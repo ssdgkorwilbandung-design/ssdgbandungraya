@@ -34,7 +34,7 @@ td{padding:12px 14px}
 .marquee-container{overflow:hidden;white-space:nowrap;box-sizing:border-box;background:#fef3c7;color:#92400e;padding:8px 15px;border-radius:12px;font-weight:600;font-size:12px;display:flex;align-items:center;border:1px solid #fde68a}
 .marquee-content{display:inline-block;animation:marquee 25s linear infinite;padding-left:100%}
 @keyframes marquee{0%{transform:translate(0,0)}100%{transform:translate(-100%,0)}}
-.hero-pub-bg{background-color:#0f172a;background-image:radial-gradient(at 0% 0%,rgba(124,58,237,.45) 0,transparent 55%),radial-gradient(at 100% 100%,rgba(16,185,129,.3) 0,transparent 55%),url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=80');background-size:cover;background-position:center;background-blend-mode:overlay}
+.hero-pub-bg{background-color:#0f172a;background-size:cover;background-position:center;background-blend-mode:overlay}
 @media print {
  .no-print{display:none !important}
  body{background:#fff !important}
@@ -44,7 +44,7 @@ td{padding:12px 14px}
 <body class="min-h-screen bg-slate-100 flex flex-col justify-between">
 
 <!-- ================= HALAMAN DEPAN PUBLIK (FRONT LANDING PAGE) ================= -->
-<div id="public-landing-wrapper" class="min-h-screen flex flex-col justify-between bg-slate-50">
+<div id="public-landing-wrapper" class="hidden min-h-screen flex flex-col justify-between bg-slate-50">
  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 sm:px-6 py-3">
   <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
    <div class="flex items-center gap-3 cursor-pointer" onclick="switchPubSubPage('beranda')">
@@ -81,8 +81,7 @@ td{padding:12px 14px}
  </header>
 
  <div id="pub-sub-beranda" class="space-y-12 pb-12">
-  <section id="pub-hero-section" class="hero-pub-bg text-white pt-12 pb-20 px-4 sm:px-6 relative overflow-hidden">
-   <div class="absolute inset-0 bg-slate-950/75"></div>
+  <section id="pub-hero-section" class="hero-pub-bg text-white pt-12 pb-20 px-4 sm:px-6 relative overflow-hidden" style="background-image:linear-gradient(rgba(15, 23, 42, 0.45), rgba(15, 23, 42, 0.65)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=80')">
    <div class="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
     <div class="lg:col-span-7 space-y-4 text-center lg:text-left">
      <span id="pub-hero-badge" class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-amber-300 text-[11px] font-bold uppercase tracking-wider">
@@ -259,7 +258,7 @@ td{padding:12px 14px}
   <section id="sec-dashboard" class="space-y-6 active-sec">
    <div class="marquee-container shadow-sm"><i class="fa-solid fa-bullhorn mr-3"></i> <div class="marquee-content" id="dash-ticker">Memuat informasi...</div></div>
    
-   <div id="dash-hero-card" class="p-6 sm:p-8 rounded-3xl relative overflow-hidden shadow-xl text-white bg-cover bg-center" style="background:linear-gradient(135deg,#0e1626,#1e1b4b 50%,var(--primary-color,#7c3aed))">
+   <div id="dash-hero-card" class="p-6 sm:p-8 rounded-3xl relative overflow-hidden shadow-xl text-white bg-cover bg-center" style="background:linear-gradient(rgba(14, 22, 38, 0.45), rgba(30, 27, 75, 0.65)), var(--primary-color,#7c3aed)">
     <div class="relative z-10 space-y-3">
      <div class="flex justify-between items-start">
       <div>
@@ -555,7 +554,12 @@ td{padding:12px 14px}
   <!-- PENGATURAN (Eksklusif Superadmin) -->
   <section id="sec-pengaturan" class="hidden space-y-6">
    <div class="ci p-6 border-l-4 border-purple-600"><h2 class="text-lg font-bold text-purple-900 border-b border-slate-100 pb-3"><i class="fa-solid fa-globe text-purple-600 mr-2"></i>Kustomisasi Beranda Depan Publik & Kontak Humas</h2>
-    <p class="text-xs text-slate-500 mt-2 mb-4">Ubah gambar latar (banner), judul utama, deskripsi sambutan di halaman depan publik, serta nomor WhatsApp Humas untuk pendaftaran sahabat baru.</p>
+    <p class="text-xs text-slate-500 mt-2 mb-2">Ubah gambar latar (banner), judul utama, deskripsi sambutan di halaman depan publik, serta nomor WhatsApp Humas untuk pendaftaran sahabat baru.</p>
+    <div class="p-3 mb-4 bg-purple-50 rounded-xl border border-purple-200 text-purple-900 text-[11px] space-y-1">
+     <p class="font-extrabold"><i class="fa-solid fa-circle-info mr-1"></i> Panduan Ukuran & Rasio Banner:</p>
+     <p>&bull; <b>Rasio Ideal:</b> 16:9 atau Lanskap (Contoh: 1200 x 675 piksel).</p>
+     <p>&bull; <b>Format:</b> JPG / PNG (Maks 2MB). Disarankan foto bertema kegiatan, masjid, atau lanskap Bandung agar teks tetap terbaca jelas.</p>
+    </div>
     <form onsubmit="savePublicHeroCfg(event)" class="space-y-4 max-w-xl">
      <div><label class="fl">Ganti Gambar Banner Beranda Depan Publik (Upload Foto)</label><input type="file" accept="image/*" onchange="uploadPubBanner(this)" class="fi"></div>
      <div><label class="fl">Teks Badge Atas (Kecil)</label><input id="c-pub-badge" class="fi" placeholder="Contoh: Ahlan wa Sahlan di Portal Resmi"></div>
@@ -597,6 +601,12 @@ td{padding:12px 14px}
     </div>
    </div>
    <div class="ci p-6"><h2 class="text-lg font-bold text-purple-900 border-b border-slate-100 pb-3"><i class="fa-solid fa-gear mr-2"></i>Profil Organisasi & Banner Dashboard</h2>
+    <p class="text-xs text-slate-500 mt-2 mb-2">Sesuaikan identitas, logo, serta banner dashboard internal.</p>
+    <div class="p-3 mb-4 bg-purple-50 rounded-xl border border-purple-200 text-purple-900 text-[11px] space-y-1">
+     <p class="font-extrabold"><i class="fa-solid fa-circle-info mr-1"></i> Panduan Ukuran Banner Dashboard:</p>
+     <p>&bull; <b>Rasio Ideal:</b> 16:9 atau 3:1 (Contoh: 1200 x 400 piksel).</p>
+     <p>&bull; <b>Tips:</b> Gunakan foto dengan latar belakang gelap/redup agar teks sambutan putih di atasnya mudah dibaca.</p>
+    </div>
     <form onsubmit="saveCfg(event)" class="mt-4 space-y-4 max-w-xl">
      <div><label class="fl">Logo Organisasi</label><input type="file" accept="image/*" onchange="logoUp(this)" class="fi"></div>
      <div><label class="fl">Banner / Latar Belakang Dashboard Internal</label><input type="file" accept="image/*" onchange="uploadBanner(this)" class="fi"></div>
@@ -639,7 +649,7 @@ td{padding:12px 14px}
 <div id="m-approval" class="mod"><div style="max-width:42rem"><div class="mh"><span>Approval Pendaftar G-Form</span><button onclick="closeM('m-approval')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><div class="p-6 space-y-4"><div class="overflow-x-auto"><table class="w-full text-left text-xs text-slate-600"><thead><tr><th>Data Pendaftar</th><th>Minat/Motivasi</th><th>Aksi</th></tr></thead><tbody id="tb-approval" class="divide-y divide-slate-100"></tbody></table></div></div><div class="p-4 border-t border-slate-100 flex justify-end"><button onclick="closeM('m-approval')" class="btn b-g">Tutup</button></div></div></div>
 <div id="m-bulk" class="mod"><div><div class="mh"><span>Bulk Import CSV</span><button onclick="closeM('m-bulk')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><div class="p-6 space-y-4 text-xs text-slate-700"><p>Impor data secara massal.</p><div class="flex gap-2"><button onclick="downloadTemplateCSV()" class="btn b-c"><i class="fa-solid fa-download"></i> Template CSV</button></div><div><label class="fl">Upload File CSV</label><input type="file" id="bulk-file" accept=".csv" class="fi bg-purple-50"></div><div class="pt-3 flex justify-end gap-2"><button type="button" onclick="closeM('m-bulk')" class="btn b-g">Batal</button><button onclick="processBulkImport()" class="btn b-p"><i class="fa-solid fa-upload"></i> Proses Import</button></div></div></div></div>
 
-<div id="m-sahabat" class="mod"><div><div class="mh"><span id="ms-title">Sahabat Baru</span><button onclick="closeM('m-sahabat')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><form onsubmit="saveSahabat(event)" class="p-6 space-y-3"><input type="hidden" id="s-id"><div><label class="fl">Nama Lengkap</label><input id="s-nama" required class="fi"></div><div class="grid grid-cols-2 gap-3"><div><label class="fl">NIA (Nomor Induk Anggota)</label><div class="flex gap-2"><input id="s-nia" required class="fi font-mono"><button type="button" onclick="generateNIA()" class="btn b-c text-[10px] px-3 flex-shrink-0" title="Generate NIA Otomatis"><i class="fa-solid fa-wand-magic-sparkles"></i> Auto</button></div></div><div><label class="fl">Status</label><select id="s-status" class="fi"><option>Anggota Aktif</option><option>Pengurus</option><option>Non Aktif</option></select></div></div><div class="grid grid-cols-2 gap-3">
+<div id="m-sahabat" class="mod"><div><div class="mh"><span id="ms-title">Sahabat Baru</span><button onclick="closeM('m-sahabat')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><form onsubmit="saveSahabat(event)" class="p-6 space-y-3"><input type="hidden" id="s-id"><div><label class="fl">Nama Lengkap</label><input id="s-nama" required class="fi"></div><div class="grid grid-cols-2 gap-3"><div><label class="fl">NIA (Nomor Induk Anggota)</label><div class="flex gap-2"><input id="s-nia" required class="fi font-mono"><button type="button" onclick="generateNIA()" class="btn b-c text-[10px] px-3 flex-shrink-0" title="Generate NIA Otomatis"><i class="fa-solid fa-wand-magic-sparkles"></i> Auto</button></div></div><div><label class="fl">Status</label><select id="s-status" onchange="onStatusChange()" class="fi"><option value="Anggota Aktif">Anggota</option><option value="Pengurus">Pengurus</option><option value="Non Aktif">Non Aktif</option></select></div></div><div class="grid grid-cols-2 gap-3">
  <div><label class="fl">Jabatan</label><select id="s-jabatan" class="fi">
   <option>Pembina Korwil</option><option>Ketua Korwil</option><option>Sekretaris</option><option>Bendahara</option>
   <option>Kabid 1</option><option>Fundraising</option><option>Staff Fundraising</option><option>UMKM</option><option>Staff UMKM</option><option>Humas</option><option>Staff Humas</option><option>Media</option><option>Staff Media</option><option>Jarkom</option><option>Staff Jarkom</option>
@@ -898,8 +908,9 @@ function renderPublicLanding(){
  if($('pub-hero-title')) $('pub-hero-title').innerText = cfg.pubHeroTitle || 'Merajut Ukhuwah, Menebar Manfaat di Bandung Raya';
  if($('pub-hero-slogan')) $('pub-hero-slogan').innerText = cfg.pubHeroSlogan || cfg.slogan;
 
- if(cfg.pubBannerUrl && $('pub-hero-section')){
-  $('pub-hero-section').style.backgroundImage = `radial-gradient(at 0% 0%,rgba(124,58,237,.45) 0,transparent 55%),radial-gradient(at 100% 100%,rgba(16,185,129,.3) 0,transparent 55%),url('${cfg.pubBannerUrl}')`;
+ if($('pub-hero-section')){
+  const pubBgImg = cfg.pubBannerUrl || 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=80';
+  $('pub-hero-section').style.backgroundImage = `linear-gradient(rgba(15, 23, 42, 0.45), rgba(15, 23, 42, 0.65)), url('${pubBgImg}')`;
  }
 
  const cleanHumasWa = (cfg.humasWa || cfg.kontak || '+6281120262026').replace(/\D/g,'');
@@ -1348,24 +1359,61 @@ function openSahabat(id){
  if($('s-nia')) $('s-nia').value = s ? s.nia : ('SSDGBR-' + new Date().toLocaleDateString('id-ID',{day:'2-digit',month:'2-digit',year:'2-digit'}).replace(/\//g,'') + '-' + String(Math.floor(1000+Math.random()*9000)));
  if($('s-pin')) $('s-pin').value = s ? (s.pin||'999999') : '999999';
  if($('s-motivasi')) $('s-motivasi').value = s ? (s.motivasi||'') : '';
- $('s-status').value=s?s.status:'Anggota Aktif'; $('s-jabatan').value=s?s.jabatan:'Anggota Aktif'; $('s-minat').value=s?s.minat:'Dakwah'; openM('m-sahabat');
+ 
+ const stVal = s ? s.status : 'Anggota Aktif';
+ $('s-status').value = stVal === 'Pengurus' ? 'Pengurus' : 'Anggota Aktif';
+ populateJabatanOptions($('s-status').value);
+ 
+ $('s-jabatan').value=s?s.jabatan:(stVal==='Pengurus'?'Ketua Korwil':'Anggota Aktif'); 
+ $('s-minat').value=s?s.minat:'Dakwah'; 
+ openM('m-sahabat');
 }
-function generateNIA(){
- const nia = 'SSDGBR-' + new Date().toLocaleDateString('id-ID',{day:'2-digit',month:'2-digit',year:'2-digit'}).replace(/\//g,'') + '-' + String(Math.floor(1000+Math.random()*9000));
- if($('s-nia')) $('s-nia').value = nia;
- toast('NIA Berhasil Digenerate');
+
+function onStatusChange(){
+ const st = $('s-status').value;
+ populateJabatanOptions(st);
 }
+
+function populateJabatanOptions(statusType){
+ const sel = $('s-jabatan');
+ if(!sel) return;
+ 
+ const pengurusRoles = ['Pembina Korwil', 'Ketua Korwil', 'Sekretaris', 'Bendahara', 'Kabid 1', 'Kabid 2', 'Kabid 3', 'Fundraising', 'UMKM', 'Humas', 'Media', 'Jarkom', 'Dakwah', 'Kaderisasi', 'Diklat', 'Pengobatan', 'Logistik', 'Liputan', 'Sosial', 'Seni & Olahraga', 'Keamanan'];
+ const anggotaRoles = ['Anggota Aktif', 'Staff Fundraising', 'Staff UMKM', 'Staff Humas', 'Staff Media', 'Staff Jarkom', 'Staff Dakwah', 'Staff Kaderisasi', 'Staff Diklat', 'Staff Pengobatan', 'Staff Logistik', 'Staff Liputan', 'Staff Sosial', 'Staff Seni & Olahraga', 'Staff Keamanan'];
+
+ let allowed = [];
+ if(statusType === 'Pengurus'){
+  allowed = pengurusRoles;
+ } else {
+  allowed = anggotaRoles;
+ }
+ 
+ sel.innerHTML = allowed.map(r=>`<option value="${r}">${r}</option>`).join('');
+}
+
 function saveSahabat(e){
  e.preventDefault();
  const id=$('s-id').value;
+ const selJabatan = $('s-jabatan').value;
+ const selStatus = $('s-status').value;
+
+ // Check uniqueness for leadership positions if status is Pengurus
+ const coreLeadershipRoles = ['Ketua Korwil', 'Sekretaris', 'Bendahara', 'Pembina Korwil'];
+ if(selStatus === 'Pengurus' && coreLeadershipRoles.includes(selJabatan)){
+  const existingHolder = sah.find(s => s.jabatan === selJabatan && s.id !== id);
+  if(existingHolder){
+   return toast(`Jabatan "${selJabatan}" sudah dipegang oleh ${existingHolder.nama}! Satu jabatan kepengurusan hanya boleh diisi oleh satu orang.`);
+  }
+ }
+
  const existing = id ? sah.find(x=>x.id===id) : null;
  const o={
   nama:$('s-nama').value,
   nia:$('s-nia').value,
-  jabatan:$('s-jabatan').value,
+  jabatan:selJabatan,
   kota:$('s-kota').value,
   hp:$('s-hp').value,
-  status:$('s-status').value,
+  status:selStatus==='Pengurus'?'Pengurus':'Anggota Aktif',
   alamat:$('s-alamat').value,
   minat:$('s-minat').value,
   motivasi:$('s-motivasi')?$('s-motivasi').value:'Berkhidmat',
@@ -1853,8 +1901,9 @@ function applyBrand(){
   if(cfg.logoUrl && $(p[0])) $(p[0]).src=cfg.logoUrl; 
  });
 
- if(cfg.bannerUrl && $('dash-hero-card')){
-  $('dash-hero-card').style.backgroundImage = `linear-gradient(rgba(15, 23, 42, 0.75), rgba(30, 27, 75, 0.85)), url('${cfg.bannerUrl}')`;
+ if($('dash-hero-card')){
+  const dashBg = cfg.bannerUrl ? `linear-gradient(rgba(14, 22, 38, 0.45), rgba(30, 27, 75, 0.65)), url('${cfg.bannerUrl}')` : `linear-gradient(135deg,#0e1626,#1e1b4b 50%,var(--primary-color,#7c3aed))`;
+  $('dash-hero-card').style.backgroundImage = dashBg;
  }
  if(cfg.ktaBgFrontUrl && $('kta-card-front')){
   $('kta-card-front').style.backgroundImage = `linear-gradient(rgba(15, 23, 42, 0.6), rgba(11, 15, 25, 0.8)), url('${cfg.ktaBgFrontUrl}')`;
@@ -1883,12 +1932,35 @@ function exportBackupJSON(){ const d="data:text/json;charset=utf-8,"+encodeURICo
 function importBackupJSON(i){ const f=i.files[0]; if(!f)return; const r=new FileReader(); r.onload=e=>{ try{ const d=JSON.parse(e.target.result); if(d.cfg){ cfg=d.cfg; sah=d.sah||[]; pendingApplicants=d.pendingApplicants||[]; kenclengList=d.kenclengList||[]; agniaList=d.agniaList||[]; prog=d.prog||[]; artikelList=d.artikelList||[]; absen=d.absen||[]; kasMasuk=d.kasMasuk||[]; kasKeluar=d.kasKeluar||[]; surat=d.surat||[]; arsipFile=d.arsipFile||[]; umkmList=d.umkmList||[]; suaraList=d.suaraList||[]; shoutboxList=d.shoutboxList||[]; applyBrand(); refresh(); toast('Di-restore'); } }catch(e){toast('Gagal');} }; r.readAsText(f); }
 
 window.onload=function(){
- loadData(); applyBrand();
+ loadData();
+ 
+ // Check session immediately before showing any view to prevent flash
+ const s=localStorage.getItem(SESSION_KEY), t=localStorage.getItem(SESSION_TIME_KEY);
+ if(s && t){
+  currentUser=JSON.parse(s);
+  const limit = (currentUser.role === 'anggota') ? INACTIVITY_LIMIT_MEMBER : INACTIVITY_LIMIT_ADMIN;
+  if(Date.now()-parseInt(t) < limit){
+   localStorage.setItem(SESSION_TIME_KEY,Date.now());
+   $('ub-name').innerText=currentUser.nama;
+   $('dash-welcome').innerText='Ahlan wa Sahlan, '+currentUser.nama;
+   $('public-landing-wrapper').classList.add('hidden');
+   $('protected-portal-wrapper').classList.remove('hidden');
+   updatePublicAuthButtons();
+   buildNav(); refresh();
+  } else {
+   currentUser = null;
+   localStorage.removeItem(SESSION_KEY);
+   showPublicLanding();
+  }
+ } else {
+  showPublicLanding();
+ }
+
+ applyBrand();
  if($('kta-sel')) $('kta-sel').innerHTML=sah.map(s=>`<option value="${s.id}">${E(s.nama)} - ${E(s.nia)}</option>`).join('');
  
  const urlParams = new URLSearchParams(window.location.search);
  if(urlParams.get('form') === 'daftar') openPublicFormModal();
- else checkSess();
 };
 </script>
 </body>
