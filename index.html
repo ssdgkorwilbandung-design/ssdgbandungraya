@@ -58,10 +58,10 @@ td{padding:12px 14px}
    </div>
 
    <nav class="hidden md:flex items-center gap-1 bg-slate-100 p-1 rounded-2xl border border-slate-200/70">
-    <button onclick="switchPubSubPage('beranda')" id="pnav-beranda" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white text-purple-700 shadow-sm transition">Beranda</button>
-    <button onclick="switchPubSubPage('artikel')" id="pnav-artikel" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 hover:text-purple-700 transition">Artikel</button>
-    <button onclick="switchPubSubPage('kegiatan')" id="pnav-kegiatan" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 hover:text-purple-700 transition">Kegiatan Kami</button>
-    <button onclick="switchPubSubPage('umkm')" id="pnav-umkm" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 hover:text-purple-700 transition">UMKM Sahabat</button>
+    <button type="button" onclick="switchPubSubPage('beranda')" id="pnav-beranda" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white text-purple-700 shadow-sm transition">Beranda</button>
+    <button type="button" onclick="switchPubSubPage('artikel')" id="pnav-artikel" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 hover:text-purple-700 transition">Artikel</button>
+    <button type="button" onclick="switchPubSubPage('kegiatan')" id="pnav-kegiatan" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 hover:text-purple-700 transition">Kegiatan Kami</button>
+    <button type="button" onclick="switchPubSubPage('umkm')" id="pnav-umkm" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 hover:text-purple-700 transition">UMKM Sahabat</button>
    </nav>
 
    <div class="flex items-center gap-2">
@@ -73,10 +73,10 @@ td{padding:12px 14px}
    </div>
   </div>
   <div class="flex md:hidden items-center justify-center gap-1.5 mt-2.5 pt-2 border-t border-slate-100 overflow-x-auto">
-   <button onclick="switchPubSubPage('beranda')" class="px-3 py-1 rounded-lg text-[11px] font-bold bg-purple-100 text-purple-800">Beranda</button>
-   <button onclick="switchPubSubPage('artikel')" class="px-3 py-1 rounded-lg text-[11px] font-bold bg-slate-100 text-slate-700">Artikel</button>
-   <button onclick="switchPubSubPage('kegiatan')" class="px-3 py-1 rounded-lg text-[11px] font-bold bg-slate-100 text-slate-700">Kegiatan</button>
-   <button onclick="switchPubSubPage('umkm')" class="px-3 py-1 rounded-lg text-[11px] font-bold bg-slate-100 text-slate-700">UMKM</button>
+   <button type="button" onclick="switchPubSubPage('beranda')" class="px-3 py-1 rounded-lg text-[11px] font-bold bg-purple-100 text-purple-800">Beranda</button>
+   <button type="button" onclick="switchPubSubPage('artikel')" class="px-3 py-1 rounded-lg text-[11px] font-bold bg-slate-100 text-slate-700">Artikel</button>
+   <button type="button" onclick="switchPubSubPage('kegiatan')" class="px-3 py-1 rounded-lg text-[11px] font-bold bg-slate-100 text-slate-700">Kegiatan</button>
+   <button type="button" onclick="switchPubSubPage('umkm')" class="px-3 py-1 rounded-lg text-[11px] font-bold bg-slate-100 text-slate-700">UMKM</button>
   </div>
  </header>
 
@@ -106,7 +106,7 @@ td{padding:12px 14px}
        </div>
        <div class="text-right">
         <span id="pub-live-clock" class="font-mono text-lg font-extrabold text-amber-300">12:37:00</span>
-        <p class="text-[10px] text-slate-300">Sabtu, 14 Nov 2026</p>
+        <p id="pub-live-date" class="text-[10px] text-slate-300">Sabtu, 14 Nov 2026</p>
        </div>
       </div>
       <div class="grid grid-cols-5 gap-1.5 text-center text-xs">
@@ -823,6 +823,17 @@ function autoSyncToCloud(){
 }
 function saveGasUrl(){ cfg.gasUrl = $('c-gasurl').value.trim(); persist(); toast('Auto-Sync Google Sheets Aktif'); }
 
+// Live Clock & Date Interval
+setInterval(() => {
+ const now = new Date();
+ if($('pub-live-clock')){
+  $('pub-live-clock').innerText = now.toLocaleTimeString('id-ID', {hour: '2-digit', minute: '2-digit', second: '2-digit'});
+ }
+ if($('pub-live-date')){
+  $('pub-live-date').innerText = now.toLocaleDateString('id-ID', {weekday: 'long', day: 'numeric', month: 'short', year: 'numeric'});
+ }
+}, 1000);
+
 function toast(m){
  let tc = $('toasts');
  if(!tc){ tc=document.createElement('div'); tc.id='toasts'; tc.className='fixed bottom-16 right-5 z-[70] flex flex-col gap-2'; document.body.appendChild(tc); }
@@ -859,12 +870,20 @@ function updatePublicAuthButtons(){
 function switchPubSubPage(sub){
  ['beranda','artikel','kegiatan','umkm'].forEach(s=>{
   const el = $('pub-sub-'+s);
-  if(el) el.classList.toggle('hidden', s !== sub);
+  if(el) {
+   if(s === sub) {
+    el.classList.remove('hidden');
+   } else {
+    el.classList.add('hidden');
+   }
+  }
   const nav = $('pnav-'+s);
   if(nav){
-   nav.className = (s === sub)
-    ? 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white text-purple-700 shadow-sm transition'
-    : 'px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 hover:text-purple-700 transition';
+   if(s === sub) {
+    nav.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white text-purple-700 shadow-sm transition';
+   } else {
+    nav.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 hover:text-purple-700 transition';
+   }
   }
  });
  renderPublicLanding();
@@ -1063,9 +1082,21 @@ function buildNav(){
 }
 
 function go(tab){
- NAV_ALL.forEach(n=> { const s=$('sec-'+n.id); if(s)s.classList.toggle('hidden',n.id!==tab); const d=$('t-d-'+n.id); if(d)d.classList.toggle('on',n.id===tab); const m=$('t-m-'+n.id); if(m)m.classList.toggle('on',n.id===tab); });
- const tObj=NAV_ALL.find(x=>x.id===tab); if(tObj) $('page-title').innerText=tObj.label;
+ NAV_ALL.forEach(n=> { 
+  const s=$('sec-'+n.id); 
+  if(s) {
+   if(n.id === tab) s.classList.remove('hidden');
+   else s.classList.add('hidden');
+  }
+  const d=$('t-d-'+n.id); 
+  if(d) d.classList.toggle('on', n.id===tab); 
+  const m=$('t-m-'+n.id); 
+  if(m) m.classList.toggle('on', n.id===tab); 
+ });
+ const tObj=NAV_ALL.find(x=>x.id===tab); 
+ if(tObj && $('page-title')) $('page-title').innerText=tObj.label;
  refresh();
+ window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function refresh(){
@@ -1853,7 +1884,7 @@ function importBackupJSON(i){ const f=i.files[0]; if(!f)return; const r=new File
 
 window.onload=function(){
  loadData(); applyBrand();
- $('kta-sel').innerHTML=sah.map(s=>`<option value="${s.id}">${E(s.nama)} - ${E(s.nia)}</option>`).join('');
+ if($('kta-sel')) $('kta-sel').innerHTML=sah.map(s=>`<option value="${s.id}">${E(s.nama)} - ${E(s.nia)}</option>`).join('');
  
  const urlParams = new URLSearchParams(window.location.search);
  if(urlParams.get('form') === 'daftar') openPublicFormModal();
