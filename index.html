@@ -25,16 +25,19 @@ html,body{max-width:100vw;overflow-x:hidden;color:var(--text-color,#1e293b)}
 .mod{position:fixed;inset:0;z-index:60;background:rgba(15,23,42,.55);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:16px}
 .mod.show{display:flex}
 .mod>div{background:#fff;border-radius:24px;width:100%;max-width:32rem;max-height:92vh;overflow:auto;box-shadow:0 25px 50px -12px rgba(0,0,0,.25)}
-.mh{background:#f8fafc;padding:16px 24px;border-bottom:1px solid #f1f5f9;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px;color:#2e1065}
+.mh{background:#f8fafc;padding:16px 24px;border-bottom:1px solid #f1f5f9;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px;color:var(--primary-color,#2e1065)}
 th{padding:12px 14px;background:#f8fafc;color:#64748b;text-transform:uppercase;font-size:10px;font-weight:700;letter-spacing:.05em}
 td{padding:12px 14px}
-.badge{padding:3px 10px;border-radius:9999px;font-size:10px;font-weight:700;background:#ede9fe;color:#6d28d9;display:inline-block}
+.badge{padding:3px 10px;border-radius:9999px;font-size:10px;font-weight:700;background:var(--soft-bg-tint,#ede9fe);color:var(--primary-color,#6d28d9);display:inline-block}
 .floating-pill-nav{background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border:1px solid rgba(226,232,240,0.8);box-shadow:0 20px 25px -5px rgba(0,0,0,0.08),0 8px 10px -6px rgba(0,0,0,0.08)}
 .kta-card-bg{background:radial-gradient(circle at 80% 20%,#1a233a 0%,#0b0f19 75%);position:relative;overflow:hidden}
 .marquee-container{overflow:hidden;white-space:nowrap;box-sizing:border-box;background:#fef3c7;color:#92400e;padding:8px 15px;border-radius:12px;font-weight:600;font-size:12px;display:flex;align-items:center;border:1px solid #fde68a}
 .marquee-content{display:inline-block;animation:marquee 25s linear infinite;padding-left:100%}
 @keyframes marquee{0%{transform:translate(0,0)}100%{transform:translate(-100%,0)}}
-.hero-pub-bg{background-color:#0f172a;background-size:cover;background-position:center;background-repeat:no-repeat}
+.hero-pub-bg{background-color:#0f172a;background-size:cover;background-position:center;background-repeat:no-repeat;min-height:480px}
+@media (max-width: 640px) {
+ .hero-pub-bg{min-height:540px; background-position:center top;}
+}
 @media print {
  .no-print{display:none !important}
  body{background:#fff !important}
@@ -48,7 +51,7 @@ td{padding:12px 14px}
  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 sm:px-6 py-3">
   <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
    <div class="flex items-center gap-3 cursor-pointer" onclick="switchPubSubPage('beranda')">
-    <div class="w-10 h-10 rounded-2xl flex items-center justify-center text-white font-extrabold shadow-md overflow-hidden" style="background:var(--primary-color,#7c3aed)">
+    <div class="w-10 h-10 rounded-2xl flex items-center justify-center text-white font-extrabold shadow-md overflow-hidden b-p">
      <i id="pub-logo-icon" class="fa-solid fa-moon text-base"></i><img id="pub-logo-img" class="w-full h-full object-cover hidden" alt="Logo">
     </div>
     <div>
@@ -81,9 +84,8 @@ td{padding:12px 14px}
  </header>
 
  <div id="pub-sub-beranda" class="space-y-12 pb-12">
-  <!-- Refined Hero Section with clear image visibility and gentle darkening gradient overlay -->
-  <section id="pub-hero-section" class="hero-pub-bg text-white pt-12 pb-24 px-4 sm:px-6 relative overflow-hidden" style="background-image:linear-gradient(rgba(15, 23, 42, 0.45), rgba(15, 23, 42, 0.65)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=80')">
-   <div class="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+  <section id="pub-hero-section" class="hero-pub-bg text-white pt-12 pb-24 px-4 sm:px-6 relative overflow-hidden flex items-center" style="background-image:linear-gradient(rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.75)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=80')">
+   <div class="relative z-10 max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
     <div class="lg:col-span-7 space-y-4 text-center lg:text-left">
      <span id="pub-hero-badge" class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 border border-white/30 text-amber-300 text-[11px] font-bold uppercase tracking-wider shadow-sm">
       <i class="fa-solid fa-moon"></i> Ahlan wa Sahlan di Portal Resmi
@@ -93,13 +95,12 @@ td{padding:12px 14px}
      <div class="flex flex-wrap justify-center lg:justify-start gap-2.5 pt-2">
       <button onclick="switchPubSubPage('kegiatan')" class="px-4 py-2.5 rounded-xl bg-white text-slate-900 font-extrabold text-xs shadow hover:bg-slate-100 transition"><i class="fa-solid fa-calendar-check text-purple-600 mr-1.5"></i> Agenda Kegiatan</button>
       <button onclick="switchPubSubPage('umkm')" class="px-4 py-2.5 rounded-xl bg-white/20 hover:bg-white/30 border border-white/30 text-white font-bold text-xs transition backdrop-blur-sm"><i class="fa-solid fa-store text-amber-300 mr-1.5"></i> Katalog UMKM Sahabat</button>
-      <a id="pub-daftar-humas-btn" href="https://wa.me/6281120262026?text=Assalamu'alaikum%20Humas%20SSDG%20Korwil%20Bandung%20Raya,%20saya%20ingin%20mendaftar%20menjadi%20Sahabat%20Baru." target="_blank" class="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-extrabold text-xs shadow transition inline-flex items-center"><i class="fa-brands fa-whatsapp text-sm mr-1.5"></i> Daftar Sahabat Baru</a>
+      <a id="pub-daftar-humas-btn" href="https://wa.me/6281120262026?text=Assalamu'alaikum%20Humas%20SSDG%20Bandung%20Raya,%20saya%20ingin%20mendaftar%20menjadi%20Sahabat%20Baru." target="_blank" class="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-extrabold text-xs shadow transition inline-flex items-center"><i class="fa-brands fa-whatsapp text-sm mr-1.5"></i> Daftar Sahabat Baru</a>
      </div>
     </div>
 
-    <!-- Dynamic Prayer Times Widget with upcoming prayer highlighted -->
     <div class="lg:col-span-5">
-     <div class="bg-slate-900/60 backdrop-blur-md border border-white/25 rounded-3xl p-5 shadow-2xl">
+     <div class="bg-slate-900/70 backdrop-blur-md border border-white/25 rounded-3xl p-5 shadow-2xl">
       <div class="flex justify-between items-center border-b border-white/15 pb-3 mb-3">
        <div>
         <p class="text-[10px] font-bold uppercase tracking-wider text-amber-300"><i class="fa-solid fa-location-dot mr-1"></i> Bandung Raya & Lembang</p>
@@ -124,7 +125,7 @@ td{padding:12px 14px}
 
   <div class="max-w-6xl mx-auto px-4 -mt-16 relative z-20">
    <div class="marquee-container shadow-md bg-white border-slate-200 text-slate-800">
-    <span class="px-2.5 py-1 rounded-lg text-[10px] font-extrabold text-white mr-3 flex-shrink-0" style="background:var(--primary-color,#7c3aed)"><i class="fa-solid fa-bullhorn mr-1"></i> INFO TERKINI</span>
+    <span class="px-2.5 py-1 rounded-lg text-[10px] font-extrabold text-white mr-3 flex-shrink-0 b-p"><i class="fa-solid fa-bullhorn mr-1"></i> INFO TERKINI</span>
     <div class="marquee-content" id="pub-ticker-text">Selamat datang di Portal Resmi SSDG Korwil Bandung Raya!</div>
    </div>
   </div>
@@ -204,19 +205,18 @@ td{padding:12px 14px}
  <footer class="bg-slate-900 text-slate-400 py-8 px-6 text-center space-y-2 mt-auto">
   <p id="pub-ft-name" class="text-xs font-extrabold text-white">SSDG Korwil Bandung Raya</p>
   <p id="pub-ft-alamat" class="text-[11px] text-slate-400">Bandung, Jawa Barat</p>
-  <p class="text-[10px] text-slate-500 pt-1">&copy; 2026 SahabatApp Pro &bull; Portal Terpadu V8.5</p>
+  <p class="text-[10px] text-slate-500 pt-1">&copy; 2026 SahabatApp Pro &bull; Portal Terpadu V8.7</p>
  </footer>
 </div>
 
 <!-- MODAL LOGIN -->
 <div id="m-login" class="mod" style="z-index:100;background:rgba(15,23,42,0.88)">
  <div class="p-8 max-w-sm w-full bg-white rounded-3xl shadow-2xl text-center space-y-5">
-  <div class="w-14 h-14 rounded-2xl mx-auto flex items-center justify-center text-white text-2xl shadow-lg overflow-hidden" style="background:var(--primary-color,#7c3aed)">
+  <div class="w-14 h-14 rounded-2xl mx-auto flex items-center justify-center text-white text-2xl shadow-lg overflow-hidden b-p">
    <i id="lg-icon" class="fa-solid fa-moon"></i><img id="lg-img" class="w-full h-full object-cover hidden" alt="Logo">
   </div>
   <div><h2 class="font-extrabold text-lg text-purple-900" id="lg-appname">SSDG Bandung</h2><p class="text-xs text-slate-500 mt-1">Login Portal Terpadu</p></div>
   <form onsubmit="doLogin(event)" class="space-y-4 text-left">
-   <!-- Error notification box inside login modal -->
    <div id="login-error-box" class="hidden p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold rounded-xl flex items-center gap-2">
     <i class="fa-solid fa-triangle-exclamation text-sm flex-shrink-0"></i>
     <span id="login-error-text">ID atau PIN Salah!</span>
@@ -234,7 +234,7 @@ td{padding:12px 14px}
 <header class="sticky top-4 z-40 px-4 max-w-7xl mx-auto w-full no-print">
  <div class="floating-pill-nav rounded-3xl px-4 py-3 flex items-center justify-between gap-4">
   <div class="flex items-center gap-3 cursor-pointer" onclick="go('dashboard')">
-   <div class="w-9 h-9 rounded-2xl flex items-center justify-center text-white font-extrabold shadow-md overflow-hidden" style="background:var(--primary-color,#7c3aed)">
+   <div class="w-9 h-9 rounded-2xl flex items-center justify-center text-white font-extrabold shadow-md overflow-hidden b-p">
     <i id="logo-icon" class="fa-solid fa-moon text-sm"></i><img id="logo-img" class="w-full h-full object-cover hidden" alt="Logo">
    </div>
    <div class="hidden sm:block"><h1 id="ui-name" class="font-extrabold text-xs leading-tight text-slate-900">SSDG Bandung</h1><p class="text-[9px] text-slate-500 font-medium">Portal Admin System</p></div>
@@ -490,7 +490,6 @@ td{padding:12px 14px}
     <button onclick="openUmkm()" class="btn b-a"><i class="fa-solid fa-plus"></i> Daftarkan Produk UMKM</button>
    </div>
    <div class="ci p-4"><input id="q-umkm" onkeyup="renderUmkm()" placeholder="Cari nama produk, kategori, penjual..." class="fi max-w-md"></div>
-   <!-- Responsive grid for mobile UMKM cards -->
    <div id="umkm-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"></div>
   </section>
 
@@ -560,10 +559,10 @@ td{padding:12px 14px}
     <div class="p-3 mb-4 bg-purple-50 rounded-xl border border-purple-200 text-purple-900 text-[11px] space-y-1">
      <p class="font-extrabold"><i class="fa-solid fa-circle-info mr-1"></i> Panduan Ukuran & Rasio Banner:</p>
      <p>&bull; <b>Rasio Ideal:</b> 16:9 atau Lanskap (Contoh: 1200 x 675 piksel).</p>
-     <p>&bull; <b>Format:</b> JPG / PNG (Maks 2MB). Disarankan foto bertema kegiatan, masjid, atau lanskap Bandung agar teks tetap terbaca jelas.</p>
+     <p>&bull; <b>Fitur Crop Otomatis:</b> Setelah memilih foto, Anda dapat menyesuaikan posisi/crop sebelum disimpan.</p>
     </div>
     <form onsubmit="savePublicHeroCfg(event)" class="space-y-4 max-w-xl">
-     <div><label class="fl">Ganti Gambar Banner Beranda Depan Publik (Upload Foto)</label><input type="file" accept="image/*" onchange="uploadPubBanner(this)" class="fi"></div>
+     <div><label class="fl">Ganti Gambar Banner Beranda Depan Publik (Upload & Crop)</label><input type="file" accept="image/*" onchange="initBannerCropper(this, 'pub')" class="fi"></div>
      <div><label class="fl">Teks Badge Atas (Kecil)</label><input id="c-pub-badge" class="fi" placeholder="Contoh: Ahlan wa Sahlan di Portal Resmi"></div>
      <div><label class="fl">Judul Besar Hero Beranda Publik</label><input id="c-pub-title" class="fi" placeholder="Contoh: Merajut Ukhuwah, Menebar Manfaat di Bandung Raya"></div>
      <div><label class="fl">Subjudul / Slogan Beranda Publik</label><textarea id="c-pub-slogan" rows="2" class="fi"></textarea></div>
@@ -573,17 +572,17 @@ td{padding:12px 14px}
     </form>
    </div>
 
-   <div class="ci p-6"><h2 class="text-lg font-bold text-purple-900 border-b border-slate-100 pb-3"><i class="fa-solid fa-palette mr-2"></i>Tema Warna & Kustomisasi Font (Minimal 9 Warna)</h2>
+   <div class="ci p-6"><h2 class="text-lg font-bold text-purple-900 border-b border-slate-100 pb-3"><i class="fa-solid fa-palette mr-2"></i>Tema Warna & Kustomisasi Font (9 Pilihan Tema Elegan)</h2>
     <div class="flex flex-wrap gap-2 mt-4 items-center">
-     <button onclick="setTheme('#7c3aed','#6d28d9','#5b21b6','#1e293b')" class="px-3 py-1.5 bg-purple-600 text-white rounded-xl text-xs font-bold shadow">Ungu</button>
-     <button onclick="setTheme('#059669','#047857','#065f46','#1e293b')" class="px-3 py-1.5 bg-emerald-600 text-white rounded-xl text-xs font-bold shadow">Emerald</button>
-     <button onclick="setTheme('#0284c7','#0369a1','#075985','#1e293b')" class="px-3 py-1.5 bg-sky-600 text-white rounded-xl text-xs font-bold shadow">Biru Sky</button>
-     <button onclick="setTheme('#db2777','#be185d','#9d174d','#1e293b')" class="px-3 py-1.5 bg-pink-600 text-white rounded-xl text-xs font-bold shadow">Pink Rosy</button>
-     <button onclick="setTheme('#d97706','#b45309','#92400e','#1e293b')" class="px-3 py-1.5 bg-amber-600 text-white rounded-xl text-xs font-bold shadow">Amber</button>
-     <button onclick="setTheme('#475569','#334155','#1e293b','#1e293b')" class="px-3 py-1.5 bg-slate-600 text-white rounded-xl text-xs font-bold shadow">Dark Slate</button>
-     <button onclick="setTheme('#dc2626','#b91c1c','#991b1b','#1e293b')" class="px-3 py-1.5 bg-red-600 text-white rounded-xl text-xs font-bold shadow">Ruby Red</button>
-     <button onclick="setTheme('#0d9488','#0f766e','#115e59','#1e293b')" class="px-3 py-1.5 bg-teal-600 text-white rounded-xl text-xs font-bold shadow">Teal</button>
-     <button onclick="setTheme('#4f46e5','#4338ca','#3730a3','#1e293b')" class="px-3 py-1.5 bg-indigo-600 text-white rounded-xl text-xs font-bold shadow">Indigo</button>
+     <button onclick="setTheme('#7c3aed','#6d28d9','#ede9fe','#1e293b')" class="px-3 py-1.5 bg-purple-600 text-white rounded-xl text-xs font-bold shadow">Royal Purple</button>
+     <button onclick="setTheme('#059669','#047857','#d1fae5','#1e293b')" class="px-3 py-1.5 bg-emerald-600 text-white rounded-xl text-xs font-bold shadow">Emerald Green</button>
+     <button onclick="setTheme('#0284c7','#0369a1','#e0f2fe','#1e293b')" class="px-3 py-1.5 bg-sky-600 text-white rounded-xl text-xs font-bold shadow">Sky Blue</button>
+     <button onclick="setTheme('#db2777','#be185d','#fce7f3','#1e293b')" class="px-3 py-1.5 bg-pink-600 text-white rounded-xl text-xs font-bold shadow">Rosy Pink</button>
+     <button onclick="setTheme('#d97706','#b45309','#fef3c7','#1e293b')" class="px-3 py-1.5 bg-amber-600 text-white rounded-xl text-xs font-bold shadow">Warm Amber</button>
+     <button onclick="setTheme('#475569','#334155','#f1f5f9','#1e293b')" class="px-3 py-1.5 bg-slate-600 text-white rounded-xl text-xs font-bold shadow">Dark Slate</button>
+     <button onclick="setTheme('#dc2626','#b91c1c','#fee2e2','#1e293b')" class="px-3 py-1.5 bg-red-600 text-white rounded-xl text-xs font-bold shadow">Ruby Red</button>
+     <button onclick="setTheme('#0d9488','#0f766e','#ccfbf1','#1e293b')" class="px-3 py-1.5 bg-teal-600 text-white rounded-xl text-xs font-bold shadow">Teal Ocean</button>
+     <button onclick="setTheme('#4f46e5','#4338ca','#e0e7ff','#1e293b')" class="px-3 py-1.5 bg-indigo-600 text-white rounded-xl text-xs font-bold shadow">Indigo Deep</button>
      <div class="flex items-center gap-2 ml-4">
       <label class="text-xs font-semibold text-slate-600">Warna Font:</label>
       <input type="color" id="custom-text-color" value="#1e293b" onchange="setFontColor(this.value)" class="w-8 h-8 rounded-lg cursor-pointer border border-slate-200">
@@ -606,12 +605,12 @@ td{padding:12px 14px}
     <p class="text-xs text-slate-500 mt-2 mb-2">Sesuaikan identitas, logo, serta banner dashboard internal.</p>
     <div class="p-3 mb-4 bg-purple-50 rounded-xl border border-purple-200 text-purple-900 text-[11px] space-y-1">
      <p class="font-extrabold"><i class="fa-solid fa-circle-info mr-1"></i> Panduan Ukuran Banner Dashboard:</p>
-     <p>&bull; <b>Rasio Ideal:</b> 16:9 atau 3:1 (Contoh: 1200 x 400 piksel).</p>
-     <p>&bull; <b>Tips:</b> Gunakan foto dengan latar belakang gelap/redup agar teks sambutan putih di atasnya mudah dibaca.</p>
+     <p>&bull; <b>Rasio Ideal:</b> 16:9 atau Lanskap.</p>
+     <p>&bull; <b>Fitur Crop Otomatis:</b> Tersedia jendela penyesuaian posisi foto sebelum diterapkan sebagai banner.</p>
     </div>
     <form onsubmit="saveCfg(event)" class="mt-4 space-y-4 max-w-xl">
      <div><label class="fl">Logo Organisasi</label><input type="file" accept="image/*" onchange="logoUp(this)" class="fi"></div>
-     <div><label class="fl">Banner / Latar Belakang Dashboard Internal</label><input type="file" accept="image/*" onchange="uploadBanner(this)" class="fi"></div>
+     <div><label class="fl">Banner / Latar Belakang Dashboard Internal (Upload & Crop)</label><input type="file" accept="image/*" onchange="initBannerCropper(this, 'dash')" class="fi"></div>
      <div><label class="fl">Nama Organisasi</label><input id="c-name" required class="fi"></div>
      <div><label class="fl">Slogan / Deskripsi Dashboard</label><input id="c-slogan" required class="fi"></div>
      <div><label class="fl">Alamat</label><textarea id="c-alamat" rows="2" class="fi"></textarea></div>
@@ -632,7 +631,6 @@ td{padding:12px 14px}
  </footer>
 </div>
 
-<!-- Enhanced mobile bottom navigation bar with larger touch targets and labels -->
 <div class="fixed bottom-2 inset-x-0 z-40 px-3 lg:hidden flex justify-center pointer-events-none no-print">
  <div class="floating-pill-nav rounded-2xl px-2.5 py-2 flex items-center gap-1.5 shadow-2xl pointer-events-auto overflow-x-auto max-w-full bg-white/95 border border-purple-100" id="nav-m"></div>
 </div>
@@ -644,6 +642,15 @@ td{padding:12px 14px}
 
 <!-- ARTICLE / DETAIL PREVIEW MODAL -->
 <div id="m-detail-preview" class="mod"><div style="max-width:36rem"><div class="mh"><span id="det-badge" class="text-purple-900 font-extrabold">Detail Informasi</span><button onclick="closeM('m-detail-preview')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><div class="p-6 space-y-3"><h3 id="det-title" class="font-extrabold text-base text-slate-900"></h3><p id="det-body" class="text-xs text-slate-600 leading-relaxed whitespace-pre-line"></p></div><div class="p-4 border-t border-slate-100 flex justify-end"><button onclick="closeM('m-detail-preview')" class="btn b-p">Tutup</button></div></div></div>
+
+<!-- REPORT / PRINT MODAL -->
+<div id="m-report" class="mod"><div style="max-width:44rem"><div class="mh"><span id="rep-title-modal">Cetak Laporan</span><div class="flex gap-2"><button onclick="window.print()" class="btn b-p text-xs"><i class="fa-solid fa-print"></i> Print</button><button onclick="closeM('m-report')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div></div><div class="p-6 space-y-4 text-xs" id="report-area"></div></div></div>
+
+<!-- CALENDAR PREVIEW MODAL -->
+<div id="m-cal-preview" class="mod"><div style="max-width:32rem"><div class="mh"><span id="cal-preview-title" class="text-purple-900 font-extrabold">Agenda Tanggal</span><button onclick="closeM('m-cal-preview')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><div class="p-6 space-y-3 text-xs" id="cal-preview-content"></div></div></div>
+
+<!-- IMAGE LIGHTBOX MODAL -->
+<div id="m-lightbox" class="mod" style="background:rgba(0,0,0,0.85)"><div style="max-width:40rem; background:transparent; box-shadow:none;"><div class="flex justify-end pb-2"><button onclick="closeM('m-lightbox')" class="text-white text-xl"><i class="fa-solid fa-xmark"></i></button></div><img id="lightbox-img" src="" class="w-full max-h-[80vh] object-contain rounded-2xl"></div></div>
 
 <!-- ALL FEATURE MODALS -->
 <div id="m-public-form" class="mod"><div><div class="mh"><span class="text-purple-900 font-extrabold"><i class="fa-solid fa-file-lines mr-2 text-purple-600"></i>Form Pendaftaran</span><button onclick="closeM('m-public-form')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><form onsubmit="submitPublicForm(event)" class="p-6 space-y-4"><div><label class="fl">Nama Lengkap</label><input id="pf-nama" required class="fi"></div><div><label class="fl">Alamat</label><textarea id="pf-alamat" rows="2" required class="fi"></textarea></div><div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><div><label class="fl">No. WA</label><input id="pf-hp" required class="fi"></div><div><label class="fl">Minat</label><select id="pf-minat" class="fi"><option>Dakwah</option><option>Ekonomi</option><option>Sosial</option><option>Pengobatan</option></select></div></div><div><label class="fl">Motivasi</label><textarea id="pf-motivasi" rows="2" required class="fi"></textarea></div><div class="flex justify-end gap-2"><button type="button" onclick="closeM('m-public-form')" class="btn b-g">Tutup</button><button class="btn b-p">Kirim Pendaftaran</button></div></form></div></div>
@@ -696,26 +703,29 @@ td{padding:12px 14px}
 <div class="flex justify-end gap-2 pt-2"><button type="button" onclick="closeM('m-surat')" class="btn b-g">Batal</button><button type="button" onclick="previewGenSurat()" id="btn-prev-surat" class="btn b-c hidden"><i class="fa-solid fa-eye"></i> Preview Surat</button><button class="btn b-p">Simpan Data Surat</button></div></form></div></div>
 
 <!-- MODAL PREVIEW SURAT RESMI -->
-<div id="m-preview-surat" class="mod"><div style="max-width:44rem"><div class="mh no-print"><span>Pratinjau Surat Resmi</span><button onclick="closeM('m-preview-surat')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><div id="print-surat-area" class="p-8 bg-white text-slate-900 text-xs space-y-4 font-serif"></div><div class="p-4 border-t border-slate-100 flex justify-end gap-2 no-print"><button onclick="closeM('m-preview-surat')" class="btn b-g">Tutup</button><button onclick="window.print()" class="btn b-p"><i class="fa-solid fa-print"></i> Cetak / Print Surat</button></div></div></div>
+<div id="m-preview-surat" class="mod"><div style="max-width:44rem"><div class="mh"><span>Preview Dokumen Surat Resmi</span><div class="flex gap-2"><button onclick="window.print()" class="btn b-p text-xs"><i class="fa-solid fa-print"></i> Cetak PDF</button><button onclick="closeM('m-preview-surat')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div></div><div class="p-8 bg-white text-slate-800 text-xs space-y-4" id="print-surat-area"></div></div></div>
 
-<div id="m-file" class="mod"><div><div class="mh"><span>Unggah File / Dokumen</span><button onclick="closeM('m-file')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><form onsubmit="saveFile(event)" class="p-6 space-y-3"><div><label class="fl">Pilih File (Bebas)</label><input type="file" id="f-upload" required class="fi"></div><div><label class="fl">Deskripsi File</label><input id="f-desk" required class="fi"></div><div class="flex justify-end gap-2"><button type="button" onclick="closeM('m-file')" class="btn b-g">Batal</button><button class="btn b-c">Unggah Arsip</button></div></form></div></div>
-<div id="m-masuk" class="mod"><div><div class="mh"><span>Pemasukan Kas</span><button onclick="closeM('m-masuk')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><form onsubmit="saveMasuk(event)" class="p-6 space-y-3"><div><label class="fl">Kategori</label><select id="km-kat" class="fi"></select></div><div><label class="fl">Nama Pemberi</label><input id="km-nama" required class="fi"></div><div><label class="fl">Nominal (Rp)</label><input type="number" min="1" id="km-nom" required class="fi"></div><div class="flex justify-end gap-2"><button type="button" onclick="closeM('m-masuk')" class="btn b-g">Batal</button><button class="btn b-e">Simpan</button></div></form></div></div>
-<div id="m-keluar" class="mod"><div><div class="mh"><span>Pengeluaran Kas</span><button onclick="closeM('m-keluar')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><form onsubmit="saveKeluar(event)" class="p-6 space-y-3"><div><label class="fl">Sumber Dana</label><select id="kl-sumber" class="fi"></select></div><div><label class="fl">Peruntukan</label><input id="kl-ket" required class="fi"></div><div><label class="fl">Nominal (Rp)</label><input type="number" min="1" id="kl-nom" required class="fi"></div><div class="flex justify-end gap-2"><button type="button" onclick="closeM('m-keluar')" class="btn b-g">Batal</button><button class="btn b-r">Simpan</button></div></form></div></div>
-<div id="m-report" class="mod"><div style="max-width:40rem"><div class="mh no-print"><span id="rep-title-modal">Laporan Keuangan</span><button onclick="closeM('m-report')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><div id="report-area" class="p-6 text-slate-800 text-xs"></div><div class="p-4 border-t border-slate-100 flex justify-end gap-2 no-print"><button onclick="closeM('m-report')" class="btn b-g">Tutup</button><button onclick="window.print()" class="btn b-p"><i class="fa-solid fa-print"></i> Cetak Laporan</button></div></div></div>
-
-<!-- MODAL DIREKTORI PRODUK UMKM -->
-<div id="m-umkm" class="mod"><div><div class="mh"><span>Daftarkan Produk UMKM</span><button onclick="closeM('m-umkm')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><form onsubmit="saveUmkm(event)" class="p-6 space-y-3"><div><label class="fl">Nama Produk</label><input id="u-produk" required class="fi" placeholder="Contoh: Kripik Singkong Balado / Jasa Desain..."></div><div><label class="fl">Foto / Gambar Produk</label><input type="file" id="u-img" accept="image/*" required class="fi"></div><div class="grid grid-cols-2 gap-3"><div><label class="fl">Kategori Produk (Bebas)</label><input id="u-kat" required class="fi" placeholder="Makanan, Fashion, Jasa..."></div><div><label class="fl">Harga (Rp)</label><input type="text" id="u-harga" required class="fi" placeholder="Contoh: Rp 25.000"></div></div><div class="grid grid-cols-2 gap-3"><div><label class="fl">Nama Penjual / Toko</label><input id="u-penjual" required class="fi"></div><div><label class="fl">No WA Pemesanan</label><input id="u-wa" required class="fi" placeholder="+62 812..."></div></div><div><label class="fl">Deskripsi Produk</label><textarea id="u-desk" rows="2" required class="fi" placeholder="Keunggulan produk, varian, dll..."></textarea></div><div class="flex justify-end gap-2"><button type="button" onclick="closeM('m-umkm')" class="btn b-g">Batal</button><button class="btn b-a">Publikasikan Produk</button></div></form></div></div>
-
-<div id="m-suara" class="mod"><div><div class="mh"><span id="su-title">Tulis Berita / Kritik Saran</span><button onclick="closeM('m-suara')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><form onsubmit="saveSuara(event)" class="p-6 space-y-3"><input type="hidden" id="su-tipe"><div><label class="fl">Judul Topik</label><input id="su-judul" required class="fi"></div><div><label class="fl">Isi Pesan / Berita Lengkap</label><textarea id="su-isi" rows="4" required class="fi"></textarea></div><div class="flex justify-end gap-2"><button type="button" onclick="closeM('m-suara')" class="btn b-g">Batal</button><button class="btn b-p">Kirim Postingan</button></div></form></div></div>
-
-<!-- MODAL TANGGAPI SUARA -->
-<div id="m-tanggapi-suara" class="mod"><div><div class="mh"><span>Tanggapi Suara Sahabat</span><button onclick="closeM('m-tanggapi-suara')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><form onsubmit="saveTanggapanSuara(event)" class="p-6 space-y-3"><input type="hidden" id="ts-id"><div><label class="fl">Isi Tanggapan Resmi</label><textarea id="ts-isi" rows="3" required class="fi" placeholder="Tuliskan balasan / tindak lanjut pengurus..."></textarea></div><div class="flex justify-end gap-2"><button type="button" onclick="closeM('m-tanggapi-suara')" class="btn b-g">Batal</button><button class="btn b-p">Simpan Tanggapan</button></div></form></div></div>
-
-<!-- LIGHTBOX PREVIEW MODAL -->
-<div id="m-lightbox" class="mod" onclick="closeM('m-lightbox')"><div class="max-w-3xl bg-transparent shadow-none text-center p-0 overflow-hidden"><img id="lightbox-img" src="" class="max-w-full max-h-[85vh] mx-auto rounded-2xl shadow-2xl object-contain"></div></div>
-
-<!-- CALENDAR PREVIEW MODAL -->
-<div id="m-cal-preview" class="mod"><div><div class="mh"><span id="cal-preview-title">Agenda Tanggal</span><button onclick="closeM('m-cal-preview')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><div id="cal-preview-content" class="p-6 space-y-3 text-xs"></div><div class="p-4 border-t border-slate-100 flex justify-end"><button onclick="closeM('m-cal-preview')" class="btn b-g">Tutup</button></div></div></div>
+<!-- MODAL CROPPER -->
+<div id="m-cropper" class="mod">
+ <div style="max-width:36rem">
+  <div class="mh"><span id="crop-modal-title" class="text-purple-900 font-extrabold">Sesuaikan Posisi & Potong Banner</span><button onclick="closeM('m-cropper')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div>
+  <div class="p-6 space-y-4 text-xs">
+   <p class="text-slate-500">Geser slider atau pilih mode tampilan untuk menyesuaikan area gambar banner agar pas di layar HP maupun Laptop:</p>
+   <div class="w-full h-56 bg-slate-900 rounded-2xl overflow-hidden relative flex items-center justify-center border border-slate-200">
+    <img id="crop-preview-img" src="" class="max-w-full max-h-full object-cover transition-all duration-150" style="width:100%; height:100%;">
+   </div>
+   <div class="space-y-2 bg-slate-50 p-3 rounded-xl border border-slate-200">
+    <label class="fl">Zoom / Skala Gambar</label>
+    <input type="range" id="crop-zoom-range" min="1" max="2" step="0.05" value="1" oninput="adjustCropZoom(this.value)" class="w-full accent-purple-600">
+    <div class="flex justify-between text-[10px] text-slate-400 font-bold"><span>Pas Layar (1x)</span><span>Perbesar (2x)</span></div>
+   </div>
+  </div>
+  <div class="p-4 border-t border-slate-100 flex justify-end gap-2">
+   <button type="button" onclick="closeM('m-cropper')" class="btn b-g">Batal</button>
+   <button type="button" onclick="applyCroppedBanner()" class="btn b-p"><i class="fa-solid fa-crop"></i> Terapkan & Simpan Banner</button>
+  </div>
+ </div>
+</div>
 
 <script>
 const $=id=>document.getElementById(id);
@@ -725,7 +735,8 @@ const nowStr=()=>new Date().toLocaleString('id-ID',{day:'2-digit',month:'long',y
 
 const KEY='ssdg_v8_final';
 const SESSION_KEY='ssdg_session';
-const SESSION_TIME_KEY='ssdg_last_activity';
+const SESSION_TIME_KEY='ssdg_session_time';
+const CURRENT_TAB_KEY='ssdg_current_tab';
 const INACTIVITY_LIMIT_ADMIN = 15 * 60 * 1000;
 const INACTIVITY_LIMIT_MEMBER = 30 * 24 * 60 * 60 * 1000;
 
@@ -769,6 +780,7 @@ let cfg={
  primaryColor:'#7c3aed',
  primaryHover:'#6d28d9',
  primaryActive:'#5b21b6',
+ softBgTint:'#ede9fe',
  textColor:'#1e293b',
  gasUrl:''
 };
@@ -835,7 +847,6 @@ function autoSyncToCloud(){
 }
 function saveGasUrl(){ cfg.gasUrl = $('c-gasurl').value.trim(); persist(); toast('Auto-Sync Google Sheets Aktif'); }
 
-// Live Clock & Date Interval + Dynamic Upcoming Prayer Time Highlighting
 setInterval(() => {
  const now = new Date();
  if($('pub-live-clock')){
@@ -845,7 +856,6 @@ setInterval(() => {
   $('pub-live-date').innerText = now.toLocaleDateString('id-ID', {weekday: 'long', day: 'numeric', month: 'short', year: 'numeric'});
  }
 
- // Prayer times schedule for Bandung Raya & Lembang
  const prayers = [
   {id:'p-subuh', time:'04:12', name:'Subuh'},
   {id:'p-dzuhur', time:'11:46', name:'Dzuhur'},
@@ -864,7 +874,7 @@ setInterval(() => {
    break;
   }
   if(i === prayers.length - 1){
-   upcomingIndex = 0; // loops back to Subuh for next day
+   upcomingIndex = 0;
   }
  }
 
@@ -896,7 +906,6 @@ function showDetailPreview(badge, title, body){
  openM('m-detail-preview');
 }
 
-// PUBLIC LANDING NAVIGATION & RENDERING
 function showPublicLanding(){
  $('public-landing-wrapper').classList.remove('hidden');
  $('protected-portal-wrapper').classList.add('hidden');
@@ -948,7 +957,6 @@ function renderPublicLanding(){
 
  if($('pub-hero-section')){
   const pubBgImg = cfg.pubBannerUrl || 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=80';
-  // Refined gradient overlay ensuring the photo background image is clearly visible while keeping text legible
   $('pub-hero-section').style.backgroundImage = `linear-gradient(rgba(15, 23, 42, 0.40), rgba(15, 23, 42, 0.65)), url('${pubBgImg}')`;
  }
 
@@ -996,59 +1004,75 @@ function renderPublicLanding(){
    </div>
   </div>`;
  const randAg = [...publicAgendas].sort(()=>Math.random()-0.5).slice(0,3);
- if($('pub-home-agendas')) $('pub-home-agendas').innerHTML = randAg.map(agCardHtml).join('') || '<p class="text-xs text-slate-400 col-span-3">Belum ada jadwal kegiatan publik.</p>';
- if($('pub-full-kegiatan-grid')) $('pub-full-kegiatan-grid').innerHTML = publicAgendas.map(agCardHtml).join('') || '<p class="text-xs text-slate-400 col-span-3">Belum ada jadwal kegiatan publik.</p>';
+ if($('pub-home-agendas')) $('pub-home-agendas').innerHTML = randAg.map(agCardHtml).join('') || '<p class="text-xs text-slate-400 col-span-3">Belum ada agenda kegiatan.</p>';
+ if($('pub-full-kegiatan-grid')) $('pub-full-kegiatan-grid').innerHTML = publicAgendas.map(agCardHtml).join('') || '<p class="text-xs text-slate-400 col-span-3">Belum ada agenda kegiatan.</p>';
 
- const umkmCardHtml = u => `
+ const umkmSearchQ = $('pub-q-umkm') ? $('pub-q-umkm').value.toLowerCase() : '';
+ const filteredPubUmkm = umkmList.filter(u=>(u.produk+u.desk+u.kat+u.penjual).toLowerCase().includes(umkmSearchQ));
+ const umCardHtml = u => `
   <div class="ci overflow-hidden flex flex-col justify-between hover:shadow-lg transition">
    <div>
-    <div class="w-full h-44 bg-slate-200 overflow-hidden"><img src="${u.img||'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=600'}" class="w-full h-full object-cover"></div>
-    <div class="p-5 space-y-1.5">
-     <div class="flex justify-between items-center"><span class="badge !bg-emerald-100 !text-emerald-800">${E(u.kat)}</span><span class="font-extrabold text-sm text-emerald-700">${E(u.harga)}</span></div>
-     <h4 class="font-extrabold text-sm text-slate-900 pt-1">${E(u.produk)}</h4>
-     <p class="text-[11px] text-slate-500 line-clamp-2">${E(u.desk)}</p>
-     <p class="text-[10px] font-bold text-purple-700 pt-1"><i class="fa-solid fa-store mr-1"></i> ${E(u.penjual)}</p>
+    <div class="w-full h-40 bg-slate-200 overflow-hidden"><img src="${u.img||'https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=600'}" class="w-full h-full object-cover"></div>
+    <div class="p-5 space-y-2">
+     <div class="flex justify-between text-[10px]"><span class="badge !bg-emerald-100 !text-emerald-800">${E(u.kat)}</span><span class="font-bold text-emerald-600">${E(u.harga)}</span></div>
+     <h4 class="font-extrabold text-sm text-slate-900">${E(u.produk)}</h4>
+     <p class="text-xs text-slate-500 line-clamp-2">${E(u.desk)}</p>
+     <p class="text-[10px] text-purple-700 font-semibold pt-1">Oleh: ${E(u.penjual)}</p>
     </div>
    </div>
-   <div class="px-5 pb-5"><a href="https://wa.me/${u.wa.replace(/\D/g,'')}?text=${encodeURIComponent("Assalamu'alaikum, saya tertarik memesan produk " + u.produk + " di Etalase UMKM SSDG.")}" target="_blank" class="btn b-e w-full justify-center"><i class="fa-brands fa-whatsapp text-sm"></i> Pesan via WhatsApp</a></div>
+   <div class="px-5 pb-5 pt-2 border-t border-slate-100">
+    <a href="https://wa.me/${u.wa.replace(/\D/g,'')}" target="_blank" class="btn b-e w-full justify-center text-xs"><i class="fa-brands fa-whatsapp text-sm"></i> Pesan / Hubungi Penjual</a>
+   </div>
   </div>`;
- const randUmkm = [...umkmList].sort(()=>Math.random()-0.5).slice(0,3);
- if($('pub-home-umkm')) $('pub-home-umkm').innerHTML = randUmkm.map(umkmCardHtml).join('') || '<p class="text-xs text-slate-400 col-span-3">Belum ada produk UMKM.</p>';
- if($('pub-full-umkm-grid')){
-  const q = ($('pub-q-umkm')?.value || '').toLowerCase();
-  const filteredU = umkmList.filter(u => (u.produk+u.desk+u.kat+u.penjual).toLowerCase().includes(q));
-  $('pub-full-umkm-grid').innerHTML = filteredU.map(umkmCardHtml).join('') || '<p class="text-xs text-slate-400 col-span-3">Produk tidak ditemukan.</p>';
- }
-
- if($('pub-social-grid')){
-  const socs = [
-   {name:'Instagram', icon:'fa-instagram', color:'text-pink-600 bg-pink-50', url: cfg.socIg || 'https://instagram.com'},
-   {name:'Facebook', icon:'fa-facebook', color:'text-blue-600 bg-blue-50', url: cfg.socFb || 'https://facebook.com'},
-   {name:'TikTok', icon:'fa-tiktok', color:'text-slate-900 bg-slate-100', url: cfg.socTt || 'https://tiktok.com'},
-   {name:'YouTube', icon:'fa-youtube', color:'text-rose-600 bg-rose-50', url: cfg.socYt || 'https://youtube.com'}
-  ];
-  $('pub-social-grid').innerHTML = socs.map(s => `<a href="${s.url}" target="_blank" class="flex items-center gap-2.5 p-3 rounded-2xl border border-slate-200 hover:border-purple-300 transition"><div class="w-8 h-8 rounded-xl ${s.color} flex items-center justify-center text-base"><i class="fa-brands ${s.icon}"></i></div><span>${s.name}</span></a>`).join('');
- }
+ const randUm = [...filteredPubUmkm].sort(()=>Math.random()-0.5).slice(0,3);
+ if($('pub-home-umkm')) $('pub-home-umkm').innerHTML = randUm.map(umCardHtml).join('') || '<p class="text-xs text-slate-400 col-span-3">Belum ada produk UMKM.</p>';
+ if($('pub-full-umkm-grid')) $('pub-full-umkm-grid').innerHTML = filteredPubUmkm.map(umCardHtml).join('') || '<p class="text-xs text-slate-400 col-span-3">Tidak ada produk UMKM ditemukan.</p>';
 }
 
-function uploadPubBanner(input){
+let pendingCropType = '';
+let currentCropImageSrc = '';
+
+function initBannerCropper(input, type){
  if(input.files[0]){
+  pendingCropType = type;
   const r=new FileReader();
   r.onload=e=>{
-   cfg.pubBannerUrl = e.target.result;
-   persist(); renderPublicLanding(); toast('Banner Beranda Publik Berhasil Diperbarui!');
+   currentCropImageSrc = e.target.result;
+   $('crop-preview-img').src = currentCropImageSrc;
+   $('crop-preview-img').style.transform = 'scale(1)';
+   if($('crop-zoom-range')) $('crop-zoom-range').value = '1';
+   openM('m-cropper');
   };
   r.readAsDataURL(input.files[0]);
  }
 }
-function savePublicHeroCfg(e){
- e.preventDefault();
- cfg.pubHeroBadge = $('c-pub-badge').value;
- cfg.pubHeroTitle = $('c-pub-title').value;
- cfg.pubHeroSlogan = $('c-pub-slogan').value;
- cfg.pubTickerText = $('c-pub-ticker').value;
- cfg.humasWa = $('c-humas-wa').value;
- persist(); renderPublicLanding(); toast('Tampilan Beranda Publik & Kontak Humas Disimpan!');
+
+function adjustCropZoom(val){
+ const img = $('crop-preview-img');
+ if(img) img.style.transform = `scale(${val})`;
+}
+
+function applyCroppedBanner(){
+ const img = $('crop-preview-img');
+ const canvas = document.createElement('canvas');
+ const ctx = canvas.getContext('2d');
+ const imageObj = new Image();
+ imageObj.onload = function(){
+  canvas.width = 1200;
+  canvas.height = 675;
+  ctx.drawImage(imageObj, 0, 0, canvas.width, canvas.height);
+  const resultUrl = canvas.toDataURL('image/jpeg', 0.9);
+
+  if(pendingCropType === 'pub'){
+   cfg.pubBannerUrl = resultUrl;
+   persist(); renderPublicLanding(); toast('Banner Beranda Publik Berhasil Disimpan!');
+  } else if(pendingCropType === 'dash'){
+   cfg.bannerUrl = resultUrl;
+   applyBrand(); toast('Banner Dashboard Berhasil Disimpan!');
+  }
+  closeM('m-cropper');
+ };
+ imageObj.src = img.src;
 }
 
 function doLogin(e){
@@ -1087,11 +1111,15 @@ function finishLogin(){
  $('public-landing-wrapper').classList.add('hidden');
  $('protected-portal-wrapper').classList.remove('hidden');
  updatePublicAuthButtons();
- buildNav(); refresh();
+ buildNav(); 
+ const lastTab = localStorage.getItem(CURRENT_TAB_KEY) || 'dashboard';
+ go(lastTab);
+ refresh();
 }
 function lockSession(){
  currentUser=null;
  localStorage.removeItem(SESSION_KEY);
+ localStorage.removeItem(CURRENT_TAB_KEY);
  showPublicLanding();
  toast('Sesi telah dikunci / keluar.');
 }
@@ -1107,7 +1135,10 @@ function checkSess(){
    $('public-landing-wrapper').classList.add('hidden');
    $('protected-portal-wrapper').classList.remove('hidden');
    updatePublicAuthButtons();
-   buildNav(); refresh();
+   buildNav(); 
+   const lastTab = localStorage.getItem(CURRENT_TAB_KEY) || 'dashboard';
+   go(lastTab);
+   refresh();
    return;
   }
  }
@@ -1127,10 +1158,13 @@ function buildNav(){
  $('nav-d').innerHTML=navs.map(n=>`<button onclick="go('${n.id}')" id="t-d-${n.id}" class="nav-item px-3 py-2 rounded-2xl text-xs font-semibold text-slate-600 hover:bg-purple-50 transition"><i class="fa-solid ${n.icon} mr-1"></i>${n.label}</button>`).join('');
  
  $('nav-m').innerHTML=navs.map(n=>`<button onclick="go('${n.id}')" id="t-m-${n.id}" class="nav-item flex flex-col items-center justify-center px-3 py-1.5 rounded-xl text-[10px] font-bold text-slate-600 transition min-w-[52px]"><i class="fa-solid ${n.icon} text-sm mb-0.5"></i><span>${n.label.split(' ')[0]}</span></button>`).join('');
- go('dashboard');
+ 
+ const lastTab = localStorage.getItem(CURRENT_TAB_KEY) || 'dashboard';
+ go(lastTab);
 }
 
 function go(tab){
+ localStorage.setItem(CURRENT_TAB_KEY, tab);
  NAV_ALL.forEach(n=> { 
   const s=$('sec-'+n.id); 
   if(s) {
@@ -1171,7 +1205,6 @@ function refresh(){
  if($('kta-bg-upload-box')) $('kta-bg-upload-box').classList.toggle('hidden', !isSuper && currentUser?.data?.jabatan !== 'Ketua Korwil');
 }
 
-// DASHBOARD
 function stats(){
  const isAnggota = currentUser && currentUser.role === 'anggota';
  if(isAnggota){
@@ -1229,7 +1262,6 @@ function uploadBanner(input){
  }
 }
 
-// GRAND CALENDAR & SHOUTBOX
 function renderGrandCalendar(){
  const y=currentCalDate.getFullYear(), m=currentCalDate.getMonth();
  const mNames=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
@@ -1251,7 +1283,7 @@ function renderGrandCalendar(){
   });
   const hasEvent = dayProgs.length > 0;
   const countBadge = dayProgs.length > 1 ? `<span class="absolute -top-1 -right-1 bg-rose-600 text-white rounded-full w-4 h-4 text-[9px] flex items-center justify-center font-bold">${dayProgs.length}</span>` : '';
-  h+=`<div onclick="openCalendarDate('${dStr}')" class="p-1.5 rounded-lg text-xs font-semibold cursor-pointer relative ${hasEvent?'bg-purple-600 text-white font-extrabold shadow-sm hover:bg-purple-700':'bg-slate-50 text-slate-700 hover:bg-slate-100'}">${d}${countBadge}</div>`;
+  h+=`<div onclick="openCalendarDate('${dStr}')" class="p-1.5 rounded-lg text-xs font-semibold cursor-pointer relative ${hasEvent?'b-p text-white font-extrabold shadow-sm':'bg-slate-50 text-slate-700 hover:bg-slate-100'}">${d}${countBadge}</div>`;
  }
  $('grand-calendar-grid').innerHTML=h;
 }
@@ -1301,7 +1333,6 @@ function postVoiceNote(){
  persist(); renderShoutbox(); toast('Voice Note dikirim');
 }
 
-// PUBLIC G-FORM & APPROVAL
 function openShareableLinkForm(){ $('share-url-input').value = window.location.origin + window.location.pathname + '?form=daftar'; openM('m-share-link'); }
 function copyShareUrl(){ $('share-url-input').select(); document.execCommand('copy'); toast('Link G-Form disalin!'); }
 function openPublicFormModal(){ $('pf-nama').value=''; $('pf-alamat').value=''; $('pf-hp').value=''; $('pf-motivasi').value=''; openM('m-public-form'); }
@@ -1318,7 +1349,6 @@ function approveApplicant(id){
 }
 function rejectApplicant(id){ pendingApplicants=pendingApplicants.filter(x=>x.id!==id); persist(); renderApprovalTable(); refresh(); toast('Ditolak.'); }
 
-// IMPORT EXPORT CSV
 function exportCSV(){ let c='Nama,NoHP,Kota,Jabatan,Status,NIA,Alamat,Motivasi,Minat\n'; sah.forEach(s=>c+=[s.nama,s.hp,s.kota,s.jabatan,s.status,s.nia,s.alamat,s.motivasi,s.minat].map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')+'\n'); const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([c],{type:'text/csv'})); a.download='Database_Sahabat.csv'; a.click(); toast('CSV Diunduh'); }
 function openBulkImportModal(){ $('bulk-file').value=''; openM('m-bulk'); }
 function downloadTemplateCSV(){ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob(["NamaKeluarga,NoHP,Kota,Jabatan,Status,NIA,Alamat,Motivasi,MinatBakat\nAhmad,+62812,Bandung,Anggota Aktif,Anggota Aktif,SSDGBR-12345,Alamat...,Motivasi...,Dakwah\n"],{type:'text/csv'})); a.download='Template_Import.csv'; a.click(); }
@@ -1327,7 +1357,6 @@ function processBulkImport(){
  const r=new FileReader(); r.onload=e=>{ try{ const lines=e.target.result.split('\n').filter(l=>l.trim()!==''); let c=0; for(let i=1;i<lines.length;i++){ const v=lines[i].split(',').map(x=>x.replace(/^"|"$/g,'').trim()); if(v.length>=6 && !sah.some(s=>s.nia===v[5])){ sah.push({id:'S'+Math.floor(Math.random()*90000), nama:v[0], hp:v[1], kota:v[2], jabatan:v[3], status:v[4], nia:v[5]||`SSDGBR-00-${Math.floor(1000+Math.random()*9000)}`, alamat:v[6], motivasi:v[7], minat:v[8], pin:'999999', foto:''}); c++; } } persist(); closeM('m-bulk'); refresh(); toast(`${c} data diimpor!`); }catch(err){toast('Gagal memproses CSV');} }; r.readAsText(f);
 }
 
-// DATABASE TABS & STATS
 function renderDbSummary(){
  if(!$('db-summary-cards')) return;
  const pengurusCount = sah.filter(s=>s.status==='Pengurus').length;
@@ -1419,13 +1448,7 @@ function populateJabatanOptions(statusType){
  const pengurusRoles = ['Pembina Korwil', 'Ketua Korwil', 'Sekretaris', 'Bendahara', 'Kabid 1', 'Kabid 2', 'Kabid 3', 'Fundraising', 'UMKM', 'Humas', 'Media', 'Jarkom', 'Dakwah', 'Kaderisasi', 'Diklat', 'Pengobatan', 'Logistik', 'Liputan', 'Sosial', 'Seni & Olahraga', 'Keamanan'];
  const anggotaRoles = ['Anggota Aktif', 'Staff Fundraising', 'Staff UMKM', 'Staff Humas', 'Staff Media', 'Staff Jarkom', 'Staff Dakwah', 'Staff Kaderisasi', 'Staff Diklat', 'Staff Pengobatan', 'Staff Logistik', 'Staff Liputan', 'Staff Sosial', 'Staff Seni & Olahraga', 'Staff Keamanan'];
 
- let allowed = [];
- if(statusType === 'Pengurus'){
-  allowed = pengurusRoles;
- } else {
-  allowed = anggotaRoles;
- }
- 
+ let allowed = statusType === 'Pengurus' ? pengurusRoles : anggotaRoles;
  sel.innerHTML = allowed.map(r=>`<option value="${r}">${r}</option>`).join('');
 }
 
@@ -1473,7 +1496,6 @@ function fillAgniaData(){ const s=sah.find(x=>x.id===$('ag-sah').value); if(s){$
 function saveAgniaAnggota(e){ e.preventDefault(); agniaList.push({id:'AG'+Date.now(), nama:$('ag-nama').value, nia:$('ag-nia').value, hp:$('ag-hp').value, alamat:$('ag-alamat')?$('ag-alamat').value:'Bandung', ket:$('ag-ket')?$('ag-ket').value:'Dermawan Agnia', kota:'Bandung'}); persist(); closeM('m-agnia'); refresh(); toast('Simpan Agnia'); }
 function delAgnia(id){ agniaList=agniaList.filter(a=>a.id!==id); persist(); refresh(); toast('Dihapus'); }
 
-// PENGUMUMAN & AGENDA
 let progCalDate = new Date();
 function setProgView(m){
  progViewMode=m;
@@ -1576,7 +1598,6 @@ function delProgram(id){ prog=prog.filter(p=>p.id!==id); persist(); refresh(); t
 
 function openLightbox(url){ $('lightbox-img').src=url; openM('m-lightbox'); }
 
-// ARTIKEL MODULE
 function renderArtikel(){
  const q=$('q-artikel').value.toLowerCase();
  const L=artikelList.filter(a=>(a.judul+a.isi).toLowerCase().includes(q));
@@ -1602,7 +1623,6 @@ function saveArtikel(e){
 }
 function delArtikel(id){ artikelList=artikelList.filter(a=>a.id!==id); persist(); refresh(); toast('Artikel dihapus'); }
 
-// BROADCAST WA LOGIC
 function openWA(id){ currentWAProg=prog.find(x=>x.id===id); if(!currentWAProg)return; changeWAType(); openM('m-broadcast'); }
 function changeWAType(){
  const p = currentWAProg; if(!p) return;
@@ -1615,7 +1635,6 @@ function changeWAType(){
 }
 function sendWA(){ const txt=encodeURIComponent($('wa-text').value); window.open(`https://api.whatsapp.com/send?text=${txt}`,'_blank'); closeM('m-broadcast'); toast('Membuka WA...'); }
 
-// ABSENSI & SURAT & GENERATOR SURAT RESMI
 function switchAbsTab(t){ ['absensi','surat','arsip','notulensi'].forEach(x=>{ $('tab-as-'+x).className=x===t?'px-4 py-2 rounded-xl text-xs font-bold bg-white text-purple-700 shadow whitespace-nowrap':'px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 whitespace-nowrap'; $('as-view-'+x).classList.toggle('hidden',x!==t); }); }
 function renderAbsensi(){ const f=$('f-abs').value; const L=absen.filter(a=>f==='semua'||a.kegiatan===f); $('tb-abs').innerHTML=L.map(a=>`<tr><td><div class="font-bold">${E(a.kegiatan)}</div><div class="text-[9px] text-slate-400">${E(a.waktu)}</div></td><td class="font-bold">${E(a.nama)}</td><td><span class="badge ${a.status!=='Hadir'?'!bg-rose-100 !text-rose-700':''}">${E(a.status)}</span></td><td><button onclick="delAbsensi('${a.id}')" class="text-rose-600"><i class="fa-solid fa-trash"></i></button></td></tr>`).join(''); }
 function openAbsensi(){ $('a-notulensi').value=''; cekRapatAbsensi(); openM('m-absensi'); }
@@ -1715,7 +1734,6 @@ function saveFile(e){
 function delFile(id){ arsipFile=arsipFile.filter(f=>f.id!==id); persist(); refresh(); toast('Dihapus'); }
 function renderNotulensi(){ const nL=prog.filter(p=>p.periode==='Rapat' && p.notulensi); $('tb-notulensi').innerHTML=nL.map(p=>`<tr><td class="font-bold">${E(p.nama)}</td><td class="font-mono text-[9px]">${E(p.tanggal)}</td><td class="text-xs italic">"${E(p.notulensi)}"</td><td><button onclick="openProgram('${p.id}')" class="text-purple-600"><i class="fa-solid fa-pen"></i></button></td></tr>`).join(''); }
 
-// KAS & KEUANGAN
 function renderKas(){
  const sumHtml=SUMBER.map(s=>{ const i=kasMasuk.filter(k=>s[0]==='Arus Kas Keseluruhan'||k.kat===s[0]).reduce((a,b)=>a+b.nom,0); const o=kasKeluar.filter(k=>s[0]==='Arus Kas Keseluruhan'||k.sum===s[0]).reduce((a,b)=>a+b.nom,0); return `<div class="rounded-xl border border-slate-200 bg-slate-50 p-4"><p class="text-[10px] font-bold text-slate-500">${s[0]}</p><p class="text-lg font-extrabold mt-1" style="color:${s[1]}">${rp(i-o)}</p><p class="text-[9px] text-slate-400 mt-1">In ${rp(i)} • Out ${rp(o)}</p></div>`; }).join('');
  $('kas-cards').innerHTML=sumHtml;
@@ -1755,7 +1773,6 @@ function generateReport(){
  openM('m-report');
 }
 
-// DIREKTORI PRODUK UMKM
 function renderUmkm(){ 
  const q=$('q-umkm').value.toLowerCase(); 
  const L=umkmList.filter(u=>(u.produk+u.desk+u.kat+u.penjual).toLowerCase().includes(q)); 
@@ -1786,7 +1803,6 @@ function delUmkm(id){
  umkmList=umkmList.filter(u=>u.id!==id); persist(); refresh(); toast('Dihapus');
 }
 
-// SUARA SAHABAT (BERITA & KRITIK SARAN)
 function renderSuara(){ 
  const isAnggota = currentUser && currentUser.role === 'anggota';
  const myName = currentUser ? currentUser.nama : '';
@@ -1820,7 +1836,6 @@ function tutupSuara(id){
  item.status = 'Ditutup / Selesai'; persist(); refresh(); toast('Topik ditutup');
 }
 
-// KTA
 function genKTA(){ 
  const isAnggota = currentUser && currentUser.role === 'anggota';
  const targetSahabat = isAnggota ? (currentUser.data || sah[0]) : (sah.find(x=>x.id===$('kta-sel').value) || currentUser.data || sah[0]);
@@ -1867,10 +1882,9 @@ function uploadKtaBg(i, side){
 }
 function downloadKTA(){ html2canvas($('kta-export'),{scale:3,useCORS:true}).then(c=>{const a=document.createElement('a');a.download='KTA_SSDG.png';a.href=c.toDataURL('image/png');a.click();toast('KTA diunduh');}); }
 
-// PENGATURAN
-function setTheme(hex, hoverHex, activeHex, textHex){ 
- cfg.primaryColor=hex; cfg.primaryHover=hoverHex; cfg.primaryActive=activeHex; cfg.textColor=textHex||'#1e293b'; 
- applyBrand(); toast('Tema Warna & Tombol Diperbarui'); 
+function setTheme(hex, hoverHex, softTintHex, textHex){ 
+ cfg.primaryColor=hex; cfg.primaryHover=hoverHex; cfg.softTint=softTintHex; cfg.textColor=textHex||'#1e293b'; 
+ applyBrand(); toast('Tema Warna & Palet Elegan Diperbarui'); 
 }
 function setFontColor(hex){
  cfg.textColor = hex;
@@ -1901,7 +1915,8 @@ function logoUp(i){
 }
 function applyBrand(){ 
  document.documentElement.style.setProperty('--primary-color',cfg.primaryColor); 
- document.documentElement.style.setProperty('--text-color',cfg.textColor || '#1e293b');
+ document.documentElement.style.setProperty('--soft-bg-tint',cfg.softTint || '#ede9fe');
+ document.documentElement.style.setProperty('--text-color',cfg.textColor || '#1e293b'); 
  document.body.style.color = cfg.textColor || '#1e293b';
  $('ui-name').innerText=cfg.appName; 
  $('lg-appname').innerText=cfg.appName; 
