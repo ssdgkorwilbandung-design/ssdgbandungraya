@@ -34,7 +34,7 @@ td{padding:12px 14px}
 .marquee-container{overflow:hidden;white-space:nowrap;box-sizing:border-box;background:#fef3c7;color:#92400e;padding:8px 15px;border-radius:12px;font-weight:600;font-size:12px;display:flex;align-items:center;border:1px solid #fde68a}
 .marquee-content{display:inline-block;animation:marquee 25s linear infinite;padding-left:100%}
 @keyframes marquee{0%{transform:translate(0,0)}100%{transform:translate(-100%,0)}}
-.hero-pub-bg{background-color:#0f172a;background-size:cover;background-position:center;background-blend-mode:overlay}
+.hero-pub-bg{background-color:#0f172a;background-size:cover;background-position:center;background-repeat:no-repeat}
 @media print {
  .no-print{display:none !important}
  body{background:#fff !important}
@@ -81,23 +81,25 @@ td{padding:12px 14px}
  </header>
 
  <div id="pub-sub-beranda" class="space-y-12 pb-12">
-  <section id="pub-hero-section" class="hero-pub-bg text-white pt-12 pb-20 px-4 sm:px-6 relative overflow-hidden" style="background-image:linear-gradient(rgba(15, 23, 42, 0.45), rgba(15, 23, 42, 0.65)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=80')">
+  <!-- Refined Hero Section with clear image visibility and gentle darkening gradient overlay -->
+  <section id="pub-hero-section" class="hero-pub-bg text-white pt-12 pb-24 px-4 sm:px-6 relative overflow-hidden" style="background-image:linear-gradient(rgba(15, 23, 42, 0.45), rgba(15, 23, 42, 0.65)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=80')">
    <div class="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
     <div class="lg:col-span-7 space-y-4 text-center lg:text-left">
-     <span id="pub-hero-badge" class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-amber-300 text-[11px] font-bold uppercase tracking-wider">
+     <span id="pub-hero-badge" class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 border border-white/30 text-amber-300 text-[11px] font-bold uppercase tracking-wider shadow-sm">
       <i class="fa-solid fa-moon"></i> Ahlan wa Sahlan di Portal Resmi
      </span>
-     <h2 id="pub-hero-title" class="text-2xl sm:text-4xl font-extrabold leading-tight">Merajut Ukhuwah, <span class="text-amber-300">Menebar Manfaat</span> di Bandung Raya</h2>
-     <p id="pub-hero-slogan" class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-xl mx-auto lg:mx-0">Kelola administrasi, syiar dakwah, gerakan sedekah produktif, dan pemberdayaan ekonomi UMKM dalam satu portal terpadu.</p>
+     <h2 id="pub-hero-title" class="text-2xl sm:text-4xl font-extrabold leading-tight drop-shadow-md">Merajut Ukhuwah, <span class="text-amber-300">Menebar Manfaat</span> di Bandung Raya</h2>
+     <p id="pub-hero-slogan" class="text-xs sm:text-sm text-slate-100 leading-relaxed max-w-xl mx-auto lg:mx-0 drop-shadow">Kelola administrasi, syiar dakwah, gerakan sedekah produktif, dan pemberdayaan ekonomi UMKM dalam satu portal terpadu.</p>
      <div class="flex flex-wrap justify-center lg:justify-start gap-2.5 pt-2">
       <button onclick="switchPubSubPage('kegiatan')" class="px-4 py-2.5 rounded-xl bg-white text-slate-900 font-extrabold text-xs shadow hover:bg-slate-100 transition"><i class="fa-solid fa-calendar-check text-purple-600 mr-1.5"></i> Agenda Kegiatan</button>
-      <button onclick="switchPubSubPage('umkm')" class="px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 border border-white/20 text-white font-bold text-xs transition"><i class="fa-solid fa-store text-amber-300 mr-1.5"></i> Katalog UMKM Sahabat</button>
+      <button onclick="switchPubSubPage('umkm')" class="px-4 py-2.5 rounded-xl bg-white/20 hover:bg-white/30 border border-white/30 text-white font-bold text-xs transition backdrop-blur-sm"><i class="fa-solid fa-store text-amber-300 mr-1.5"></i> Katalog UMKM Sahabat</button>
       <a id="pub-daftar-humas-btn" href="https://wa.me/6281120262026?text=Assalamu'alaikum%20Humas%20SSDG%20Korwil%20Bandung%20Raya,%20saya%20ingin%20mendaftar%20menjadi%20Sahabat%20Baru." target="_blank" class="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-extrabold text-xs shadow transition inline-flex items-center"><i class="fa-brands fa-whatsapp text-sm mr-1.5"></i> Daftar Sahabat Baru</a>
      </div>
     </div>
 
+    <!-- Dynamic Prayer Times Widget with upcoming prayer highlighted -->
     <div class="lg:col-span-5">
-     <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-5 shadow-2xl">
+     <div class="bg-slate-900/60 backdrop-blur-md border border-white/25 rounded-3xl p-5 shadow-2xl">
       <div class="flex justify-between items-center border-b border-white/15 pb-3 mb-3">
        <div>
         <p class="text-[10px] font-bold uppercase tracking-wider text-amber-300"><i class="fa-solid fa-location-dot mr-1"></i> Bandung Raya & Lembang</p>
@@ -105,15 +107,15 @@ td{padding:12px 14px}
        </div>
        <div class="text-right">
         <span id="pub-live-clock" class="font-mono text-lg font-extrabold text-amber-300">12:37:00</span>
-        <p id="pub-live-date" class="text-[10px] text-slate-300">Sabtu, 14 Nov 2026</p>
+        <p id="pub-live-date" class="text-[10px] text-slate-200">Sabtu, 14 Nov 2026</p>
        </div>
       </div>
-      <div class="grid grid-cols-5 gap-1.5 text-center text-xs">
-       <div class="bg-white/10 rounded-xl p-2"><p class="text-[10px] text-slate-300">Subuh</p><p class="font-extrabold mt-0.5">04:12</p></div>
-       <div class="bg-amber-400/25 border border-amber-300/60 rounded-xl p-2"><p class="text-[10px] text-amber-200 font-bold">Dzuhur</p><p class="font-extrabold text-amber-300 mt-0.5">11:46</p></div>
-       <div class="bg-white/10 rounded-xl p-2"><p class="text-[10px] text-slate-300">Ashar</p><p class="font-extrabold mt-0.5">15:08</p></div>
-       <div class="bg-white/10 rounded-xl p-2"><p class="text-[10px] text-slate-300">Maghrib</p><p class="font-extrabold mt-0.5">17:56</p></div>
-       <div class="bg-white/10 rounded-xl p-2"><p class="text-[10px] text-slate-300">Isya</p><p class="font-extrabold mt-0.5">19:09</p></div>
+      <div id="prayer-times-widget" class="grid grid-cols-5 gap-1.5 text-center text-xs">
+       <div id="p-subuh" class="bg-white/10 rounded-xl p-2"><p class="text-[10px] text-slate-200">Subuh</p><p class="font-extrabold mt-0.5">04:12</p></div>
+       <div id="p-dzuhur" class="bg-white/10 rounded-xl p-2"><p class="text-[10px] text-slate-200">Dzuhur</p><p class="font-extrabold mt-0.5">11:46</p></div>
+       <div id="p-ashar" class="bg-white/10 rounded-xl p-2"><p class="text-[10px] text-slate-200">Ashar</p><p class="font-extrabold mt-0.5">15:08</p></div>
+       <div id="p-maghrib" class="bg-white/10 rounded-xl p-2"><p class="text-[10px] text-slate-200">Maghrib</p><p class="font-extrabold mt-0.5">17:56</p></div>
+       <div id="p-isya" class="bg-white/10 rounded-xl p-2"><p class="text-[10px] text-slate-200">Isya</p><p class="font-extrabold mt-0.5">19:09</p></div>
       </div>
      </div>
     </div>
@@ -833,7 +835,7 @@ function autoSyncToCloud(){
 }
 function saveGasUrl(){ cfg.gasUrl = $('c-gasurl').value.trim(); persist(); toast('Auto-Sync Google Sheets Aktif'); }
 
-// Live Clock & Date Interval
+// Live Clock & Date Interval + Dynamic Upcoming Prayer Time Highlighting
 setInterval(() => {
  const now = new Date();
  if($('pub-live-clock')){
@@ -842,6 +844,42 @@ setInterval(() => {
  if($('pub-live-date')){
   $('pub-live-date').innerText = now.toLocaleDateString('id-ID', {weekday: 'long', day: 'numeric', month: 'short', year: 'numeric'});
  }
+
+ // Prayer times schedule for Bandung Raya & Lembang
+ const prayers = [
+  {id:'p-subuh', time:'04:12', name:'Subuh'},
+  {id:'p-dzuhur', time:'11:46', name:'Dzuhur'},
+  {id:'p-ashar', time:'15:08', name:'Ashar'},
+  {id:'p-maghrib', time:'17:56', name:'Maghrib'},
+  {id:'p-isya', time:'19:09', name:'Isya'}
+ ];
+
+ const currentMinutes = now.getHours() * 60 + now.getMinutes();
+ let upcomingIndex = 0;
+ for(let i=0; i<prayers.length; i++){
+  const [h, m] = prayers[i].time.split(':').map(Number);
+  const pMinutes = h * 60 + m;
+  if(currentMinutes < pMinutes){
+   upcomingIndex = i;
+   break;
+  }
+  if(i === prayers.length - 1){
+   upcomingIndex = 0; // loops back to Subuh for next day
+  }
+ }
+
+ prayers.forEach((p, idx) => {
+  const el = $(p.id);
+  if(el){
+   if(idx === upcomingIndex){
+    el.className = 'bg-amber-400/30 border border-amber-300/80 rounded-xl p-2 shadow-lg backdrop-blur-sm transform scale-105 transition-all';
+    el.innerHTML = `<p class="text-[10px] text-amber-200 font-bold">${p.name} (Akan Tiba)</p><p class="font-extrabold text-amber-300 mt-0.5">${p.time}</p>`;
+   } else {
+    el.className = 'bg-white/10 rounded-xl p-2 transition-all';
+    el.innerHTML = `<p class="text-[10px] text-slate-300">${p.name}</p><p class="font-extrabold mt-0.5">${p.time}</p>`;
+   }
+  }
+ });
 }, 1000);
 
 function toast(m){
@@ -910,7 +948,8 @@ function renderPublicLanding(){
 
  if($('pub-hero-section')){
   const pubBgImg = cfg.pubBannerUrl || 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=80';
-  $('pub-hero-section').style.backgroundImage = `linear-gradient(rgba(15, 23, 42, 0.45), rgba(15, 23, 42, 0.65)), url('${pubBgImg}')`;
+  // Refined gradient overlay ensuring the photo background image is clearly visible while keeping text legible
+  $('pub-hero-section').style.backgroundImage = `linear-gradient(rgba(15, 23, 42, 0.40), rgba(15, 23, 42, 0.65)), url('${pubBgImg}')`;
  }
 
  const cleanHumasWa = (cfg.humasWa || cfg.kontak || '+6281120262026').replace(/\D/g,'');
@@ -1087,7 +1126,6 @@ function buildNav(){
  }
  $('nav-d').innerHTML=navs.map(n=>`<button onclick="go('${n.id}')" id="t-d-${n.id}" class="nav-item px-3 py-2 rounded-2xl text-xs font-semibold text-slate-600 hover:bg-purple-50 transition"><i class="fa-solid ${n.icon} mr-1"></i>${n.label}</button>`).join('');
  
- // Enhanced mobile nav items with larger touch target, icon, and short label
  $('nav-m').innerHTML=navs.map(n=>`<button onclick="go('${n.id}')" id="t-m-${n.id}" class="nav-item flex flex-col items-center justify-center px-3 py-1.5 rounded-xl text-[10px] font-bold text-slate-600 transition min-w-[52px]"><i class="fa-solid ${n.icon} text-sm mb-0.5"></i><span>${n.label.split(' ')[0]}</span></button>`).join('');
  go('dashboard');
 }
@@ -1397,7 +1435,6 @@ function saveSahabat(e){
  const selJabatan = $('s-jabatan').value;
  const selStatus = $('s-status').value;
 
- // Check uniqueness for leadership positions if status is Pengurus
  const coreLeadershipRoles = ['Ketua Korwil', 'Sekretaris', 'Bendahara', 'Pembina Korwil'];
  if(selStatus === 'Pengurus' && coreLeadershipRoles.includes(selJabatan)){
   const existingHolder = sah.find(s => s.jabatan === selJabatan && s.id !== id);
@@ -1934,7 +1971,6 @@ function importBackupJSON(i){ const f=i.files[0]; if(!f)return; const r=new File
 window.onload=function(){
  loadData();
  
- // Check session immediately before showing any view to prevent flash
  const s=localStorage.getItem(SESSION_KEY), t=localStorage.getItem(SESSION_TIME_KEY);
  if(s && t){
   currentUser=JSON.parse(s);
