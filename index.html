@@ -14,7 +14,7 @@
 html,body{max-width:100vw;overflow-x:hidden;color:var(--text-color,#1e293b)}
 .ci{background:#fff;border:1px solid #e2e8f0;box-shadow:0 10px 25px -5px rgba(0,0,0,.04),0 8px 10px -6px rgba(0,0,0,.04);border-radius:1.25rem}
 .fi{width:100%;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:9px 14px;font-size:12px;color:var(--text-color,#334155)}
-.fi:focus{outline:none;border-color:var(--primary-color,#7c3aed);background:#fff;box-shadow:0 0 0 3px rgba(124,58,237,.1)}
+.fi:focus{outline:none;border-color:var(--primary-color,#7c3aed);background:#fff;box-shadow:0 0 0 3px var(--primary-glow,rgba(124,58,237,.1))}
 .fl{display:block;font-size:11px;font-weight:600;color:#64748b;margin-bottom:4px}
 .btn{padding:9px 16px;border-radius:12px;font-size:12px;font-weight:600;color:#fff;display:inline-flex;gap:6px;align-items:center;transition:.2s;cursor:pointer;border:none}
 .btn:hover{filter:brightness(.92);transform:translateY(-1px)}
@@ -25,7 +25,7 @@ html,body{max-width:100vw;overflow-x:hidden;color:var(--text-color,#1e293b)}
 .mod{position:fixed;inset:0;z-index:60;background:rgba(15,23,42,.55);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:16px}
 .mod.show{display:flex}
 .mod>div{background:#fff;border-radius:24px;width:100%;max-width:32rem;max-height:92vh;overflow:auto;box-shadow:0 25px 50px -12px rgba(0,0,0,.25)}
-.mh{background:#f8fafc;padding:16px 24px;border-bottom:1px solid #f1f5f9;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px;color:var(--primary-color,#2e1065)}
+.mh{background:#f8fafc;padding:16px 24px;border-bottom:1px solid #f1f5f9;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px;color:var(--primary-color,#7c3aed)}
 th{padding:12px 14px;background:#f8fafc;color:#64748b;text-transform:uppercase;font-size:10px;font-weight:700;letter-spacing:.05em}
 td{padding:12px 14px}
 .badge{padding:3px 10px;border-radius:9999px;font-size:10px;font-weight:700;background:var(--soft-bg-tint,#ede9fe);color:var(--primary-color,#6d28d9);display:inline-block}
@@ -60,13 +60,6 @@ td{padding:12px 14px}
     </div>
    </div>
 
-   <nav class="hidden md:flex items-center gap-1 bg-slate-100 p-1 rounded-2xl border border-slate-200/70">
-    <button type="button" onclick="switchPubSubPage('beranda')" id="pnav-beranda" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white text-purple-700 shadow-sm transition">Beranda</button>
-    <button type="button" onclick="switchPubSubPage('artikel')" id="pnav-artikel" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 hover:text-purple-700 transition">Artikel</button>
-    <button type="button" onclick="switchPubSubPage('kegiatan')" id="pnav-kegiatan" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 hover:text-purple-700 transition">Kegiatan Kami</button>
-    <button type="button" onclick="switchPubSubPage('umkm')" id="pnav-umkm" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 hover:text-purple-700 transition">UMKM Sahabat</button>
-   </nav>
-
    <div class="flex items-center gap-2">
     <button id="btn-pub-login" onclick="openM('m-login')" class="btn b-p text-xs shadow-md"><i class="fa-solid fa-right-to-bracket"></i> <span>Masuk Portal</span></button>
     <div id="box-pub-logged" class="hidden flex items-center gap-2">
@@ -74,12 +67,6 @@ td{padding:12px 14px}
      <button onclick="lockSession()" class="px-3 py-2 rounded-xl bg-rose-50 text-rose-600 hover:bg-rose-100 text-xs font-bold border border-rose-200" title="Keluar / Logout"><i class="fa-solid fa-right-from-bracket"></i></button>
     </div>
    </div>
-  </div>
-  <div class="flex md:hidden items-center justify-center gap-1.5 mt-2.5 pt-2 border-t border-slate-100 overflow-x-auto">
-   <button type="button" onclick="switchPubSubPage('beranda')" class="px-3 py-1 rounded-lg text-[11px] font-bold bg-purple-100 text-purple-800">Beranda</button>
-   <button type="button" onclick="switchPubSubPage('artikel')" class="px-3 py-1 rounded-lg text-[11px] font-bold bg-slate-100 text-slate-700">Artikel</button>
-   <button type="button" onclick="switchPubSubPage('kegiatan')" class="px-3 py-1 rounded-lg text-[11px] font-bold bg-slate-100 text-slate-700">Kegiatan</button>
-   <button type="button" onclick="switchPubSubPage('umkm')" class="px-3 py-1 rounded-lg text-[11px] font-bold bg-slate-100 text-slate-700">UMKM</button>
   </div>
  </header>
 
@@ -93,7 +80,7 @@ td{padding:12px 14px}
      <h2 id="pub-hero-title" class="text-2xl sm:text-4xl font-extrabold leading-tight drop-shadow-md">Merajut Ukhuwah, <span class="text-amber-300">Menebar Manfaat</span> di Bandung Raya</h2>
      <p id="pub-hero-slogan" class="text-xs sm:text-sm text-slate-100 leading-relaxed max-w-xl mx-auto lg:mx-0 drop-shadow">Kelola administrasi, syiar dakwah, gerakan sedekah produktif, dan pemberdayaan ekonomi UMKM dalam satu portal terpadu.</p>
      <div class="flex flex-wrap justify-center lg:justify-start gap-2.5 pt-2">
-      <button onclick="switchPubSubPage('kegiatan')" class="px-4 py-2.5 rounded-xl bg-white text-slate-900 font-extrabold text-xs shadow hover:bg-slate-100 transition"><i class="fa-solid fa-calendar-check text-purple-600 mr-1.5"></i> Agenda Kegiatan</button>
+      <button onclick="switchPubSubPage('kegiatan')" class="px-4 py-2.5 rounded-xl bg-white text-slate-900 font-extrabold text-xs shadow hover:bg-slate-100 transition"><i class="fa-solid fa-calendar-check mr-1.5" style="color:var(--primary-color,#7c3aed)"></i> Agenda Kegiatan</button>
       <button onclick="switchPubSubPage('umkm')" class="px-4 py-2.5 rounded-xl bg-white/20 hover:bg-white/30 border border-white/30 text-white font-bold text-xs transition backdrop-blur-sm"><i class="fa-solid fa-store text-amber-300 mr-1.5"></i> Katalog UMKM Sahabat</button>
       <a id="pub-daftar-humas-btn" href="https://wa.me/6281120262026?text=Assalamu'alaikum%20Humas%20SSDG%20Bandung%20Raya,%20saya%20ingin%20mendaftar%20menjadi%20Sahabat%20Baru." target="_blank" class="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-extrabold text-xs shadow transition inline-flex items-center"><i class="fa-brands fa-whatsapp text-sm mr-1.5"></i> Daftar Sahabat Baru</a>
      </div>
@@ -132,8 +119,8 @@ td{padding:12px 14px}
 
   <section class="max-w-6xl mx-auto px-4 space-y-5">
    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-slate-200 pb-3">
-    <div><span class="text-[10px] font-extrabold uppercase tracking-wider text-purple-600">Literasi & Hikmah</span><h3 class="font-extrabold text-lg sm:text-xl text-slate-900">Artikel & Buletin Pilihan</h3></div>
-    <button onclick="switchPubSubPage('artikel')" class="text-xs font-extrabold text-purple-700 hover:underline self-start sm:self-auto">Lihat Artikel Lainnya <i class="fa-solid fa-arrow-right ml-1"></i></button>
+    <div><span class="text-[10px] font-extrabold uppercase tracking-wider" style="color:var(--primary-color,#7c3aed)">Literasi & Hikmah</span><h3 class="font-extrabold text-lg sm:text-xl text-slate-900">Artikel & Buletin Pilihan</h3></div>
+    <button onclick="switchPubSubPage('artikel')" class="text-xs font-extrabold hover:underline self-start sm:self-auto" style="color:var(--primary-color,#7c3aed)">Lihat Artikel Lainnya <i class="fa-solid fa-arrow-right ml-1"></i></button>
    </div>
    <div id="pub-home-articles" class="grid grid-cols-1 md:grid-cols-3 gap-5"></div>
   </section>
@@ -168,7 +155,7 @@ td{padding:12px 14px}
 
    <div class="lg:col-span-5 ci p-6 sm:p-8 flex flex-col justify-between space-y-4">
     <div>
-     <span class="text-[10px] font-extrabold uppercase tracking-wider text-purple-600">Terhubung Bersama Kami</span>
+     <span class="text-[10px] font-extrabold uppercase tracking-wider" style="color:var(--primary-color,#7c3aed)">Terhubung Bersama Kami</span>
      <h3 class="font-extrabold text-lg text-slate-900 mt-0.5">Jejaring Sosial Resmi</h3>
      <p class="text-xs text-slate-500 mt-1">Ikuti dokumentasi kegiatan dan kajian terbaru SSDG Korwil Bandung Raya (membuka tab baru tanpa menutup halaman ini).</p>
     </div>
@@ -179,7 +166,7 @@ td{padding:12px 14px}
 
  <div id="pub-sub-artikel" class="hidden max-w-6xl mx-auto px-4 py-8 space-y-6 w-full">
   <div class="flex justify-between items-center border-b border-slate-200 pb-4">
-   <div><span class="text-[10px] font-extrabold uppercase text-purple-600">Arsip Publik</span><h2 class="font-extrabold text-xl text-slate-900">Seluruh Artikel & Buletin Sahabat</h2></div>
+   <div><span class="text-[10px] font-extrabold uppercase" style="color:var(--primary-color,#7c3aed)">Arsip Publik</span><h2 class="font-extrabold text-xl text-slate-900">Seluruh Artikel & Buletin Sahabat</h2></div>
    <button onclick="switchPubSubPage('beranda')" class="btn b-g"><i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda</button>
   </div>
   <div id="pub-full-artikel-grid" class="grid grid-cols-1 md:grid-cols-3 gap-5"></div>
@@ -215,7 +202,7 @@ td{padding:12px 14px}
   <div class="w-14 h-14 rounded-2xl mx-auto flex items-center justify-center text-white text-2xl shadow-lg overflow-hidden b-p">
    <i id="lg-icon" class="fa-solid fa-moon"></i><img id="lg-img" class="w-full h-full object-cover hidden" alt="Logo">
   </div>
-  <div><h2 class="font-extrabold text-lg text-purple-900" id="lg-appname">SSDG Bandung</h2><p class="text-xs text-slate-500 mt-1">Login Portal Terpadu</p></div>
+  <div><h2 class="font-extrabold text-lg" style="color:var(--primary-color,#7c3aed)" id="lg-appname">SSDG Bandung</h2><p class="text-xs text-slate-500 mt-1">Login Portal Terpadu</p></div>
   <form onsubmit="doLogin(event)" class="space-y-4 text-left">
    <div id="login-error-box" class="hidden p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold rounded-xl flex items-center gap-2">
     <i class="fa-solid fa-triangle-exclamation text-sm flex-shrink-0"></i>
@@ -241,8 +228,8 @@ td{padding:12px 14px}
   </div>
   <nav id="nav-d" class="hidden lg:flex items-center gap-1 overflow-x-auto py-1"></nav>
   <div class="flex items-center gap-2">
-   <button onclick="showPublicLanding()" class="px-3 py-1.5 rounded-2xl bg-purple-50 text-purple-700 font-semibold text-xs hover:bg-purple-100 transition flex items-center gap-1.5" title="Lihat Halaman Depan Publik"><i class="fa-solid fa-globe"></i> <span class="hidden xl:inline">Beranda Publik</span></button>
-   <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-slate-100 rounded-2xl text-xs font-semibold text-slate-700"><i class="fa-solid fa-circle-user text-purple-600 text-sm"></i><span id="ub-name">User</span></div>
+   <button onclick="showPublicLanding()" class="px-3 py-1.5 rounded-2xl font-semibold text-xs transition flex items-center gap-1.5" style="background:var(--soft-bg-tint,#ede9fe);color:var(--primary-color,#7c3aed)" title="Lihat Halaman Depan Publik"><i class="fa-solid fa-globe"></i> <span class="hidden xl:inline">Beranda Publik</span></button>
+   <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-slate-100 rounded-2xl text-xs font-semibold text-slate-700"><i class="fa-solid fa-circle-user text-sm" style="color:var(--primary-color,#7c3aed)"></i><span id="ub-name">User</span></div>
    <button onclick="lockSession()" class="px-3 py-1.5 rounded-2xl bg-rose-50 text-rose-600 font-semibold text-xs hover:bg-rose-100 transition flex items-center gap-1.5"><i class="fa-solid fa-lock"></i> <span class="hidden md:inline">Kunci</span></button>
   </div>
  </div>
@@ -250,7 +237,7 @@ td{padding:12px 14px}
 
 <div class="flex-grow flex flex-col min-w-0 max-w-7xl mx-auto w-full px-4 pt-4">
  <div class="flex items-center justify-between mb-4 bg-white/80 backdrop-blur px-5 py-3 rounded-2xl border border-slate-200 no-print">
-  <div><span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Halaman Aktif</span><h2 id="page-title" class="font-extrabold text-base text-purple-900">Dashboard Utama</h2></div>
+  <div><span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Halaman Aktif</span><h2 id="page-title" class="font-extrabold text-base" style="color:var(--primary-color,#7c3aed)">Dashboard Utama</h2></div>
   <div class="flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full text-[10px] font-bold"><div class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div><span id="sync-status-text">Cloud Ready</span></div>
  </div>
 
@@ -290,19 +277,19 @@ td{padding:12px 14px}
 
    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
     <div class="lg:col-span-2 ci p-6 space-y-4">
-     <h3 class="font-bold text-sm text-purple-900 border-b border-slate-100 pb-2"><i class="fa-solid fa-wallet text-emerald-600 mr-2"></i>Ringkasan Arus Kas Keseluruhan</h3>
+     <h3 class="font-bold text-sm border-b border-slate-100 pb-2" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-wallet text-emerald-600 mr-2"></i>Ringkasan Arus Kas Keseluruhan</h3>
      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="dash-arus-kas-summary"></div>
     </div>
     <div class="ci p-6 space-y-4">
-     <h3 class="font-bold text-sm text-purple-900 border-b border-slate-100 pb-2"><i class="fa-solid fa-clipboard-user text-cyan-600 mr-2"></i>Log Kehadiran Saya</h3>
+     <h3 class="font-bold text-sm border-b border-slate-100 pb-2" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-clipboard-user text-cyan-600 mr-2"></i>Log Kehadiran Saya</h3>
      <div id="dash-my-absensi" class="space-y-2"></div>
     </div>
    </div>
 
    <div class="ci p-6 space-y-4">
     <div class="flex justify-between items-center border-b border-slate-100 pb-2">
-     <h3 class="font-bold text-sm text-purple-900"><i class="fa-solid fa-calendar-day text-amber-500 mr-2"></i>Agenda & Pengumuman Terdekat</h3>
-     <button onclick="go('pengumuman')" class="text-[11px] font-bold text-purple-700 hover:underline">Lihat Semua Agenda &rarr;</button>
+     <h3 class="font-bold text-sm" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-calendar-day text-amber-500 mr-2"></i>Agenda & Pengumuman Terdekat</h3>
+     <button onclick="go('pengumuman')" class="text-[11px] font-bold hover:underline" style="color:var(--primary-color,#7c3aed)">Lihat Semua Agenda &rarr;</button>
     </div>
     <div id="dash-upcoming" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3"></div>
    </div>
@@ -310,14 +297,14 @@ td{padding:12px 14px}
    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
     <div class="lg:col-span-2 ci p-6 space-y-4">
      <div class="flex justify-between items-center border-b border-slate-100 pb-2">
-      <h3 class="font-bold text-sm text-purple-900"><i class="fa-solid fa-calendar-days text-indigo-600 mr-2"></i>Grand Calendar Bulanan</h3>
-      <div class="flex items-center gap-2"><button onclick="changeMonth(-1)" class="px-2 py-1 bg-slate-100 rounded text-xs font-bold">&lt;</button><span id="cal-month-label" class="text-xs font-bold text-purple-900">Bulan</span><button onclick="changeMonth(1)" class="px-2 py-1 bg-slate-100 rounded text-xs font-bold">&gt;</button></div>
+      <h3 class="font-bold text-sm" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-calendar-days text-indigo-600 mr-2"></i>Grand Calendar Bulanan</h3>
+      <div class="flex items-center gap-2"><button onclick="changeMonth(-1)" class="px-2 py-1 bg-slate-100 rounded text-xs font-bold">&lt;</button><span id="cal-month-label" class="text-xs font-bold" style="color:var(--primary-color,#7c3aed)">Bulan</span><button onclick="changeMonth(1)" class="px-2 py-1 bg-slate-100 rounded text-xs font-bold">&gt;</button></div>
      </div>
      <div id="grand-calendar-grid" class="grid grid-cols-7 gap-1 text-center text-xs"></div>
     </div>
     <div class="ci p-6 space-y-4 flex flex-col justify-between">
      <div>
-      <h3 class="font-bold text-sm text-purple-900 border-b border-slate-100 pb-2"><i class="fa-solid fa-comments text-pink-600 mr-2"></i>Suara Sahabat (Live Chat Multimedia)</h3>
+      <h3 class="font-bold text-sm border-b border-slate-100 pb-2" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-comments text-pink-600 mr-2"></i>Suara Sahabat (Live Chat Multimedia)</h3>
       <div id="shoutbox-messages" class="space-y-2 mt-3 max-h-48 overflow-y-auto pr-1"></div>
      </div>
      <form onsubmit="postShoutbox(event)" class="mt-3 space-y-2 pt-2 border-t border-slate-100">
@@ -335,7 +322,7 @@ td{padding:12px 14px}
   <!-- DATABASE -->
   <section id="sec-database" class="hidden space-y-6">
    <div class="ci p-6 flex flex-col lg:flex-row justify-between gap-4 items-start">
-    <div><h2 class="text-lg font-bold text-purple-900"><i class="fa-solid fa-database text-purple-600 mr-2"></i>Database Terpadu</h2><p class="text-xs text-slate-500">Kelola Sahabat, Kencleng Pusaka, Agnia, dan pendaftar baru.</p></div>
+    <div><h2 class="text-lg font-bold" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-database mr-2" style="color:var(--primary-color,#7c3aed)"></i>Database Terpadu</h2><p class="text-xs text-slate-500">Kelola Sahabat, Kencleng Pusaka, Agnia, dan pendaftar baru.</p></div>
     <div class="flex flex-wrap gap-2">
      <button onclick="openSahabat()" class="btn b-p"><i class="fa-solid fa-plus"></i> Sahabat Baru</button>
      <button onclick="openKenclengModal()" class="btn" style="background:#d97706"><i class="fa-solid fa-plus"></i> Kencleng</button>
@@ -347,7 +334,7 @@ td{padding:12px 14px}
    </div>
    
    <div class="flex gap-2 p-2 bg-slate-200 rounded-2xl w-max mx-auto md:mx-0 overflow-x-auto max-w-full">
-    <button onclick="switchDbTab('sahabat')" id="tab-db-sahabat" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-purple-700 shadow whitespace-nowrap">Daftar Sahabat</button>
+    <button onclick="switchDbTab('sahabat')" id="tab-db-sahabat" class="px-4 py-2 rounded-xl text-xs font-bold bg-white shadow whitespace-nowrap" style="color:var(--primary-color,#7c3aed)">Daftar Sahabat</button>
     <button onclick="switchDbTab('kencleng')" id="tab-db-kencleng" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 whitespace-nowrap">Kencleng Pusaka</button>
     <button onclick="switchDbTab('agnia')" id="tab-db-agnia" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 whitespace-nowrap">Daftar Agnia</button>
    </div>
@@ -377,10 +364,10 @@ td{padding:12px 14px}
   <!-- PENGUMUMAN / EVENT -->
   <section id="sec-pengumuman" class="hidden space-y-6">
    <div class="ci p-6 flex flex-col sm:flex-row justify-between gap-4">
-    <div><h2 class="text-lg font-bold text-purple-900"><i class="fa-solid fa-bullhorn text-amber-500 mr-2"></i>Pengumuman & Agenda</h2><p class="text-xs text-slate-500">Kelola info kegiatan, jadwal rapat, liputan, papan kalender, serta broadcast ke WA.</p></div>
+    <div><h2 class="text-lg font-bold" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-bullhorn text-amber-500 mr-2"></i>Pengumuman & Agenda</h2><p class="text-xs text-slate-500">Kelola info kegiatan, jadwal rapat, liputan, papan kalender, serta broadcast ke WA.</p></div>
     <div class="flex flex-wrap gap-2">
      <button id="btn-add-prog" onclick="openProgram()" class="btn b-a"><i class="fa-solid fa-plus"></i> Tambah Agenda</button>
-     <button id="btn-print-prog" onclick="printLaporanKegiatan()" class="btn b-g"><i class="fa-solid fa-print text-purple-600"></i> Cetak Laporan Kegiatan</button>
+     <button id="btn-print-prog" onclick="printLaporanKegiatan()" class="btn b-g"><i class="fa-solid fa-print" style="color:var(--primary-color,#7c3aed)"></i> Cetak Laporan Kegiatan</button>
     </div>
    </div>
    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 bg-slate-50 p-3 rounded-2xl border border-slate-200">
@@ -392,17 +379,17 @@ td{padding:12px 14px}
       <option value="selesai">Sudah Terlaksana</option>
      </select>
      <div class="flex gap-1 bg-slate-200 p-1 rounded-xl flex-shrink-0">
-      <button id="btn-pview-card" onclick="setProgView('card')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-purple-700 text-white shadow"><i class="fa-solid fa-list"></i></button>
+      <button id="btn-pview-card" onclick="setProgView('card')" class="px-3 py-1.5 rounded-xl text-xs font-bold b-p text-white shadow"><i class="fa-solid fa-list"></i></button>
       <button id="btn-pview-cal" onclick="setProgView('calendar')" class="px-3 py-1.5 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800"><i class="fa-solid fa-calendar-days"></i> Board Calendar</button>
      </div>
     </div>
    </div>
    <div id="prog-board-cal-wrap" class="hidden ci p-6 space-y-4">
     <div class="flex justify-between items-center border-b border-slate-100 pb-3">
-     <h3 class="font-bold text-sm text-purple-900"><i class="fa-solid fa-calendar-days text-purple-600 mr-2"></i>Board Calendar Agenda Korwil</h3>
+     <h3 class="font-bold text-sm" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-calendar-days mr-2" style="color:var(--primary-color,#7c3aed)"></i>Board Calendar Agenda Korwil</h3>
      <div class="flex items-center gap-2">
       <button onclick="changeProgCalMonth(-1)" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs font-bold">&lt;</button>
-      <span id="prog-cal-label" class="text-xs font-extrabold text-purple-900 min-w-[110px] text-center">Bulan</span>
+      <span id="prog-cal-label" class="text-xs font-extrabold min-w-[110px] text-center" style="color:var(--primary-color,#7c3aed)">Bulan</span>
       <button onclick="changeProgCalMonth(1)" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs font-bold">&gt;</button>
      </div>
     </div>
@@ -414,7 +401,7 @@ td{padding:12px 14px}
   <!-- ARTIKEL -->
   <section id="sec-artikel" class="hidden space-y-6">
    <div class="ci p-6 flex justify-between items-center">
-    <div><h2 class="text-lg font-bold text-purple-900"><i class="fa-solid fa-newspaper text-purple-600 mr-2"></i>Artikel & Buletin Sahabat</h2><p class="text-xs text-slate-500">Informasi, kajian, dan wawasan yang diterbitkan oleh pengurus (tampil juga di Beranda Publik).</p></div>
+    <div><h2 class="text-lg font-bold" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-newspaper mr-2" style="color:var(--primary-color,#7c3aed)"></i>Artikel & Buletin Sahabat</h2><p class="text-xs text-slate-500">Informasi, kajian, dan wawasan yang diterbitkan oleh pengurus (tampil juga di Beranda Publik).</p></div>
     <button id="btn-add-artikel" onclick="openArtikel()" class="btn b-p"><i class="fa-solid fa-plus"></i> Tulis Artikel Baru</button>
    </div>
    <div class="ci p-4"><input id="q-artikel" onkeyup="renderArtikel()" placeholder="Cari judul artikel..." class="fi max-w-md"></div>
@@ -423,10 +410,10 @@ td{padding:12px 14px}
 
   <!-- ABSENSI & SURAT -->
   <section id="sec-abssurat" class="hidden space-y-6">
-   <div class="ci p-6"><h2 class="text-lg font-bold text-purple-900"><i class="fa-solid fa-envelope-open-text text-blue-600 mr-2"></i>Absensi & Kesekretariatan</h2><p class="text-xs text-slate-500">Catat absensi kegiatan, notulensi rapat, surat menyurat, dan arsip file.</p></div>
+   <div class="ci p-6"><h2 class="text-lg font-bold" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-envelope-open-text text-blue-600 mr-2"></i>Absensi & Kesekretariatan</h2><p class="text-xs text-slate-500">Catat absensi kegiatan, notulensi rapat, surat menyurat, dan arsip file.</p></div>
    
    <div class="flex gap-2 p-2 bg-slate-200 rounded-2xl w-max overflow-x-auto max-w-full">
-    <button onclick="switchAbsTab('absensi')" id="tab-as-absensi" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-purple-700 shadow whitespace-nowrap">Absensi Kehadiran</button>
+    <button onclick="switchAbsTab('absensi')" id="tab-as-absensi" class="px-4 py-2 rounded-xl text-xs font-bold bg-white shadow whitespace-nowrap" style="color:var(--primary-color,#7c3aed)">Absensi Kehadiran</button>
     <button onclick="switchAbsTab('surat')" id="tab-as-surat" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 whitespace-nowrap">Surat Masuk/Keluar</button>
     <button onclick="switchAbsTab('arsip')" id="tab-as-arsip" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 whitespace-nowrap">Arsip Dokumen</button>
     <button onclick="switchAbsTab('notulensi')" id="tab-as-notulensi" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 whitespace-nowrap">Arsip Notulensi</button>
@@ -458,21 +445,21 @@ td{padding:12px 14px}
   <!-- KAS & REPORT KEUANGAN -->
   <section id="sec-kas" class="hidden space-y-6">
    <div class="ci p-6 flex flex-col md:flex-row justify-between gap-4">
-    <div><h2 class="text-lg font-bold text-purple-900"><i class="fa-solid fa-wallet text-emerald-600 mr-2"></i>Keuangan & Kas</h2><p class="text-xs text-slate-500">Pencatatan Infaq, Agnia, Kencleng, Kegiatan dan Laporan Arus Kas.</p></div>
+    <div><h2 class="text-lg font-bold" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-wallet text-emerald-600 mr-2"></i>Keuangan & Kas</h2><p class="text-xs text-slate-500">Pencatatan Infaq, Agnia, Kencleng, Kegiatan dan Laporan Arus Kas.</p></div>
     <div class="flex gap-2"><button onclick="openKasMasuk()" class="btn b-e"><i class="fa-solid fa-plus"></i> Pemasukan</button><button onclick="openKeluar()" class="btn b-r"><i class="fa-solid fa-minus"></i> Pengeluaran</button></div>
    </div>
 
    <div id="kas-cards" class="grid grid-cols-2 md:grid-cols-5 gap-3"></div>
 
    <div class="ci p-5 border-l-4 border-emerald-500 space-y-3">
-    <h3 class="font-bold text-sm text-purple-900"><i class="fa-solid fa-print text-emerald-600 mr-2"></i>Cetak Laporan Keuangan Terpusat</h3>
+    <h3 class="font-bold text-sm" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-print text-emerald-600 mr-2"></i>Cetak Laporan Keuangan Terpusat</h3>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
      <div><label class="fl">Pilih Tipe Laporan</label><select id="rep-tipe" class="fi"><option value="Arus Kas Keseluruhan">Arus Kas Keseluruhan</option><option value="Infaq Bulanan (Kas)">Infaq Kas Bulanan</option><option value="Infaq Agnia">Infaq Agnia</option><option value="Infaq Kencleng">Infaq Kencleng</option><option value="Infaq Kegiatan">Infaq Kegiatan</option></select></div>
      <div><label class="fl">Rentang Filter</label><select id="rep-filter" onchange="toggleRepFilter()" class="fi"><option value="bulan">Per Bulan</option><option value="tahun">Per Tahun</option><option value="custom">Range Tanggal (Custom)</option></select></div>
      <div id="rep-input-area"><input type="month" id="rep-bulan" class="fi"></div>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 items-center">
-     <div><label class="fl">Format Ekspor / Cetak Laporan</label><select id="rep-format" class="fi font-bold text-purple-900 bg-purple-50"><option value="print">Cetak / Print Langsung (PDF Ready)</option><option value="excel">Ekspor ke Excel (.xls / .csv)</option></select></div>
+     <div><label class="fl">Format Ekspor / Cetak Laporan</label><select id="rep-format" class="fi font-bold bg-purple-50" style="color:var(--primary-color,#7c3aed)"><option value="print">Cetak / Print Langsung (PDF Ready)</option><option value="excel">Ekspor ke Excel (.xls / .csv)</option></select></div>
      <div class="flex justify-end pt-2"><button onclick="generateReport()" class="btn b-p w-full sm:w-auto justify-center"><i class="fa-solid fa-file-invoice"></i> Buat & Cetak Laporan</button></div>
     </div>
    </div>
@@ -486,7 +473,7 @@ td{padding:12px 14px}
   <!-- DIREKTORI PRODUK UMKM -->
   <section id="sec-umkm" class="hidden space-y-6">
    <div class="ci p-6 flex justify-between items-center">
-    <div><h2 class="text-lg font-bold text-purple-900"><i class="fa-solid fa-store text-amber-600 mr-2"></i>Direktori Produk UMKM Anggota</h2><p class="text-xs text-slate-500">Temukan dan dukung produk unggulan langsung dari sahabat SSDG.</p></div>
+    <div><h2 class="text-lg font-bold" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-store text-amber-600 mr-2"></i>Direktori Produk UMKM Anggota</h2><p class="text-xs text-slate-500">Temukan dan dukung produk unggulan langsung dari sahabat SSDG.</p></div>
     <button onclick="openUmkm()" class="btn b-a"><i class="fa-solid fa-plus"></i> Daftarkan Produk UMKM</button>
    </div>
    <div class="ci p-4"><input id="q-umkm" onkeyup="renderUmkm()" placeholder="Cari nama produk, kategori, penjual..." class="fi max-w-md"></div>
@@ -496,7 +483,7 @@ td{padding:12px 14px}
   <!-- SUARA SAHABAT -->
   <section id="sec-suara" class="hidden space-y-6">
    <div class="ci p-6 flex justify-between items-center">
-    <div><h2 class="text-lg font-bold text-purple-900"><i class="fa-solid fa-comments text-blue-600 mr-2"></i>Suara Sahabat (Berita & Aspirasi)</h2><p class="text-xs text-slate-500">Media penyampaian informasi, berita internal, dan kritik/saran.</p></div>
+    <div><h2 class="text-lg font-bold" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-comments text-blue-600 mr-2"></i>Suara Sahabat (Berita & Aspirasi)</h2><p class="text-xs text-slate-500">Media penyampaian informasi, berita internal, dan kritik/saran.</p></div>
     <div class="flex gap-2"><button onclick="openSuara('Berita')" class="btn b-c"><i class="fa-solid fa-newspaper"></i> Tulis Berita</button><button onclick="openSuara('Kritik Saran')" class="btn b-r"><i class="fa-solid fa-bullseye"></i> Kritik & Saran</button></div>
    </div>
    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -507,10 +494,10 @@ td{padding:12px 14px}
 
   <!-- KTA -->
   <section id="sec-kartu" class="hidden space-y-6">
-   <div class="ci p-6 flex justify-between"><h2 class="text-lg font-bold text-purple-900"><i class="fa-solid fa-address-card text-purple-600 mr-2"></i>Kartu Tanda Anggota (KTA)</h2><button onclick="downloadKTA()" class="btn b-p"><i class="fa-solid fa-download"></i> Unduh KTA</button></div>
+   <div class="ci p-6 flex justify-between"><h2 class="text-lg font-bold" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-address-card mr-2" style="color:var(--primary-color,#7c3aed)"></i>Kartu Tanda Anggota (KTA)</h2><button onclick="downloadKTA()" class="btn b-p"><i class="fa-solid fa-download"></i> Unduh KTA</button></div>
    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
     <div class="ci p-6 space-y-4">
-     <h3 class="font-bold text-sm text-purple-900 border-b border-slate-100 pb-2">Pengaturan KTA</h3>
+     <h3 class="font-bold text-sm border-b border-slate-100 pb-2" style="color:var(--primary-color,#7c3aed)">Pengaturan KTA</h3>
      <div id="kta-sel-wrapper"><label class="fl">Pilih Profil Sahabat</label><select id="kta-sel" onchange="genKTA()" class="fi"></select></div>
      <div><label class="fl">Upload Foto Anggota</label><input type="file" accept="image/*" onchange="photoKTA(this)" class="fi"><button type="button" onclick="removePhotoKTA()" class="text-[10px] text-rose-500 mt-1 font-semibold hover:underline">Hapus Foto</button></div>
      <div id="kta-bg-upload-box" class="pt-2 border-t border-slate-100 space-y-3">
@@ -554,9 +541,9 @@ td{padding:12px 14px}
 
   <!-- PENGATURAN (Eksklusif Superadmin) -->
   <section id="sec-pengaturan" class="hidden space-y-6">
-   <div class="ci p-6 border-l-4 border-purple-600"><h2 class="text-lg font-bold text-purple-900 border-b border-slate-100 pb-3"><i class="fa-solid fa-globe text-purple-600 mr-2"></i>Kustomisasi Beranda Depan Publik & Kontak Humas</h2>
+   <div class="ci p-6 border-l-4" style="border-left-color:var(--primary-color,#7c3aed)"><h2 class="text-lg font-bold border-b border-slate-100 pb-3" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-globe mr-2" style="color:var(--primary-color,#7c3aed)"></i>Kustomisasi Beranda Depan Publik & Kontak Humas</h2>
     <p class="text-xs text-slate-500 mt-2 mb-2">Ubah gambar latar (banner), judul utama, deskripsi sambutan di halaman depan publik, serta nomor WhatsApp Humas untuk pendaftaran sahabat baru.</p>
-    <div class="p-3 mb-4 bg-purple-50 rounded-xl border border-purple-200 text-purple-900 text-[11px] space-y-1">
+    <div class="p-3 mb-4 rounded-xl border text-[11px] space-y-1" style="background:var(--soft-bg-tint,#ede9fe);border-color:var(--primary-color,#7c3aed);color:var(--primary-color,#7c3aed)">
      <p class="font-extrabold"><i class="fa-solid fa-circle-info mr-1"></i> Panduan Ukuran & Rasio Banner:</p>
      <p>&bull; <b>Rasio Ideal:</b> 16:9 atau Lanskap (Contoh: 1200 x 675 piksel).</p>
      <p>&bull; <b>Fitur Crop Otomatis:</b> Setelah memilih foto, Anda dapat menyesuaikan posisi/crop sebelum disimpan.</p>
@@ -572,7 +559,7 @@ td{padding:12px 14px}
     </form>
    </div>
 
-   <div class="ci p-6"><h2 class="text-lg font-bold text-purple-900 border-b border-slate-100 pb-3"><i class="fa-solid fa-palette mr-2"></i>Tema Warna & Kustomisasi Font (9 Pilihan Tema Elegan)</h2>
+   <div class="ci p-6"><h2 class="text-lg font-bold border-b border-slate-100 pb-3" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-palette mr-2"></i>Tema Warna & Kustomisasi Font (9 Pilihan Tema Elegan)</h2>
     <div class="flex flex-wrap gap-2 mt-4 items-center">
      <button onclick="setTheme('#7c3aed','#6d28d9','#ede9fe','#1e293b')" class="px-3 py-1.5 bg-purple-600 text-white rounded-xl text-xs font-bold shadow">Royal Purple</button>
      <button onclick="setTheme('#059669','#047857','#d1fae5','#1e293b')" class="px-3 py-1.5 bg-emerald-600 text-white rounded-xl text-xs font-bold shadow">Emerald Green</button>
@@ -589,11 +576,11 @@ td{padding:12px 14px}
      </div>
     </div>
    </div>
-   <div class="ci p-6"><h2 class="text-lg font-bold text-purple-900 border-b border-slate-100 pb-3"><i class="fa-solid fa-cloud text-blue-600 mr-2"></i>Google Sheets & Auto-Sync</h2>
+   <div class="ci p-6"><h2 class="text-lg font-bold border-b border-slate-100 pb-3" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-cloud text-blue-600 mr-2"></i>Google Sheets & Auto-Sync</h2>
     <p class="text-xs text-slate-500 mb-4">Masukkan URL Web App GAS agar tersinkronisasi.</p>
     <div class="space-y-3 max-w-xl"><div><label class="fl">Google Apps Script URL</label><input id="c-gasurl" class="fi" placeholder="https://script.google.com/macros/s/.../exec"></div><button onclick="saveGasUrl()" class="btn b-p"><i class="fa-solid fa-link"></i> Simpan & Aktifkan</button></div>
    </div>
-   <div class="ci p-6"><h2 class="text-lg font-bold text-purple-900 border-b border-slate-100 pb-3"><i class="fa-solid fa-share-nodes text-pink-600 mr-2"></i>Media Sosial Korwil</h2>
+   <div class="ci p-6"><h2 class="text-lg font-bold border-b border-slate-100 pb-3" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-share-nodes text-pink-600 mr-2"></i>Media Sosial Korwil</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 max-w-xl">
      <div><label class="fl">Facebook URL</label><input id="soc-fb" class="fi" placeholder="https://facebook.com/..."></div>
      <div><label class="fl">Instagram URL</label><input id="soc-ig" class="fi" placeholder="https://instagram.com/..."></div>
@@ -601,9 +588,9 @@ td{padding:12px 14px}
      <div><label class="fl">YouTube URL</label><input id="soc-yt" class="fi" placeholder="https://youtube.com/..."></div>
     </div>
    </div>
-   <div class="ci p-6"><h2 class="text-lg font-bold text-purple-900 border-b border-slate-100 pb-3"><i class="fa-solid fa-gear mr-2"></i>Profil Organisasi & Banner Dashboard</h2>
+   <div class="ci p-6"><h2 class="text-lg font-bold border-b border-slate-100 pb-3" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-gear mr-2"></i>Profil Organisasi & Banner Dashboard</h2>
     <p class="text-xs text-slate-500 mt-2 mb-2">Sesuaikan identitas, logo, serta banner dashboard internal.</p>
-    <div class="p-3 mb-4 bg-purple-50 rounded-xl border border-purple-200 text-purple-900 text-[11px] space-y-1">
+    <div class="p-3 mb-4 rounded-xl border text-[11px] space-y-1" style="background:var(--soft-bg-tint,#ede9fe);border-color:var(--primary-color,#7c3aed);color:var(--primary-color,#7c3aed)">
      <p class="font-extrabold"><i class="fa-solid fa-circle-info mr-1"></i> Panduan Ukuran Banner Dashboard:</p>
      <p>&bull; <b>Rasio Ideal:</b> 16:9 atau Lanskap.</p>
      <p>&bull; <b>Fitur Crop Otomatis:</b> Tersedia jendela penyesuaian posisi foto sebelum diterapkan sebagai banner.</p>
@@ -618,14 +605,14 @@ td{padding:12px 14px}
      <button class="btn b-p"><i class="fa-solid fa-save"></i> Simpan Profil</button>
     </form>
    </div>
-   <div class="ci p-6"><h3 class="font-bold text-sm text-purple-900 border-b border-slate-100 pb-2"><i class="fa-solid fa-database mr-2"></i>Backup Data</h3>
+   <div class="ci p-6"><h3 class="font-bold text-sm border-b border-slate-100 pb-2" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-database mr-2"></i>Backup Data</h3>
     <div class="flex gap-2 mt-3"><button onclick="exportBackupJSON()" class="btn b-e"><i class="fa-solid fa-download"></i> Backup (.json)</button><label class="btn b-g cursor-pointer"><i class="fa-solid fa-upload"></i> Restore <input type="file" accept=".json" onchange="importBackupJSON(this)" class="hidden"></label></div>
    </div>
   </section>
 
  </main>
  <footer class="bg-white border border-slate-200 rounded-3xl py-6 px-6 mt-8 text-center space-y-3 mb-24 no-print">
-  <p id="ft-name" class="text-xs font-bold text-purple-900"></p>
+  <p id="ft-name" class="text-xs font-bold" style="color:var(--primary-color,#7c3aed)"></p>
   <div id="footer-socials" class="flex justify-center gap-4 text-sm"></div>
   <p class="text-[10px] text-slate-400 mt-1">&copy; 2026 SahabatApp Pro &bull; Portal Terpadu V8.7</p>
  </footer>
@@ -641,20 +628,20 @@ td{padding:12px 14px}
 <div id="m-pin" class="mod"><div><div class="mh"><span>Ganti Password / PIN</span><button onclick="closeM('m-pin')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><form onsubmit="saveMyPin(event)" class="p-6 space-y-3"><div><label class="fl">PIN Lama</label><input type="password" id="pin-old" required class="fi"></div><div><label class="fl">PIN Baru</label><input type="password" id="pin-new" required class="fi"></div><div class="flex justify-end gap-2"><button type="button" onclick="closeM('m-pin')" class="btn b-g">Batal</button><button class="btn b-p">Simpan</button></div></form></div></div>
 
 <!-- ARTICLE / DETAIL PREVIEW MODAL -->
-<div id="m-detail-preview" class="mod"><div style="max-width:36rem"><div class="mh"><span id="det-badge" class="text-purple-900 font-extrabold">Detail Informasi</span><button onclick="closeM('m-detail-preview')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><div class="p-6 space-y-3"><h3 id="det-title" class="font-extrabold text-base text-slate-900"></h3><p id="det-body" class="text-xs text-slate-600 leading-relaxed whitespace-pre-line"></p></div><div class="p-4 border-t border-slate-100 flex justify-end"><button onclick="closeM('m-detail-preview')" class="btn b-p">Tutup</button></div></div></div>
+<div id="m-detail-preview" class="mod"><div style="max-width:36rem"><div class="mh"><span id="det-badge" class="font-extrabold" style="color:var(--primary-color,#7c3aed)">Detail Informasi</span><button onclick="closeM('m-detail-preview')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><div class="p-6 space-y-3"><h3 id="det-title" class="font-extrabold text-base text-slate-900"></h3><p id="det-body" class="text-xs text-slate-600 leading-relaxed whitespace-pre-line"></p></div><div class="p-4 border-t border-slate-100 flex justify-end"><button onclick="closeM('m-detail-preview')" class="btn b-p">Tutup</button></div></div></div>
 
 <!-- REPORT / PRINT MODAL -->
 <div id="m-report" class="mod"><div style="max-width:44rem"><div class="mh"><span id="rep-title-modal">Cetak Laporan</span><div class="flex gap-2"><button onclick="window.print()" class="btn b-p text-xs"><i class="fa-solid fa-print"></i> Print</button><button onclick="closeM('m-report')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div></div><div class="p-6 space-y-4 text-xs" id="report-area"></div></div></div>
 
 <!-- CALENDAR PREVIEW MODAL -->
-<div id="m-cal-preview" class="mod"><div style="max-width:32rem"><div class="mh"><span id="cal-preview-title" class="text-purple-900 font-extrabold">Agenda Tanggal</span><button onclick="closeM('m-cal-preview')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><div class="p-6 space-y-3 text-xs" id="cal-preview-content"></div></div></div>
+<div id="m-cal-preview" class="mod"><div style="max-width:32rem"><div class="mh"><span id="cal-preview-title" class="font-extrabold" style="color:var(--primary-color,#7c3aed)">Agenda Tanggal</span><button onclick="closeM('m-cal-preview')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><div class="p-6 space-y-3 text-xs" id="cal-preview-content"></div></div></div>
 
 <!-- IMAGE LIGHTBOX MODAL -->
 <div id="m-lightbox" class="mod" style="background:rgba(0,0,0,0.85)"><div style="max-width:40rem; background:transparent; box-shadow:none;"><div class="flex justify-end pb-2"><button onclick="closeM('m-lightbox')" class="text-white text-xl"><i class="fa-solid fa-xmark"></i></button></div><img id="lightbox-img" src="" class="w-full max-h-[80vh] object-contain rounded-2xl"></div></div>
 
 <!-- ALL FEATURE MODALS -->
-<div id="m-public-form" class="mod"><div><div class="mh"><span class="text-purple-900 font-extrabold"><i class="fa-solid fa-file-lines mr-2 text-purple-600"></i>Form Pendaftaran</span><button onclick="closeM('m-public-form')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><form onsubmit="submitPublicForm(event)" class="p-6 space-y-4"><div><label class="fl">Nama Lengkap</label><input id="pf-nama" required class="fi"></div><div><label class="fl">Alamat</label><textarea id="pf-alamat" rows="2" required class="fi"></textarea></div><div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><div><label class="fl">No. WA</label><input id="pf-hp" required class="fi"></div><div><label class="fl">Minat</label><select id="pf-minat" class="fi"><option>Dakwah</option><option>Ekonomi</option><option>Sosial</option><option>Pengobatan</option></select></div></div><div><label class="fl">Motivasi</label><textarea id="pf-motivasi" rows="2" required class="fi"></textarea></div><div class="flex justify-end gap-2"><button type="button" onclick="closeM('m-public-form')" class="btn b-g">Tutup</button><button class="btn b-p">Kirim Pendaftaran</button></div></form></div></div>
-<div id="m-share-link" class="mod"><div><div class="mh"><span class="text-purple-900 font-extrabold">Bagikan Link Pendaftaran</span><button onclick="closeM('m-share-link')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><div class="p-6 space-y-4 text-xs text-slate-700"><p>Salin tautan ini untuk calon anggota:</p><div class="flex gap-2"><input id="share-url-input" readonly class="fi font-mono bg-slate-50 select-all"><button onclick="copyShareUrl()" class="btn b-p flex-shrink-0"><i class="fa-solid fa-copy"></i> Salin</button></div><div class="flex justify-end"><button onclick="closeM('m-share-link')" class="btn b-g">Tutup</button></div></div></div></div>
+<div id="m-public-form" class="mod"><div><div class="mh"><span class="font-extrabold" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-file-lines mr-2" style="color:var(--primary-color,#7c3aed)"></i>Form Pendaftaran</span><button onclick="closeM('m-public-form')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><form onsubmit="submitPublicForm(event)" class="p-6 space-y-4"><div><label class="fl">Nama Lengkap</label><input id="pf-nama" required class="fi"></div><div><label class="fl">Alamat</label><textarea id="pf-alamat" rows="2" required class="fi"></textarea></div><div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><div><label class="fl">No. WA</label><input id="pf-hp" required class="fi"></div><div><label class="fl">Minat</label><select id="pf-minat" class="fi"><option>Dakwah</option><option>Ekonomi</option><option>Sosial</option><option>Pengobatan</option></select></div></div><div><label class="fl">Motivasi</label><textarea id="pf-motivasi" rows="2" required class="fi"></textarea></div><div class="flex justify-end gap-2"><button type="button" onclick="closeM('m-public-form')" class="btn b-g">Tutup</button><button class="btn b-p">Kirim Pendaftaran</button></div></form></div></div>
+<div id="m-share-link" class="mod"><div><div class="mh"><span class="font-extrabold" style="color:var(--primary-color,#7c3aed)">Bagikan Link Pendaftaran</span><button onclick="closeM('m-share-link')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><div class="p-6 space-y-4 text-xs text-slate-700"><p>Salin tautan ini untuk calon anggota:</p><div class="flex gap-2"><input id="share-url-input" readonly class="fi font-mono bg-slate-50 select-all"><button onclick="copyShareUrl()" class="btn b-p flex-shrink-0"><i class="fa-solid fa-copy"></i> Salin</button></div><div class="flex justify-end"><button onclick="closeM('m-share-link')" class="btn b-g">Tutup</button></div></div></div></div>
 <div id="m-approval" class="mod"><div style="max-width:42rem"><div class="mh"><span>Approval Pendaftar G-Form</span><button onclick="closeM('m-approval')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><div class="p-6 space-y-4"><div class="overflow-x-auto"><table class="w-full text-left text-xs text-slate-600"><thead><tr><th>Data Pendaftar</th><th>Minat/Motivasi</th><th>Aksi</th></tr></thead><tbody id="tb-approval" class="divide-y divide-slate-100"></tbody></table></div></div><div class="p-4 border-t border-slate-100 flex justify-end"><button onclick="closeM('m-approval')" class="btn b-g">Tutup</button></div></div></div>
 <div id="m-bulk" class="mod"><div><div class="mh"><span>Bulk Import CSV</span><button onclick="closeM('m-bulk')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><div class="p-6 space-y-4 text-xs text-slate-700"><p>Impor data secara massal.</p><div class="flex gap-2"><button onclick="downloadTemplateCSV()" class="btn b-c"><i class="fa-solid fa-download"></i> Template CSV</button></div><div><label class="fl">Upload File CSV</label><input type="file" id="bulk-file" accept=".csv" class="fi bg-purple-50"></div><div class="pt-3 flex justify-end gap-2"><button type="button" onclick="closeM('m-bulk')" class="btn b-g">Batal</button><button onclick="processBulkImport()" class="btn b-p"><i class="fa-solid fa-upload"></i> Proses Import</button></div></div></div></div>
 
@@ -669,7 +656,7 @@ td{padding:12px 14px}
 </div><div class="grid grid-cols-2 gap-3"><div><label class="fl">No. WA</label><input id="s-hp" required class="fi"></div><div><label class="fl">Minat</label><select id="s-minat" class="fi"><option>Dakwah</option><option>Ekonomi</option><option>Sosial</option><option>Pengobatan</option></select></div></div><div><label class="fl">PIN Login Anggota (6 Digit)</label><input id="s-pin" value="999999" maxlength="6" class="fi font-mono"></div><div><label class="fl">Motivasi Bergabung</label><input id="s-motivasi" class="fi" placeholder="Contoh: Berkhidmat untuk umat..."></div><div><label class="fl">Alamat</label><textarea id="s-alamat" rows="2" class="fi"></textarea></div><div class="flex justify-end gap-2"><button type="button" onclick="closeM('m-sahabat')" class="btn b-g">Batal</button><button class="btn b-p">Simpan</button></div></form></div></div>
 
 <!-- MODAL DETAIL PROFIL SAHABAT -->
-<div id="m-detail-sahabat" class="mod"><div style="max-width:38rem"><div class="mh"><span class="text-purple-900 font-extrabold"><i class="fa-solid fa-id-badge mr-2 text-purple-600"></i>Profil Lengkap Sahabat</span><button onclick="closeM('m-detail-sahabat')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><div id="detail-sahabat-body" class="p-6 space-y-4 text-xs"></div><div class="p-4 border-t border-slate-100 flex justify-end gap-2"><button onclick="closeM('m-detail-sahabat')" class="btn b-g">Tutup</button></div></div></div>
+<div id="m-detail-sahabat" class="mod"><div style="max-width:38rem"><div class="mh"><span class="font-extrabold" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-id-badge mr-2" style="color:var(--primary-color,#7c3aed)"></i>Profil Lengkap Sahabat</span><button onclick="closeM('m-detail-sahabat')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><div id="detail-sahabat-body" class="p-6 space-y-4 text-xs"></div><div class="p-4 border-t border-slate-100 flex justify-end gap-2"><button onclick="closeM('m-detail-sahabat')" class="btn b-g">Tutup</button></div></div></div>
 
 <div id="m-kencleng" class="mod"><div><div class="mh"><span>Tambah Anggota Kencleng</span><button onclick="closeM('m-kencleng')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><form onsubmit="saveKenclengAnggota(event)" class="p-6 space-y-3"><div><label class="fl">Pilih dari Database (Opsional)</label><select id="kc-sah" onchange="fillKenclengData()" class="fi"></select></div><div><label class="fl">Nama Pemegang Kencleng</label><input id="kc-nama" required class="fi"></div><div class="grid grid-cols-2 gap-3"><div><label class="fl">NIA / Kode Box</label><input id="kc-nia" class="fi" placeholder="Contoh: BOX-001"></div><div><label class="fl">No. WA</label><input id="kc-hp" class="fi"></div></div><div><label class="fl">Domisili & Alamat Penempatan</label><input id="kc-alamat" class="fi" placeholder="Bandung / Alamat lengkap..."></div><div><label class="fl">Keterangan / Catatan</label><input id="kc-ket" class="fi" placeholder="Contoh: Kencleng Toko / Rumah"></div><div class="flex justify-end gap-2"><button type="button" onclick="closeM('m-kencleng')" class="btn b-g">Batal</button><button class="btn" style="background:#d97706;color:white">Simpan</button></div></form></div></div>
 
@@ -690,8 +677,8 @@ td{padding:12px 14px}
 <!-- MODAL SURAT & GENERATOR SURAT RESMI -->
 <div id="m-surat" class="mod"><div style="max-width:38rem"><div class="mh"><span id="msr-title">Form Surat</span><button onclick="closeM('m-surat')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div><form onsubmit="saveSurat(event)" class="p-6 space-y-3"><input type="hidden" id="sr-id"><input type="hidden" id="sr-tipe">
 <div class="grid grid-cols-2 gap-3"><div><label class="fl">Nomor Surat</label><input id="sr-no" required class="fi"></div><div><label class="fl">Tanggal Surat</label><input type="date" id="sr-tgl" required class="fi"></div></div>
-<div id="gen-surat-options" class="space-y-3 hidden bg-purple-50 p-3 rounded-xl border border-purple-100">
- <div><label class="fl text-purple-900 font-bold">Pilih Jenis Surat Resmi</label><select id="gs-jenis" onchange="updateGenSuratTemplate()" class="fi"><option value="Surat Tugas">Surat Tugas</option><option value="Surat Undangan Rapat">Surat Undangan Rapat</option><option value="Surat Keputusan (SK)">Surat Keputusan (SK)</option><option value="Surat Keterangan Aktif">Surat Keterangan Aktif</option></select></div>
+<div id="gen-surat-options" class="space-y-3 hidden p-3 rounded-xl border" style="background:var(--soft-bg-tint,#ede9fe);border-color:var(--primary-color,#7c3aed)">
+ <div><label class="fl font-bold" style="color:var(--primary-color,#7c3aed)">Pilih Jenis Surat Resmi</label><select id="gs-jenis" onchange="updateGenSuratTemplate()" class="fi"><option value="Surat Tugas">Surat Tugas</option><option value="Surat Undangan Rapat">Surat Undangan Rapat</option><option value="Surat Keputusan (SK)">Surat Keputusan (SK)</option><option value="Surat Keterangan Aktif">Surat Keterangan Aktif</option></select></div>
  <div class="grid grid-cols-2 gap-3">
   <div><label class="fl">Tarik Tujuan dari Anggota/Pengurus</label><select id="gs-target-sahabat" onchange="fillSuratTarget()" class="fi"></select></div>
   <div><label class="fl">Penandatangan (Ketua/Sekretaris)</label><select id="gs-sign" class="fi"><option value="Ketua Korwil">Ketua Korwil</option><option value="Sekretaris Korwil">Sekretaris Korwil</option></select></div>
@@ -708,7 +695,7 @@ td{padding:12px 14px}
 <!-- MODAL CROPPER -->
 <div id="m-cropper" class="mod">
  <div style="max-width:36rem">
-  <div class="mh"><span id="crop-modal-title" class="text-purple-900 font-extrabold">Sesuaikan Posisi & Potong Banner</span><button onclick="closeM('m-cropper')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div>
+  <div class="mh"><span id="crop-modal-title" class="font-extrabold" style="color:var(--primary-color,#7c3aed)">Sesuaikan Posisi & Potong Banner</span><button onclick="closeM('m-cropper')"><i class="fa-solid fa-xmark text-slate-400"></i></button></div>
   <div class="p-6 space-y-4 text-xs">
    <p class="text-slate-500">Geser slider atau pilih mode tampilan untuk menyesuaikan area gambar banner agar pas di layar HP maupun Laptop:</p>
    <div class="w-full h-56 bg-slate-900 rounded-2xl overflow-hidden relative flex items-center justify-center border border-slate-200">
@@ -934,14 +921,6 @@ function switchPubSubPage(sub){
     el.classList.add('hidden');
    }
   }
-  const nav = $('pnav-'+s);
-  if(nav){
-   if(s === sub) {
-    nav.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white text-purple-700 shadow-sm transition';
-   } else {
-    nav.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 hover:text-purple-700 transition';
-   }
-  }
  });
  renderPublicLanding();
  window.scrollTo({top:0, behavior:'smooth'});
@@ -981,7 +960,7 @@ function renderPublicLanding(){
      <p class="text-xs text-slate-500 line-clamp-2">${E(a.isi)}</p>
     </div>
    </div>
-   <div class="px-5 pb-5"><button onclick="showDetailPreview('Artikel • ${E(a.tgl)}', '${E(a.judul).replace(/'/g,"")}', '${E(a.isi).replace(/'/g,"").replace(/\n/g," ")}')" class="text-xs font-extrabold text-purple-700 hover:underline">Baca Selengkapnya &rarr;</button></div>
+   <div class="px-5 pb-5"><button onclick="showDetailPreview('Artikel • ${E(a.tgl)}', '${E(a.judul).replace(/'/g,"")}', '${E(a.isi).replace(/'/g,"").replace(/\n/g," ")}')" class="text-xs font-extrabold hover:underline" style="color:var(--primary-color,#7c3aed)">Baca Selengkapnya &rarr;</button></div>
   </div>`;
  const randArt = [...artikelList].sort(()=>Math.random()-0.5).slice(0,3);
  if($('pub-home-articles')) $('pub-home-articles').innerHTML = randArt.map(artCardHtml).join('') || '<p class="text-xs text-slate-400 col-span-3">Belum ada artikel.</p>';
@@ -1017,7 +996,7 @@ function renderPublicLanding(){
      <div class="flex justify-between text-[10px]"><span class="badge !bg-emerald-100 !text-emerald-800">${E(u.kat)}</span><span class="font-bold text-emerald-600">${E(u.harga)}</span></div>
      <h4 class="font-extrabold text-sm text-slate-900">${E(u.produk)}</h4>
      <p class="text-xs text-slate-500 line-clamp-2">${E(u.desk)}</p>
-     <p class="text-[10px] text-purple-700 font-semibold pt-1">Oleh: ${E(u.penjual)}</p>
+     <p class="text-[10px] font-semibold pt-1" style="color:var(--primary-color,#7c3aed)">Oleh: ${E(u.penjual)}</p>
     </div>
    </div>
    <div class="px-5 pb-5 pt-2 border-t border-slate-100">
@@ -1226,7 +1205,7 @@ function stats(){
  const autoTicker = cfg.tickerText || `💰 Saldo Kas Terkini: ${totalSaldo}  •  ${upcomingEv}  •  ${randomQuote}`;
  if($('dash-ticker')) $('dash-ticker').innerText = autoTicker;
 
- $('dash-arus-kas-summary').innerHTML=`<div class="p-3 bg-emerald-50 rounded-xl"><p class="text-[10px] font-bold text-emerald-700">Masuk</p><p class="font-bold text-emerald-600 mt-1">${rp(tIn)}</p></div><div class="p-3 bg-rose-50 rounded-xl"><p class="text-[10px] font-bold text-rose-700">Keluar</p><p class="font-bold text-rose-600 mt-1">${rp(tOut)}</p></div><div class="p-3 bg-purple-50 rounded-xl"><p class="text-[10px] font-bold text-purple-700">Saldo Akhir</p><p class="font-bold text-purple-900 mt-1">${rp(tIn-tOut)}</p></div>`;
+ $('dash-arus-kas-summary').innerHTML=`<div class="p-3 bg-emerald-50 rounded-xl"><p class="text-[10px] font-bold text-emerald-700">Masuk</p><p class="font-bold text-emerald-600 mt-1">${rp(tIn)}</p></div><div class="p-3 bg-rose-50 rounded-xl"><p class="text-[10px] font-bold text-rose-700">Keluar</p><p class="font-bold text-rose-600 mt-1">${rp(tOut)}</p></div><div class="p-3 rounded-xl" style="background:var(--soft-bg-tint,#ede9fe)"><p class="text-[10px] font-bold" style="color:var(--primary-color,#7c3aed)">Saldo Akhir</p><p class="font-bold mt-1" style="color:var(--primary-color,#7c3aed)">${rp(tIn-tOut)}</p></div>`;
 
  if(currentUser){
   const myAbs = absen.filter(a=>a.nama===currentUser.nama);
@@ -1300,7 +1279,7 @@ function openCalendarDate(dateStr){
   return false;
  });
  $('cal-preview-title').innerText = `Agenda Tanggal ${dateStr}`;
- $('cal-preview-content').innerHTML = dayProgs.length ? dayProgs.map(p=>`<div class="p-3 bg-purple-50 rounded-xl border border-purple-100 space-y-1"><div class="flex justify-between font-bold text-purple-900"><span>${E(p.nama)}</span><span class="badge">${E(p.periode)}</span></div><p class="text-slate-600 text-[11px]">${E(p.deskripsi)}</p><p class="text-[10px] text-slate-400">PJ: ${Array.isArray(p.pj)?p.pj.join(', '):E(p.pj)}</p>${p.img?`<div class="mt-2"><img src="${p.img}" onclick="openLightbox('${p.img}')" class="w-full h-28 object-cover rounded-lg cursor-pointer hover:opacity-90"></div>`:''}</div>`).join('') : '<p class="text-slate-400 text-center py-4">Tidak ada agenda pada tanggal ini.</p>';
+ $('cal-preview-content').innerHTML = dayProgs.length ? dayProgs.map(p=>`<div class="p-3 rounded-xl border space-y-1" style="background:var(--soft-bg-tint,#ede9fe);border-color:var(--primary-color,#7c3aed)"><div class="flex justify-between font-bold" style="color:var(--primary-color,#7c3aed)"><span>${E(p.nama)}</span><span class="badge">${E(p.periode)}</span></div><p class="text-slate-600 text-[11px]">${E(p.deskripsi)}</p><p class="text-[10px] text-slate-400">PJ: ${Array.isArray(p.pj)?p.pj.join(', '):E(p.pj)}</p>${p.img?`<div class="mt-2"><img src="${p.img}" onclick="openLightbox('${p.img}')" class="w-full h-28 object-cover rounded-lg cursor-pointer hover:opacity-90"></div>`:''}</div>`).join('') : '<p class="text-slate-400 text-center py-4">Tidak ada agenda pada tanggal ini.</p>';
  openM('m-cal-preview');
 }
 
@@ -1308,8 +1287,8 @@ function renderShoutbox(){
  $('shoutbox-messages').innerHTML = shoutboxList.slice(-15).map(s=>{
   let content = `<p class="text-slate-700 mt-0.5">${E(s.pesan)}</p>`;
   if(s.type==='image') content = `<div class="mt-1"><img src="${s.url}" onclick="openLightbox('${s.url}')" class="w-32 h-32 object-cover rounded-lg cursor-pointer"></div>`;
-  if(s.type==='voice') content = `<div class="mt-1 flex items-center gap-2 bg-purple-100 p-2 rounded-lg text-purple-900 text-xs"><i class="fa-solid fa-play text-purple-700"></i><span>Voice Note (0:15)</span></div>`;
-  return `<div class="bg-slate-50 p-2 rounded-xl border border-slate-100 text-xs"><div class="flex justify-between font-bold text-[10px] text-purple-900"><span>${E(s.nama)}</span><span class="text-[9px] text-slate-400">${E(s.waktu)}</span></div>${content}</div>`;
+  if(s.type==='voice') content = `<div class="mt-1 flex items-center gap-2 p-2 rounded-lg text-xs" style="background:var(--soft-bg-tint,#ede9fe);color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-play"></i><span>Voice Note (0:15)</span></div>`;
+  return `<div class="bg-slate-50 p-2 rounded-xl border border-slate-100 text-xs"><div class="flex justify-between font-bold text-[10px]" style="color:var(--primary-color,#7c3aed)"><span>${E(s.nama)}</span><span class="text-[9px] text-slate-400">${E(s.waktu)}</span></div>${content}</div>`;
  }).join('');
 }
 function postShoutbox(e){
@@ -1368,9 +1347,18 @@ function renderDbSummary(){
  ].map(c=>`<div class="ci p-4 flex items-center gap-3"><div class="w-10 h-10 rounded-xl ${c[3]} flex items-center justify-center text-base"><i class="fa-solid ${c[2]}"></i></div><div><p class="text-[10px] font-bold text-slate-400 uppercase">${c[0]}</p><p class="text-lg font-extrabold text-slate-900">${c[1]}</p></div></div>`).join('');
 }
 function switchDbTab(t){ 
- $('tab-db-sahabat').className=t==='sahabat'?'px-4 py-2 rounded-xl text-xs font-bold bg-white text-purple-700 shadow whitespace-nowrap':'px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 whitespace-nowrap'; 
- $('tab-db-kencleng').className=t==='kencleng'?'px-4 py-2 rounded-xl text-xs font-bold bg-white text-purple-700 shadow whitespace-nowrap':'px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 whitespace-nowrap'; 
- $('tab-db-agnia').className=t==='agnia'?'px-4 py-2 rounded-xl text-xs font-bold bg-white text-purple-700 shadow whitespace-nowrap':'px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 whitespace-nowrap'; 
+ $('tab-db-sahabat').className=t==='sahabat'?'px-4 py-2 rounded-xl text-xs font-bold bg-white shadow whitespace-nowrap':'px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 whitespace-nowrap';
+ if(t==='sahabat') $('tab-db-sahabat').style.color='var(--primary-color,#7c3aed)';
+ else $('tab-db-sahabat').style.color='';
+ 
+ $('tab-db-kencleng').className=t==='kencleng'?'px-4 py-2 rounded-xl text-xs font-bold bg-white shadow whitespace-nowrap':'px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 whitespace-nowrap'; 
+ if(t==='kencleng') $('tab-db-kencleng').style.color='var(--primary-color,#7c3aed)';
+ else $('tab-db-kencleng').style.color='';
+
+ $('tab-db-agnia').className=t==='agnia'?'px-4 py-2 rounded-xl text-xs font-bold bg-white shadow whitespace-nowrap':'px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 whitespace-nowrap'; 
+ if(t==='agnia') $('tab-db-agnia').style.color='var(--primary-color,#7c3aed)';
+ else $('tab-db-agnia').style.color='';
+
  $('db-view-sahabat').classList.toggle('hidden',t!=='sahabat'); 
  $('db-view-kencleng').classList.toggle('hidden',t!=='kencleng'); 
  $('db-view-agnia').classList.toggle('hidden',t!=='agnia'); 
@@ -1379,7 +1367,7 @@ function renderDbSahabat(){
  renderDbSummary();
  const q=$('q-sah').value.toLowerCase(), f=$('f-sah').value, fm=$('f-minat')?$('f-minat').value:'semua';
  const L=sah.filter(s=>(s.nama+s.nia+s.kota+s.jabatan+s.hp).toLowerCase().includes(q)&&(f==='semua'||s.status===f)&&(fm==='semua'||s.minat===fm));
- $('tb-sah').innerHTML=L.map(s=>`<tr><td><div class="font-bold text-slate-900 cursor-pointer hover:text-purple-700" onclick="viewSahabatDetail('${s.id}')">${E(s.nama)}</div><div class="text-[10px] text-purple-600 font-mono">${E(s.nia)}</div></td><td><div class="font-medium">${E(s.jabatan)}</div><div class="text-[9px] text-slate-400">Minat: ${E(s.minat)}</div></td><td><span class="badge">${E(s.status)}</span></td><td><div class="font-mono">${E(s.hp)}</div><div class="text-[10px] text-slate-400">${E(s.kota)}</div></td><td class="whitespace-nowrap"><button onclick="viewSahabatDetail('${s.id}')" class="text-cyan-600 mr-2" title="Detail Profil"><i class="fa-solid fa-eye"></i></button><a href="https://wa.me/${(s.hp||'').replace(/\D/g,'')}" target="_blank" class="text-emerald-600 mr-2" title="Chat WA"><i class="fa-brands fa-whatsapp"></i></a><button onclick="openSahabat('${s.id}')" class="text-purple-600 mr-2" title="Edit"><i class="fa-solid fa-edit"></i></button><button onclick="delSahabat('${s.id}')" class="text-rose-600" title="Hapus"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('') || '<tr><td colspan="5" class="text-center text-slate-400 py-6">Data sahabat tidak ditemukan.</td></tr>';
+ $('tb-sah').innerHTML=L.map(s=>`<tr><td><div class="font-bold text-slate-900 cursor-pointer hover:underline" style="color:var(--primary-color,#7c3aed)" onclick="viewSahabatDetail('${s.id}')">${E(s.nama)}</div><div class="text-[10px] font-mono" style="color:var(--primary-color,#7c3aed)">${E(s.nia)}</div></td><td><div class="font-medium">${E(s.jabatan)}</div><div class="text-[9px] text-slate-400">Minat: ${E(s.minat)}</div></td><td><span class="badge">${E(s.status)}</span></td><td><div class="font-mono">${E(s.hp)}</div><div class="text-[10px] text-slate-400">${E(s.kota)}</div></td><td class="whitespace-nowrap"><button onclick="viewSahabatDetail('${s.id}')" class="text-cyan-600 mr-2" title="Detail Profil"><i class="fa-solid fa-eye"></i></button><a href="https://wa.me/${(s.hp||'').replace(/\D/g,'')}" target="_blank" class="text-emerald-600 mr-2" title="Chat WA"><i class="fa-brands fa-whatsapp"></i></a><button onclick="openSahabat('${s.id}')" class="mr-2" style="color:var(--primary-color,#7c3aed)" title="Edit"><i class="fa-solid fa-edit"></i></button><button onclick="delSahabat('${s.id}')" class="text-rose-600" title="Hapus"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('') || '<tr><td colspan="5" class="text-center text-slate-400 py-6">Data sahabat tidak ditemukan.</td></tr>';
 }
 function viewSahabatDetail(id){
  const s=sah.find(x=>x.id===id); if(!s) return;
@@ -1388,17 +1376,17 @@ function viewSahabatDetail(id){
  const totalInfaq = myInfaq.reduce((a,b)=>a+b.nom,0);
  $('detail-sahabat-body').innerHTML = `
   <div class="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
-   <img src="${s.foto||'https://placehold.co/120x150/1e293b/cbd5e1?text=Foto'}" class="w-16 h-20 rounded-xl object-cover border border-purple-200">
+   <img src="${s.foto||'https://placehold.co/120x150/1e293b/cbd5e1?text=Foto'}" class="w-16 h-20 rounded-xl object-cover border" style="border-color:var(--primary-color,#7c3aed)">
    <div>
     <span class="badge">${E(s.status)}</span>
     <h4 class="font-extrabold text-base text-slate-900 mt-1">${E(s.nama)}</h4>
-    <p class="font-mono text-purple-700 font-bold text-[11px]">${E(s.nia)}</p>
+    <p class="font-mono font-bold text-[11px]" style="color:var(--primary-color,#7c3aed)">${E(s.nia)}</p>
     <p class="text-[11px] text-slate-500">${E(s.jabatan)} &bull; ${E(s.kota)}</p>
    </div>
   </div>
   <div class="grid grid-cols-2 gap-3 bg-white p-3 rounded-xl border border-slate-100">
    <div><span class="text-slate-400 block text-[10px]">Nomor WhatsApp</span><b>${E(s.hp)}</b></div>
-   <div><span class="text-slate-400 block text-[10px]">PIN Akses Portal</span><b class="font-mono text-purple-700">${E(s.pin||'999999')}</b></div>
+   <div><span class="text-slate-400 block text-[10px]">PIN Akses Portal</span><b class="font-mono" style="color:var(--primary-color,#7c3aed)">${E(s.pin||'999999')}</b></div>
    <div><span class="text-slate-400 block text-[10px]">Minat & Bakat</span><b>${E(s.minat||'-')}</b></div>
    <div><span class="text-slate-400 block text-[10px]">Total Kontribusi Kas</span><b class="text-emerald-600">${rp(totalInfaq)}</b></div>
    <div class="col-span-2"><span class="text-slate-400 block text-[10px]">Alamat Domisili</span><b>${E(s.alamat||'-')}</b></div>
@@ -1499,8 +1487,8 @@ function delAgnia(id){ agniaList=agniaList.filter(a=>a.id!==id); persist(); refr
 let progCalDate = new Date();
 function setProgView(m){
  progViewMode=m;
- $('btn-pview-card').className=m==='card'?'px-3 py-1.5 rounded-xl text-xs font-bold bg-purple-700 text-white shadow':'px-3 py-1.5 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800';
- $('btn-pview-cal').className=m==='calendar'?'px-3 py-1.5 rounded-xl text-xs font-bold bg-purple-700 text-white shadow':'px-3 py-1.5 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800';
+ $('btn-pview-card').className=m==='card'?'px-3 py-1.5 rounded-xl text-xs font-bold b-p text-white shadow':'px-3 py-1.5 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800';
+ $('btn-pview-cal').className=m==='calendar'?'px-3 py-1.5 rounded-xl text-xs font-bold b-p text-white shadow':'px-3 py-1.5 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800';
  $('prog-board-cal-wrap').classList.toggle('hidden', m !== 'calendar');
  renderProg();
 }
@@ -1516,13 +1504,13 @@ function renderProgBoardCalendar(){
  for(let d=1; d<=totalDays; d++){
   const dStr=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
   const dayProgs = prog.filter(p=>p.tanggal===dStr || (p.periode==='Mingguan' && new Date(dStr)>=new Date(p.tanggal) && new Date(dStr).getDay()===new Date(p.tanggal).getDay()));
-  const evTags = dayProgs.slice(0,2).map(ev=>`<div class="text-[9px] truncate px-1 py-0.5 rounded bg-purple-100 text-purple-800 font-bold mt-0.5">${E(ev.nama)}</div>`).join('');
-  h+=`<div onclick="openCalendarDate('${dStr}')" class="min-h-[64px] p-1.5 rounded-xl border text-left cursor-pointer transition ${dayProgs.length?'border-purple-300 bg-purple-50/40 hover:bg-purple-50':'border-slate-100 bg-white hover:bg-slate-50'}"><div class="font-bold text-[11px] ${dayProgs.length?'text-purple-700':'text-slate-600'}">${d}</div>${evTags}</div>`;
+  const evTags = dayProgs.slice(0,2).map(ev=>`<div class="text-[9px] truncate px-1 py-0.5 rounded font-bold mt-0.5" style="background:var(--soft-bg-tint,#ede9fe);color:var(--primary-color,#7c3aed)">${E(ev.nama)}</div>`).join('');
+  h+=`<div onclick="openCalendarDate('${dStr}')" class="min-h-[64px] p-1.5 rounded-xl border text-left cursor-pointer transition ${dayProgs.length?'bg-purple-50/40 hover:bg-purple-50':'border-slate-100 bg-white hover:bg-slate-50'}" style="${dayProgs.length?'border-color:var(--primary-color,#7c3aed)':''}"><div class="font-bold text-[11px]" style="${dayProgs.length?'color:var(--primary-color,#7c3aed)':'color:#475569'}">${d}</div>${evTags}</div>`;
  }
  $('prog-board-grid').innerHTML=h;
 }
 function renderProg(){
- $('prog-filter').innerHTML=['semua',...PERIODE].map(p=>`<button onclick="progFilter='${p}';renderProg()" class="px-3 py-1 rounded-lg text-[10px] font-bold ${progFilter===p?'bg-purple-700 text-white':'bg-slate-200 text-slate-600'}">${p}</button>`).join('');
+ $('prog-filter').innerHTML=['semua',...PERIODE].map(p=>`<button onclick="progFilter='${p}';renderProg()" class="px-3 py-1 rounded-lg text-[10px] font-bold ${progFilter===p?'b-p text-white':'bg-slate-200 text-slate-600'}">${p}</button>`).join('');
  const stFilter = $('prog-status-filter') ? $('prog-status-filter').value : 'semua';
  const dToday = new Date().toLocaleDateString('sv-SE');
  const L=prog.filter(p=>{
@@ -1537,7 +1525,7 @@ function renderProg(){
  $('prog-cards').innerHTML=L.map(p=>{
   const isDone = p.tanggal < dToday;
   const statusBadge = isDone ? `<span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-emerald-100 text-emerald-700">Terlaksana</span>` : `<span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-100 text-amber-800">Mendatang</span>`;
-  return `<div class="ci p-5 flex flex-col justify-between"><div>${p.img?`<div class="w-full h-36 rounded-xl bg-slate-100 overflow-hidden mb-3"><img src="${p.img}" onclick="openLightbox('${p.img}')" class="w-full h-full object-cover cursor-pointer hover:opacity-90"></div>`:''}<div class="flex justify-between items-center mb-2"><div class="flex gap-1.5 items-center"><span class="badge">${E(p.periode)}</span>${statusBadge}</div><span class="text-[10px] text-slate-400 font-mono">${E(p.tanggal)} ${p.waktu?'• '+E(p.waktu):''}</span></div><h3 class="font-bold text-slate-900">${E(p.nama)}</h3>${p.lokasi?`<p class="text-[10px] text-cyan-700 font-semibold mt-0.5"><i class="fa-solid fa-location-dot mr-1"></i>${E(p.lokasi)}</p>`:''}<p class="text-xs text-slate-500 mt-1.5">${E(p.deskripsi)}</p><p class="text-xs text-purple-800 font-semibold mt-2"><i class="fa-solid fa-user-tie mr-1"></i> PJ: ${Array.isArray(p.pj)?p.pj.join(', '):E(p.pj)}</p>${p.notulensi?`<div class="mt-2 p-2 bg-slate-50 rounded-lg border border-slate-100 text-[10px] text-slate-600"><b>Notulensi:</b> ${E(p.notulensi)}</div>`:''}</div><div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center">${!isAnggota?`<button onclick="openWA('${p.id}')" class="text-[10px] bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-lg font-bold hover:bg-emerald-100"><i class="fa-brands fa-whatsapp"></i> Broadcast</button>`:'<span></span>'}${!isAnggota?`<div class="flex gap-2.5"><button onclick="duplicateProgram('${p.id}')" class="text-cyan-600" title="Duplikasi Agenda"><i class="fa-solid fa-copy"></i></button><button onclick="openProgram('${p.id}')" class="text-purple-600" title="Edit"><i class="fa-solid fa-edit"></i></button><button onclick="delProgram('${p.id}')" class="text-rose-600" title="Hapus"><i class="fa-solid fa-trash"></i></button></div>`:''}</div></div>`;
+  return `<div class="ci p-5 flex flex-col justify-between"><div>${p.img?`<div class="w-full h-36 rounded-xl bg-slate-100 overflow-hidden mb-3"><img src="${p.img}" onclick="openLightbox('${p.img}')" class="w-full h-full object-cover cursor-pointer hover:opacity-90"></div>`:''}<div class="flex justify-between items-center mb-2"><div class="flex gap-1.5 items-center"><span class="badge">${E(p.periode)}</span>${statusBadge}</div><span class="text-[10px] text-slate-400 font-mono">${E(p.tanggal)} ${p.waktu?'• '+E(p.waktu):''}</span></div><h3 class="font-bold text-slate-900">${E(p.nama)}</h3>${p.lokasi?`<p class="text-[10px] text-cyan-700 font-semibold mt-0.5"><i class="fa-solid fa-location-dot mr-1"></i>${E(p.lokasi)}</p>`:''}<p class="text-xs text-slate-500 mt-1.5">${E(p.deskripsi)}</p><p class="text-xs font-semibold mt-2" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-user-tie mr-1"></i> PJ: ${Array.isArray(p.pj)?p.pj.join(', '):E(p.pj)}</p>${p.notulensi?`<div class="mt-2 p-2 bg-slate-50 rounded-lg border border-slate-100 text-[10px] text-slate-600"><b>Notulensi:</b> ${E(p.notulensi)}</div>`:''}</div><div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center">${!isAnggota?`<button onclick="openWA('${p.id}')" class="text-[10px] bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-lg font-bold hover:bg-emerald-100"><i class="fa-brands fa-whatsapp"></i> Broadcast</button>`:'<span></span>'}${!isAnggota?`<div class="flex gap-2.5"><button onclick="duplicateProgram('${p.id}')" class="text-cyan-600" title="Duplikasi Agenda"><i class="fa-solid fa-copy"></i></button><button onclick="openProgram('${p.id}')" style="color:var(--primary-color,#7c3aed)" title="Edit"><i class="fa-solid fa-edit"></i></button><button onclick="delProgram('${p.id}')" class="text-rose-600" title="Hapus"><i class="fa-solid fa-trash"></i></button></div>`:''}</div></div>`;
  }).join('')||'<p class="text-xs text-slate-400 col-span-3 text-center py-6">Tidak ada agenda sesuai filter.</p>';
 }
 function duplicateProgram(id){
@@ -1566,7 +1554,7 @@ function openProgram(id){
 
  const pengurusList = sah.filter(s=>s.status==='Pengurus' || s.jabatan.includes('Korwil') || s.jabatan==='Sekretaris' || s.jabatan==='Bendahara' || s.jabatan.startsWith('Kabid') || s.jabatan.startsWith('Staff'));
  const currentPj = p ? (Array.isArray(p.pj)?p.pj:[p.pj]) : [];
- $('p-pj-container').innerHTML = pengurusList.map(s=>`<label class="flex items-center gap-2 text-xs cursor-pointer"><input type="checkbox" name="pj_checkbox" value="${E(s.nama)} (${E(s.jabatan)})" ${currentPj.includes(s.nama+' ('+s.jabatan+')')||currentPj.includes(s.nama)?'checked':''} class="rounded text-purple-600"> <span><b>${E(s.nama)}</b> - <span class="text-[10px] text-purple-700">${E(s.jabatan)}</span></span></label>`).join('');
+ $('p-pj-container').innerHTML = pengurusList.map(s=>`<label class="flex items-center gap-2 text-xs cursor-pointer"><input type="checkbox" name="pj_checkbox" value="${E(s.nama)} (${E(s.jabatan)})" ${currentPj.includes(s.nama+' ('+s.jabatan+')')||currentPj.includes(s.nama)?'checked':''} class="rounded" style="accent-color:var(--primary-color,#7c3aed)"> <span><b>${E(s.nama)}</b> - <span class="text-[10px]" style="color:var(--primary-color,#7c3aed)">${E(s.jabatan)}</span></span></label>`).join('');
 
  openM('m-program'); 
 }
@@ -1602,7 +1590,7 @@ function renderArtikel(){
  const q=$('q-artikel').value.toLowerCase();
  const L=artikelList.filter(a=>(a.judul+a.isi).toLowerCase().includes(q));
  const isAnggota = currentUser && currentUser.role === 'anggota';
- $('artikel-cards').innerHTML=L.map(a=>`<div class="ci p-5 flex flex-col justify-between"><div><div class="w-full h-36 rounded-xl bg-slate-100 overflow-hidden mb-3"><img src="${a.img||'https://placehold.co/300x200/f1f5f9/94a3b8?text=Artikel'}" onclick="openLightbox('${a.img}')" class="w-full h-full object-cover cursor-pointer"></div><div class="flex justify-between text-[10px] text-slate-400 mb-1"><span class="badge">Buletin</span><span>${E(a.tgl)}</span></div><h3 class="font-bold text-slate-800 text-base">${E(a.judul)}</h3><p class="text-xs text-slate-600 mt-2 line-clamp-3">${E(a.isi)}</p></div><div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center"><span class="text-[10px] font-semibold text-purple-700">Oleh: ${E(a.penulis)}</span>${!isAnggota?`<button onclick="delArtikel('${a.id}')" class="text-rose-600 text-xs"><i class="fa-solid fa-trash"></i> Hapus</button>`:''}</div></div>`).join('') || '<p class="text-xs text-slate-400 col-span-3 text-center py-6">Belum ada artikel yang diterbitkan.</p>';
+ $('artikel-cards').innerHTML=L.map(a=>`<div class="ci p-5 flex flex-col justify-between"><div><div class="w-full h-36 rounded-xl bg-slate-100 overflow-hidden mb-3"><img src="${a.img||'https://placehold.co/300x200/f1f5f9/94a3b8?text=Artikel'}" onclick="openLightbox('${a.img}')" class="w-full h-full object-cover cursor-pointer"></div><div class="flex justify-between text-[10px] text-slate-400 mb-1"><span class="badge">Buletin</span><span>${E(a.tgl)}</span></div><h3 class="font-bold text-slate-800 text-base">${E(a.judul)}</h3><p class="text-xs text-slate-600 mt-2 line-clamp-3">${E(a.isi)}</p></div><div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center"><span class="text-[10px] font-semibold" style="color:var(--primary-color,#7c3aed)">Oleh: ${E(a.penulis)}</span>${!isAnggota?`<button onclick="delArtikel('${a.id}')" class="text-rose-600 text-xs"><i class="fa-solid fa-trash"></i> Hapus</button>`:''}</div></div>`).join('') || '<p class="text-xs text-slate-400 col-span-3 text-center py-6">Belum ada artikel yang diterbitkan.</p>';
 }
 function openArtikel(){ $('art-id').value=''; $('art-judul').value=''; $('art-isi').value=''; $('art-img').value=''; openM('m-artikel'); }
 function saveArtikel(e){
@@ -1635,7 +1623,17 @@ function changeWAType(){
 }
 function sendWA(){ const txt=encodeURIComponent($('wa-text').value); window.open(`https://api.whatsapp.com/send?text=${txt}`,'_blank'); closeM('m-broadcast'); toast('Membuka WA...'); }
 
-function switchAbsTab(t){ ['absensi','surat','arsip','notulensi'].forEach(x=>{ $('tab-as-'+x).className=x===t?'px-4 py-2 rounded-xl text-xs font-bold bg-white text-purple-700 shadow whitespace-nowrap':'px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 whitespace-nowrap'; $('as-view-'+x).classList.toggle('hidden',x!==t); }); }
+function switchAbsTab(t){ 
+ ['absensi','surat','arsip','notulensi'].forEach(x=>{ 
+  const btn = $('tab-as-'+x);
+  if(btn){
+   btn.className = x===t ? 'px-4 py-2 rounded-xl text-xs font-bold bg-white shadow whitespace-nowrap' : 'px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 whitespace-nowrap';
+   if(x===t) btn.style.color = 'var(--primary-color,#7c3aed)';
+   else btn.style.color = '';
+  }
+  $('as-view-'+x).classList.toggle('hidden',x!==t); 
+ }); 
+}
 function renderAbsensi(){ const f=$('f-abs').value; const L=absen.filter(a=>f==='semua'||a.kegiatan===f); $('tb-abs').innerHTML=L.map(a=>`<tr><td><div class="font-bold">${E(a.kegiatan)}</div><div class="text-[9px] text-slate-400">${E(a.waktu)}</div></td><td class="font-bold">${E(a.nama)}</td><td><span class="badge ${a.status!=='Hadir'?'!bg-rose-100 !text-rose-700':''}">${E(a.status)}</span></td><td><button onclick="delAbsensi('${a.id}')" class="text-rose-600"><i class="fa-solid fa-trash"></i></button></td></tr>`).join(''); }
 function openAbsensi(){ $('a-notulensi').value=''; cekRapatAbsensi(); openM('m-absensi'); }
 function cekRapatAbsensi(){ const k=$('a-keg').value; const p=prog.find(x=>x.nama===k); $('a-notulensi-area').classList.toggle('hidden', !(p&&p.periode==='Rapat')); }
@@ -1644,7 +1642,7 @@ function delAbsensi(id){ absen=absen.filter(a=>a.id!==id); persist(); refresh();
 
 function renderSurat(){ 
  $('tb-s-masuk').innerHTML=surat.filter(s=>s.tipe==='Masuk').map(s=>`<tr><td class="font-mono text-[9px]">${E(s.tgl)}<br><b class="text-xs text-slate-700">${E(s.no)}</b></td><td><b>${E(s.tujuan)}</b><br><span class="text-[10px]">${E(s.perihal)}</span></td><td><button onclick="delSurat('${s.id}')" class="text-rose-600"><i class="fa-solid fa-trash"></i></button></td></tr>`).join(''); 
- $('tb-s-keluar').innerHTML=surat.filter(s=>s.tipe==='Keluar').map(s=>`<tr><td class="font-mono text-[9px]">${E(s.tgl)}<br><b class="text-xs text-slate-700">${E(s.no)}</b></td><td><b>${E(s.tujuan)}</b><br><span class="text-[10px]">${E(s.perihal)}</span><br><button onclick="viewGenSurat('${s.id}')" class="text-[9px] text-purple-600 font-bold underline mt-0.5">Lihat Surat Resmi</button></td><td><button onclick="delSurat('${s.id}')" class="text-rose-600"><i class="fa-solid fa-trash"></i></button></td></tr>`).join(''); 
+ $('tb-s-keluar').innerHTML=surat.filter(s=>s.tipe==='Keluar').map(s=>`<tr><td class="font-mono text-[9px]">${E(s.tgl)}<br><b class="text-xs text-slate-700">${E(s.no)}</b></td><td><b>${E(s.tujuan)}</b><br><span class="text-[10px]">${E(s.perihal)}</span><br><button onclick="viewGenSurat('${s.id}')" class="text-[9px] font-bold underline mt-0.5" style="color:var(--primary-color,#7c3aed)">Lihat Surat Resmi</button></td><td><button onclick="delSurat('${s.id}')" class="text-rose-600"><i class="fa-solid fa-trash"></i></button></td></tr>`).join(''); 
 }
 function openSurat(tipe){ 
  $('sr-id').value=''; $('sr-tipe').value=tipe; $('msr-title').innerText='Form Surat '+tipe; $('lbl-tujuan').innerText=tipe==='Masuk'?'Pengirim Asal':'Tujuan Surat'; 
@@ -1680,16 +1678,16 @@ function previewGenSurat(){
  openM('m-preview-surat');
 }
 function renderPreviewHtml(no, tgl, tujuan, perihal, isi, jenis, sign){
- const logo = cfg.logoUrl ? `<img src="${cfg.logoUrl}" class="w-16 h-16 object-cover rounded-full">` : `<div class="w-16 h-16 rounded-full bg-purple-700 text-white flex items-center justify-center font-bold text-xl"><i class="fa-solid fa-moon"></i></div>`;
+ const logo = cfg.logoUrl ? `<img src="${cfg.logoUrl}" class="w-16 h-16 object-cover rounded-full">` : `<div class="w-16 h-16 rounded-full text-white flex items-center justify-center font-bold text-xl b-p"><i class="fa-solid fa-moon"></i></div>`;
  $('print-surat-area').innerHTML = `
-  <div class="flex items-center gap-4 border-b-4 border-purple-900 pb-4 mb-6">
+  <div class="flex items-center gap-4 border-b-4 pb-4 mb-6" style="border-bottom-color:var(--primary-color,#7c3aed)">
    ${logo}
    <div class="text-center flex-grow">
-    <h3 class="font-extrabold text-sm uppercase tracking-wider text-purple-900">${E(cfg.appName)}</h3>
+    <h3 class="font-extrabold text-sm uppercase tracking-wider" style="color:var(--primary-color,#7c3aed)">${E(cfg.appName)}</h3>
     <p class="text-[10px] text-slate-600">Sekretariat: ${E(cfg.alamat)} | Telp: ${E(cfg.kontak)} | Email: ${E(cfg.email)}</p>
    </div>
   </div>
-  <div class="text-center font-bold text-sm underline mb-4 text-purple-900 uppercase">${E(jenis||'Surat Resmi')}</div>
+  <div class="text-center font-bold text-sm underline mb-4 uppercase" style="color:var(--primary-color,#7c3aed)">${E(jenis||'Surat Resmi')}</div>
   <div class="grid grid-cols-2 text-xs mb-4">
    <div><b>Nomor:</b> ${E(no)}<br><b>Lampiran:</b> 1 Berkas<br><b>Perihal:</b> ${E(perihal)}</div>
    <div class="text-right">Bandung, ${E(tgl)}<br><br>Kepada Yth.<br><b>${E(tujuan)}</b><br>di Tempat</div>
@@ -1717,7 +1715,7 @@ function saveSurat(e){
 function delSurat(id){ surat=surat.filter(s=>s.id!==id); persist(); refresh(); toast('Dihapus'); }
 
 function renderFile(){ 
- $('tb-arsip-file').innerHTML=arsipFile.map(f=>`<tr><td class="text-[10px] font-mono">${E(f.tgl)}</td><td class="font-bold">${E(f.desk)}<br><span class="text-[9px] text-purple-600">${E(f.name)}</span></td><td class="text-[9px]">${f.size}</td><td class="whitespace-nowrap"><a href="${f.url||'#'}" download="${E(f.name)}" class="text-emerald-600 mr-3 font-bold" title="Unduh File"><i class="fa-solid fa-download"></i> Unduh</a><button onclick="delFile('${f.id}')" class="text-rose-600"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('') || '<tr><td colspan="4" class="text-center text-slate-400 py-6">Belum ada file arsip.</td></tr>'; 
+ $('tb-arsip-file').innerHTML=arsipFile.map(f=>`<tr><td class="text-[10px] font-mono">${E(f.tgl)}</td><td class="font-bold">${E(f.desk)}<br><span class="text-[9px]" style="color:var(--primary-color,#7c3aed)">${E(f.name)}</span></td><td class="text-[9px]">${f.size}</td><td class="whitespace-nowrap"><a href="${f.url||'#'}" download="${E(f.name)}" class="text-emerald-600 mr-3 font-bold" title="Unduh File"><i class="fa-solid fa-download"></i> Unduh</a><button onclick="delFile('${f.id}')" class="text-rose-600"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('') || '<tr><td colspan="4" class="text-center text-slate-400 py-6">Belum ada file arsip.</td></tr>'; 
 }
 function openArsipFile(){ $('f-upload').value=''; $('f-desk').value=''; openM('m-file'); }
 function saveFile(e){ 
@@ -1732,7 +1730,7 @@ function saveFile(e){
  r.readAsDataURL(f);
 }
 function delFile(id){ arsipFile=arsipFile.filter(f=>f.id!==id); persist(); refresh(); toast('Dihapus'); }
-function renderNotulensi(){ const nL=prog.filter(p=>p.periode==='Rapat' && p.notulensi); $('tb-notulensi').innerHTML=nL.map(p=>`<tr><td class="font-bold">${E(p.nama)}</td><td class="font-mono text-[9px]">${E(p.tanggal)}</td><td class="text-xs italic">"${E(p.notulensi)}"</td><td><button onclick="openProgram('${p.id}')" class="text-purple-600"><i class="fa-solid fa-pen"></i></button></td></tr>`).join(''); }
+function renderNotulensi(){ const nL=prog.filter(p=>p.periode==='Rapat' && p.notulensi); $('tb-notulensi').innerHTML=nL.map(p=>`<tr><td class="font-bold">${E(p.nama)}</td><td class="font-mono text-[9px]">${E(p.tanggal)}</td><td class="text-xs italic">"${E(p.notulensi)}"</td><td><button onclick="openProgram('${p.id}')" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-pen"></i></button></td></tr>`).join(''); }
 
 function renderKas(){
  const sumHtml=SUMBER.map(s=>{ const i=kasMasuk.filter(k=>s[0]==='Arus Kas Keseluruhan'||k.kat===s[0]).reduce((a,b)=>a+b.nom,0); const o=kasKeluar.filter(k=>s[0]==='Arus Kas Keseluruhan'||k.sum===s[0]).reduce((a,b)=>a+b.nom,0); return `<div class="rounded-xl border border-slate-200 bg-slate-50 p-4"><p class="text-[10px] font-bold text-slate-500">${s[0]}</p><p class="text-lg font-extrabold mt-1" style="color:${s[1]}">${rp(i-o)}</p><p class="text-[9px] text-slate-400 mt-1">In ${rp(i)} • Out ${rp(o)}</p></div>`; }).join('');
@@ -1769,7 +1767,7 @@ function generateReport(){
  }
 
  $('rep-title-modal').innerText='Laporan '+tipe;
- $('report-area').innerHTML=`<div class="text-center mb-4 border-b pb-2"><b>${E(cfg.appName)}</b><br><span class="text-[10px]">${E(cfg.alamat)}</span><br><b class="text-sm mt-2 block">LAPORAN ${tipe.toUpperCase()}</b><span class="text-[10px]">${info}</span></div><table class="w-full text-left border-collapse mb-4"><thead><tr class="bg-slate-100"><th class="p-2">Tgl</th><th class="p-2">Keterangan</th><th class="p-2 text-right">Nominal</th></tr></thead><tbody><tr><td colspan="3" class="bg-emerald-50 font-bold p-2 text-emerald-800">PEMASUKAN</td></tr>${inF.map(k=>`<tr><td class="p-2 border-b">${E(k.tgl)}</td><td class="p-2 border-b">${E(k.nama)}</td><td class="p-2 border-b text-right text-emerald-600">${rp(k.nom)}</td></tr>`).join('')}<tr><td colspan="3" class="bg-rose-50 font-bold p-2 text-rose-800">PENGELUARAN</td></tr>${outF.map(k=>`<tr><td class="p-2 border-b">${E(k.tgl)}</td><td class="p-2 border-b">${E(k.ket)}</td><td class="p-2 border-b text-right text-rose-600">${rp(k.nom)}</td></tr>`).join('')}</tbody></table><div class="flex justify-between font-bold text-sm bg-slate-100 p-3 rounded-lg"><span>Total Saldo Akhir Periode:</span><span class="text-purple-700">${rp(tI-tO)}</span></div>`;
+ $('report-area').innerHTML=`<div class="text-center mb-4 border-b pb-2"><b>${E(cfg.appName)}</b><br><span class="text-[10px]">${E(cfg.alamat)}</span><br><b class="text-sm mt-2 block">LAPORAN ${tipe.toUpperCase()}</b><span class="text-[10px]">${info}</span></div><table class="w-full text-left border-collapse mb-4"><thead><tr class="bg-slate-100"><th class="p-2">Tgl</th><th class="p-2">Keterangan</th><th class="p-2 text-right">Nominal</th></tr></thead><tbody><tr><td colspan="3" class="bg-emerald-50 font-bold p-2 text-emerald-800">PEMASUKAN</td></tr>${inF.map(k=>`<tr><td class="p-2 border-b">${E(k.tgl)}</td><td class="p-2 border-b">${E(k.nama)}</td><td class="p-2 border-b text-right text-emerald-600">${rp(k.nom)}</td></tr>`).join('')}<tr><td colspan="3" class="bg-rose-50 font-bold p-2 text-rose-800">PENGELUARAN</td></tr>${outF.map(k=>`<tr><td class="p-2 border-b">${E(k.tgl)}</td><td class="p-2 border-b">${E(k.ket)}</td><td class="p-2 border-b text-right text-rose-600">${rp(k.nom)}</td></tr>`).join('')}</tbody></table><div class="flex justify-between font-bold text-sm bg-slate-100 p-3 rounded-lg"><span>Total Saldo Akhir Periode:</span><span style="color:var(--primary-color,#7c3aed)">${rp(tI-tO)}</span></div>`;
  openM('m-report');
 }
 
@@ -1781,7 +1779,7 @@ function renderUmkm(){
 
  $('umkm-cards').innerHTML=L.map(u=>{
   const canDelete = isSuper || (u.penjual && u.penjual.toLowerCase() === myName);
-  return `<div class="ci p-4 sm:p-5 border-l-4 border-amber-500 flex flex-col justify-between text-xs"><div><div class="w-full h-32 sm:h-36 rounded-xl bg-slate-100 overflow-hidden mb-2.5"><img src="${u.img||'https://placehold.co/300x200/f1f5f9/94a3b8?text=Produk'}" onclick="openLightbox('${u.img}')" class="w-full h-full object-cover cursor-pointer hover:opacity-90"></div><div class="flex justify-between items-center"><span class="badge !bg-amber-100 !text-amber-700">${E(u.kat)}</span><span class="text-xs font-extrabold text-emerald-600">${E(u.harga)}</span></div><h3 class="font-bold text-slate-800 mt-1.5 text-sm">${E(u.produk)}</h3><p class="text-[10px] text-slate-500 mt-1 line-clamp-2">${E(u.desk)}</p><p class="text-[10px] text-purple-700 font-semibold mt-1.5"><i class="fa-solid fa-user mr-1"></i> Penjual: ${E(u.penjual)}</p></div><div class="mt-3 pt-2.5 border-t border-slate-100 flex justify-between items-center"><a href="https://wa.me/${u.wa.replace(/\D/g,'')}" target="_blank" class="px-3 py-1.5 bg-emerald-500 text-white font-bold text-[11px] rounded-xl shadow hover:bg-emerald-600"><i class="fa-brands fa-whatsapp mr-1"></i> Pesan</a>${canDelete?`<button onclick="delUmkm('${u.id}')" class="text-rose-600 text-[11px] font-bold hover:underline"><i class="fa-solid fa-trash"></i> Hapus</button>`:'<span class="text-[9px] text-slate-400 italic">Milik Anggota Lain</span>'}</div></div>`;
+  return `<div class="ci p-4 sm:p-5 border-l-4 border-amber-500 flex flex-col justify-between text-xs"><div><div class="w-full h-32 sm:h-36 rounded-xl bg-slate-100 overflow-hidden mb-2.5"><img src="${u.img||'https://placehold.co/300x200/f1f5f9/94a3b8?text=Produk'}" onclick="openLightbox('${u.img}')" class="w-full h-full object-cover cursor-pointer hover:opacity-90"></div><div class="flex justify-between items-center"><span class="badge !bg-amber-100 !text-amber-700">${E(u.kat)}</span><span class="text-xs font-extrabold text-emerald-600">${E(u.harga)}</span></div><h3 class="font-bold text-slate-800 mt-1.5 text-sm">${E(u.produk)}</h3><p class="text-[10px] text-slate-500 mt-1 line-clamp-2">${E(u.desk)}</p><p class="text-[10px] font-semibold mt-1.5" style="color:var(--primary-color,#7c3aed)"><i class="fa-solid fa-user mr-1"></i> Penjual: ${E(u.penjual)}</p></div><div class="mt-3 pt-2.5 border-t border-slate-100 flex justify-between items-center"><a href="https://wa.me/${u.wa.replace(/\D/g,'')}" target="_blank" class="px-3 py-1.5 bg-emerald-500 text-white font-bold text-[11px] rounded-xl shadow hover:bg-emerald-600"><i class="fa-brands fa-whatsapp mr-1"></i> Pesan</a>${canDelete?`<button onclick="delUmkm('${u.id}')" class="text-rose-600 text-[11px] font-bold hover:underline"><i class="fa-solid fa-trash"></i> Hapus</button>`:'<span class="text-[9px] text-slate-400 italic">Milik Anggota Lain</span>'}</div></div>`;
  }).join('') || '<p class="text-xs text-slate-400 col-span-3 text-center py-8">Belum ada produk UMKM yang terdaftar.</p>'; 
 }
 function openUmkm(){ $('u-produk').value=''; $('u-wa').value=''; $('u-desk').value=''; $('u-img').value=''; $('u-kat').value=''; $('u-harga').value=''; $('u-penjual').value=currentUser?currentUser.nama:''; openM('m-umkm'); }
@@ -1810,9 +1808,9 @@ function renderSuara(){
  const bList = suaraList.filter(s=>s.tipe==='Berita' && (!isAnggota || s.penulis === myName));
  const kList = suaraList.filter(s=>s.tipe==='Kritik Saran' && (!isAnggota || s.penulis === myName));
 
- $('suara-berita').innerHTML=bList.map(s=>`<div class="ci p-4 bg-blue-50/50 border-blue-200 space-y-2"><div class="flex justify-between items-start"><h4 class="font-bold text-sm text-blue-900">${E(s.judul)}</h4><span class="badge">${E(s.status||'Menunggu')}</span></div><p class="text-xs text-blue-700">${E(s.isi)}</p>${s.tanggapan?`<div class="p-2 bg-white rounded-lg border border-blue-100 text-[11px] text-slate-700"><b>Tanggapan Pengurus:</b> ${E(s.tanggapan)}</div>`:''}<div class="flex justify-between items-center text-[9px] text-slate-400 pt-1"><span>Oleh: ${E(s.penulis)} • ${E(s.tgl)}</span>${!isAnggota?`<div class="flex gap-2"><button onclick="openTanggapiSuara('${s.id}')" class="text-purple-600 font-bold"><i class="fa-solid fa-reply"></i> Tanggapi</button><button onclick="tutupSuara('${s.id}')" class="text-emerald-600 font-bold"><i class="fa-solid fa-check"></i> Selesaikan</button></div>`:''}</div></div>`).join('') || '<p class="text-xs text-slate-400 p-2">Belum ada berita.</p>';
+ $('suara-berita').innerHTML=bList.map(s=>`<div class="ci p-4 bg-blue-50/50 border-blue-200 space-y-2"><div class="flex justify-between items-start"><h4 class="font-bold text-sm text-blue-900">${E(s.judul)}</h4><span class="badge">${E(s.status||'Menunggu')}</span></div><p class="text-xs text-blue-700">${E(s.isi)}</p>${s.tanggapan?`<div class="p-2 bg-white rounded-lg border border-blue-100 text-[11px] text-slate-700"><b>Tanggapan Pengurus:</b> ${E(s.tanggapan)}</div>`:''}<div class="flex justify-between items-center text-[9px] text-slate-400 pt-1"><span>Oleh: ${E(s.penulis)} • ${E(s.tgl)}</span>${!isAnggota?`<div class="flex gap-2"><button onclick="openTanggapiSuara('${s.id}')" style="color:var(--primary-color,#7c3aed)" class="font-bold"><i class="fa-solid fa-reply"></i> Tanggapi</button><button onclick="tutupSuara('${s.id}')" class="text-emerald-600 font-bold"><i class="fa-solid fa-check"></i> Selesaikan</button></div>`:''}</div></div>`).join('') || '<p class="text-xs text-slate-400 p-2">Belum ada berita.</p>';
 
- $('suara-kritik').innerHTML=kList.map(s=>`<div class="ci p-4 bg-rose-50/50 border-rose-200 space-y-2"><div class="flex justify-between items-start"><h4 class="font-bold text-sm text-rose-900">${E(s.judul)}</h4><span class="badge">${E(s.status||'Menunggu')}</span></div><p class="text-xs text-rose-700">"${E(s.isi)}"</p>${s.tanggapan?`<div class="p-2 bg-white rounded-lg border border-rose-100 text-[11px] text-slate-700"><b>Tanggapan Pengurus:</b> ${E(s.tanggapan)}</div>`:''}<div class="flex justify-between items-center text-[9px] text-slate-400 pt-1"><span>Oleh: ${E(s.penulis)} • ${E(s.tgl)}</span>${!isAnggota?`<div class="flex gap-2"><button onclick="openTanggapiSuara('${s.id}')" class="text-purple-600 font-bold"><i class="fa-solid fa-reply"></i> Tanggapi</button><button onclick="tutupSuara('${s.id}')" class="text-emerald-600 font-bold"><i class="fa-solid fa-check"></i> Selesaikan</button></div>`:''}</div></div>`).join('') || '<p class="text-xs text-slate-400 p-2">Belum ada kritik & saran.</p>';
+ $('suara-kritik').innerHTML=kList.map(s=>`<div class="ci p-4 bg-rose-50/50 border-rose-200 space-y-2"><div class="flex justify-between items-start"><h4 class="font-bold text-sm text-rose-900">${E(s.judul)}</h4><span class="badge">${E(s.status||'Menunggu')}</span></div><p class="text-xs text-rose-700">"${E(s.isi)}"</p>${s.tanggapan?`<div class="p-2 bg-white rounded-lg border border-rose-100 text-[11px] text-slate-700"><b>Tanggapan Pengurus:</b> ${E(s.tanggapan)}</div>`:''}<div class="flex justify-between items-center text-[9px] text-slate-400 pt-1"><span>Oleh: ${E(s.penulis)} • ${E(s.tgl)}</span>${!isAnggota?`<div class="flex gap-2"><button onclick="openTanggapiSuara('${s.id}')" style="color:var(--primary-color,#7c3aed)" class="font-bold"><i class="fa-solid fa-reply"></i> Tanggapi</button><button onclick="tutupSuara('${s.id}')" class="text-emerald-600 font-bold"><i class="fa-solid fa-check"></i> Selesaikan</button></div>`:''}</div></div>`).join('') || '<p class="text-xs text-slate-400 p-2">Belum ada kritik & saran.</p>';
 }
 function openSuara(tipe){ $('su-tipe').value=tipe; $('su-title').innerText='Tulis '+tipe; $('su-judul').value=''; $('su-isi').value=''; openM('m-suara'); }
 function saveSuara(e){ e.preventDefault(); suaraList.push({id:'SS'+Date.now(), tipe:$('su-tipe').value, judul:$('su-judul').value, isi:$('su-isi').value, penulis:currentUser?currentUser.nama:'Sahabat', status:'Aktif', tanggapan:'', tgl:nowStr()}); persist(); closeM('m-suara'); refresh(); toast('Pesan Terkirim'); }
@@ -2000,7 +1998,7 @@ window.onload=function(){
    buildNav(); refresh();
   } else {
    currentUser = null;
-   localStorage.removeItem(SESSION_KEY);
+   localStorage.getItem(SESSION_KEY);
    showPublicLanding();
   }
  } else {
