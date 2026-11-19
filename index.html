@@ -90,7 +90,7 @@ td{padding:12px 14px}
      <div class="bg-slate-900/70 backdrop-blur-md border border-white/25 rounded-3xl p-5 shadow-2xl">
       <div class="flex justify-between items-center border-b border-white/15 pb-3 mb-3">
        <div>
-        <p class="text-[10px] font-bold uppercase tracking-wider text-amber-300"><i class="fa-solid fa-location-dot mr-1"></i> Bandung Raya & Lembang</p>
+        <p id="pub-prayer-location" class="text-[10px] font-bold uppercase tracking-wider text-amber-300"><i class="fa-solid fa-location-dot mr-1"></i> Mendeteksi Lokasi...</p>
         <h3 class="font-extrabold text-base">Jadwal Waktu Sholat</h3>
        </div>
        <div class="text-right">
@@ -834,6 +834,58 @@ function autoSyncToCloud(){
 }
 function saveGasUrl(){ cfg.gasUrl = $('c-gasurl').value.trim(); persist(); toast('Auto-Sync Google Sheets Aktif'); }
 
+let dynamicPrayers = [
+ {id:'p-subuh', time:'04:12', name:'Subuh'},
+ {id:'p-dzuhur', time:'11:46', name:'Dzuhur'},
+ {id:'p-ashar', time:'15:08', name:'Ashar'},
+ {id:'p-maghrib', time:'17:56', name:'Maghrib'},
+ {id:'p-isya', time:'19:09', name:'Isya'}
+];
+
+async function initUserPrayerLocation(){
+ const locEl = $('pub-prayer-location');
+ const setFallback = () => {
+  if(locEl) locEl.innerHTML = `<i class="fa-solid fa-location-dot mr-1"></i> Bandung Raya (Default)`;
+ };
+
+ if(!navigator.geolocation){
+  setFallback();
+  return;
+ }
+
+ navigator.geolocation.getCurrentPosition(async (pos) => {
+  const lat = pos.coords.latitude;
+  const lon = pos.coords.longitude;
+  try {
+   const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10`);
+   const geoData = await geoRes.json();
+   const addr = geoData.address || {};
+   const cityName = addr.city || addr.town || addr.county || addr.regency || addr.state_district || 'Lokasi Anda';
+   if(locEl) locEl.innerHTML = `<i class="fa-solid fa-location-dot mr-1"></i> ${E(cityName)}`;
+  } catch (e) {
+   if(locEl) locEl.innerHTML = `<i class="fa-solid fa-location-dot mr-1"></i> Lokasi Terdeteksi`;
+  }
+
+  try {
+   const timestamp = Math.floor(Date.now() / 1000);
+   const pRes = await fetch(`https://api.aladhan.com/v1/timings/${timestamp}?latitude=${lat}&longitude=${lon}&method=20`);
+   const pData = await pRes.json();
+   if(pData && pData.data && pData.data.timings){
+    const t = pData.data.timings;
+    dynamicPrayers = [
+     {id:'p-subuh', time:t.Fajr.slice(0,5), name:'Subuh'},
+     {id:'p-dzuhur', time:t.Dhuhr.slice(0,5), name:'Dzuhur'},
+     {id:'p-ashar', time:t.Asr.slice(0,5), name:'Ashar'},
+     {id:'p-maghrib', time:t.Maghrib.slice(0,5), name:'Maghrib'},
+     {id:'p-isya', time:t.Isha.slice(0,5), name:'Isya'}
+    ];
+   }
+  } catch (e) {}
+ }, () => {
+  setFallback();
+ }, {timeout: 8000});
+}
+
 setInterval(() => {
  const now = new Date();
  if($('pub-live-clock')){
@@ -843,29 +895,21 @@ setInterval(() => {
   $('pub-live-date').innerText = now.toLocaleDateString('id-ID', {weekday: 'long', day: 'numeric', month: 'short', year: 'numeric'});
  }
 
- const prayers = [
-  {id:'p-subuh', time:'04:12', name:'Subuh'},
-  {id:'p-dzuhur', time:'11:46', name:'Dzuhur'},
-  {id:'p-ashar', time:'15:08', name:'Ashar'},
-  {id:'p-maghrib', time:'17:56', name:'Maghrib'},
-  {id:'p-isya', time:'19:09', name:'Isya'}
- ];
-
  const currentMinutes = now.getHours() * 60 + now.getMinutes();
  let upcomingIndex = 0;
- for(let i=0; i<prayers.length; i++){
-  const [h, m] = prayers[i].time.split(':').map(Number);
+ for(let i=0; i<dynamicPrayers.length; i++){
+  const [h, m] = dynamicPrayers[i].time.split(':').map(Number);
   const pMinutes = h * 60 + m;
   if(currentMinutes < pMinutes){
    upcomingIndex = i;
    break;
   }
-  if(i === prayers.length - 1){
+  if(i === dynamicPrayers.length - 1){
    upcomingIndex = 0;
   }
  }
 
- prayers.forEach((p, idx) => {
+ dynamicPrayers.forEach((p, idx) => {
   const el = $(p.id);
   if(el){
    if(idx === upcomingIndex){
@@ -1957,7 +2001,7 @@ function applyBrand(){
  }
  if(cfg.ktaBgFrontUrl && $('kta-card-front')){
   $('kta-card-front').style.backgroundImage = `linear-gradient(rgba(15, 23, 42, 0.6), rgba(11, 15, 25, 0.8)), url('${cfg.ktaBgFrontUrl}')`;
- }
+}
  if(cfg.ktaBgBackUrl && $('kta-card-back')){
   $('kta-card-back').style.backgroundImage = `linear-gradient(rgba(15, 23, 42, 0.6), rgba(11, 15, 25, 0.8)), url('${cfg.ktaBgBackUrl}')`;
  }
@@ -1983,6 +2027,7 @@ function importBackupJSON(i){ const f=i.files[0]; if(!f)return; const r=new File
 
 window.onload=function(){
  loadData();
+ initUserPrayerLocation();
  
  const s=localStorage.getItem(SESSION_KEY), t=localStorage.getItem(SESSION_TIME_KEY);
  if(s && t){
@@ -1998,7 +2043,7 @@ window.onload=function(){
    buildNav(); refresh();
   } else {
    currentUser = null;
-   localStorage.getItem(SESSION_KEY);
+   localStorage.removeItem(SESSION_KEY);
    showPublicLanding();
   }
  } else {
